@@ -21,6 +21,6 @@ public class Inimigo extends Entity {
         setImageCollection(imgCollection);
         setDoNotStop(true);
 
-    	GameSystem.setAIforEntity(this, new ControleInimigo());
+    	//GameSystem.setAIforEntity(this, new ControleInimigo());
 	}
 }

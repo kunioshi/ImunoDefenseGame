@@ -10,13 +10,15 @@ public class ControleInimigo extends AIAction {
 		double velX;
 		double velY;
 		
-		double ang;
+		//double ang;
 		
+		velX = 2;
+		velY = 0;
 		
 		//velX = Math.sin(ang)*2;
 		//velY = Math.cos(ang)*2;
 		
-		//entity.doMove(velX, velY);
+		entity.doMove(velX, velY);
 	}
 
 	@Override

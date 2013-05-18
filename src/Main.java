@@ -17,7 +17,7 @@ public class Main {
 		
 		GameSystem.setPaintPanel(Global.janela.getGamePanel());
         GameSystem.getScenarioCollection().setScenarioAtual("cena1");
-//        GameSystem.setObjGameUpdate( new GameUpdate(janela) );
+        //GameSystem.setObjGameUpdate( new GameUpdate(janela) );
         GameSystem.init();
 		
 		Global.janela.setVisible(true);

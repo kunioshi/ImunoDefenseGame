@@ -1,5 +1,6 @@
 import java.io.IOException;
 
+import s3t.gameControl.system.GameSystem;
 import s3t.gameEntities.Entity;
 import s3t.gameEntities.Scenario;
 import s3t.graphicsElements.ImageCollection;
@@ -20,7 +21,10 @@ public class Spider extends Entity {
         imgCollection.add("default", img);
         imgCollection.setDefaultKey("default");
         
-        setImageCollection(imgCollection);		
+        setImageCollection(imgCollection);
+        setDoNotStop(true);
+
+    	GameSystem.setAIforEntity(this, new ControleInimigo());
 	}
 
 }
