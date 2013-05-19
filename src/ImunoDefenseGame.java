@@ -1,4 +1,3 @@
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.io.IOException;
 
@@ -32,7 +31,7 @@ public class ImunoDefenseGame implements Runnable {
 	private void inicializarPanelPrincipal() {
 		panelPrincipal = new Panel();
 		
-		janela.add(panelPrincipal, BorderLayout.CENTER);
+		janela.adicionarComponenteAoCentro(panelPrincipal);
 		
 		GameSystem.setPaintPanel(panelPrincipal);
 	}
