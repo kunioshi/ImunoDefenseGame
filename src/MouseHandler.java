@@ -23,8 +23,7 @@ public class MouseHandler implements MouseListener, MouseMotionListener {
 			SegueMouse spider = new SegueMouse(mousePos.x, mousePos.y, GameSystem.getScenarioCollection().getScenarioAtual());
 			//Spider spider = new Spider(gridX*32, gridY*32, GameSystem.getScenarioCollection().getScenarioAtual());
 			GameSystem.getEntityCollection().addEntity(spider);
-			
-			Global.janela.incTotalTorres();
+
 		} catch (IOException e1) {
 			System.out.println("Erro na imagem spider");
 		}
