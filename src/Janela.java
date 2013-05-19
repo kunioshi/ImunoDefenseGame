@@ -5,21 +5,19 @@ import javax.swing.*;
 public class Janela extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
-	private JPanel gamePanel = new JPanel();
-    private JPanel infoPanel = new JPanel();
-    private JLabel lbl_totalTorres = new JLabel();
+	private Panel gamePanel = new Panel();
+    private Panel infoPanel = new Panel();
+    private Label lbl_totalTorres = new Label();
     
     private int totalTorres = 0; 
     
-    public Janela() {
-        
-        Dimension screenSize = Global.screen;
+    public Janela(Dimension screen) {
         setLayout( new BorderLayout() );
         
-        setSize(800, 400);
+        setSize(screen.width, screen.height);
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLocation( (screenSize.width - getWidth())/2, (screenSize.height - getHeight())/2 );
+        setLocation( (screen.width - getWidth())/2, (screen.height - getHeight())/2 );
         
         gamePanel.addMouseListener( MouseHandler.mouseHandler );
         gamePanel.addMouseMotionListener( MouseHandler.mouseHandler );
@@ -31,7 +29,7 @@ public class Janela extends JFrame {
         
     }
     
-    public JPanel getGamePanel() {
+    public Panel getGamePanel() {
         return gamePanel;
     }
     
