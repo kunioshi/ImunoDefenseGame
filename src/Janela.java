@@ -20,7 +20,8 @@ public class Janela extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocation( (screenSize.width - getWidth())/2, (screenSize.height - getHeight())/2 );
         
-        gamePanel.addMouseListener( new MouseHandler() );
+        gamePanel.addMouseListener( MouseHandler.mouseHandler );
+        gamePanel.addMouseMotionListener( MouseHandler.mouseHandler );
         
         infoPanel.add( lbl_totalTorres ); 
         

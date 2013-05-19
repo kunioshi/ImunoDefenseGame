@@ -1,3 +1,4 @@
+import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -7,7 +8,9 @@ import s3t.gameControl.system.GameSystem;
 
 
 public class MouseHandler implements MouseListener, MouseMotionListener {
-
+	public static Point mousePos = new Point();
+	public static MouseHandler mouseHandler = new MouseHandler();
+	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 
@@ -17,14 +20,14 @@ public class MouseHandler implements MouseListener, MouseMotionListener {
 		System.out.println(gridX + "|" + gridY);
 		
 		try {
-			Spider spider = new Spider(gridX*32, gridY*32, GameSystem.getScenarioCollection().getScenarioAtual());
+			SegueMouse spider = new SegueMouse(mousePos.x, mousePos.y, GameSystem.getScenarioCollection().getScenarioAtual());
+			//Spider spider = new Spider(gridX*32, gridY*32, GameSystem.getScenarioCollection().getScenarioAtual());
 			GameSystem.getEntityCollection().addEntity(spider);
 			
 			Global.janela.incTotalTorres();
 		} catch (IOException e1) {
 			System.out.println("Erro na imagem spider");
 		}
-		
 	}
 
 	@Override
@@ -44,7 +47,6 @@ public class MouseHandler implements MouseListener, MouseMotionListener {
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		Global.mousePos = e.getPoint();
+		mousePos = e.getPoint();
 	}
-
 }
