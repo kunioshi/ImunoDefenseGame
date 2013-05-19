@@ -16,7 +16,8 @@ public class Janela extends JFrame {
         Dimension screenSize = Global.screen;
         setLayout( new BorderLayout() );
         
-        setSize(800, 600);
+        setSize(800, 400);
+        setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocation( (screenSize.width - getWidth())/2, (screenSize.height - getHeight())/2 );
         
