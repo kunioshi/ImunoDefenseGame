@@ -16,13 +16,20 @@ public class MouseHandler implements MouseListener, MouseMotionListener {
 
 		int gridX = (int) (e.getX() / 32);
 		int gridY = (int) (e.getY() / 32);
+		boolean estaSeguindo = false;
 		
 		System.out.println(gridX + "|" + gridY);
 		
 		try {
 			SegueMouse spider = new SegueMouse(mousePos.x, mousePos.y, GameSystem.getScenarioCollection().getScenarioAtual());
+			if (spider != null){estaSeguindo = true;}
 			//Spider spider = new Spider(gridX*32, gridY*32, GameSystem.getScenarioCollection().getScenarioAtual());
 			GameSystem.getEntityCollection().addEntity(spider);
+			if (estaSeguindo = true){
+				PontosDeColisao ponto = new PontosDeColisao(){};
+				ponto.colisao.add(new Point(gridX, gridY));
+			}
+			
 
 		} catch (IOException e1) {
 			System.out.println("Erro na imagem spider");
