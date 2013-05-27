@@ -9,7 +9,7 @@ public class Janela extends JFrame {
     public Janela(Dimension screen) {
         setLayout( new BorderLayout() );
         
-        setSize(800,500);
+        setSize(800,512);
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocation( (screen.width - getWidth())/2, (screen.height - getHeight())/2 );  
