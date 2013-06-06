@@ -4,9 +4,9 @@ import br.envyGames.imunoDefense.motor.Janela;
 import br.envyGames.imunoDefense.motor.JogoMotor;
 
 public class Jogo implements Runnable {
-
-	private static final int HEIGHT = 512;
+	
 	private static final int WIDTH = 800;
+	private static final int HEIGHT = 512;
 	
 	private Janela janelaPrincipal;
 	private JogoMotor motor;
