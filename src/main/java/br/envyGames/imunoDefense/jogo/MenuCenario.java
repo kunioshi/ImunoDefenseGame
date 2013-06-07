@@ -3,6 +3,7 @@ package br.envyGames.imunoDefense.jogo;
 import java.awt.Color;
 import java.io.IOException;
 
+import br.envyGames.imunoDefense.motor.ArquivoImagem;
 import br.envyGames.imunoDefense.motor.Cenario;
 import br.envyGames.imunoDefense.motor.CenarioItem;
 import br.envyGames.imunoDefense.motor.CenarioLayer;
@@ -16,9 +17,7 @@ public class MenuCenario extends Cenario {
 		    setBackgroundColor(Color.black);
 			
 			CenarioLayer background = CenarioLayer.criarSolidLayer("BackGround");
-			Imagem grama;
-			
-				grama = new Imagem("/imagens/grama.jpg");
+			Imagem grama = new ArquivoImagem("/imagens/grama.jpg");
 	
 		    for (int i = 0; i < largura; i += 32)
 		    	for (int j = 0; j < altura; j += 32) {
@@ -27,8 +26,9 @@ public class MenuCenario extends Cenario {
 		    		background.adicionarItem(item);
 		    	}    		
 		    
-		    adicionarLayer(background);
-		} catch (IOException e) {
+		    adicionarLayer(background);		    
+		} 
+		catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
