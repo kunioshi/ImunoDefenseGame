@@ -4,6 +4,8 @@ import s3t.gameControl.system.GameSystem;
 
 public class JogoMotor {
 	
+	private CenarioGerenciador cenarioGerenciador;
+	
 	public void inicializar() {
 		GameSystem.init();
 	}
@@ -16,6 +18,16 @@ public class JogoMotor {
 		return janela;
 	}
 	
+	public CenarioGerenciador getCenarioGerenciador() {
+		if (cenarioGerenciador == null)
+			cenarioGerenciador = new CenarioGerenciador();
+		
+		return cenarioGerenciador;
+	}
+	
+	public void loadCenario(String cenarioID) {
+		getCenarioGerenciador().loadCenario(cenarioID);
+	}
 	
 	private Painel criarPainelPrincipal() {
 		Painel painel = new Painel();		

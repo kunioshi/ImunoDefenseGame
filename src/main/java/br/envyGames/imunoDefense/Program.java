@@ -1,6 +1,6 @@
 package br.envyGames.imunoDefense;
 
-import br.envyGames.imunoDefense.game.Jogo;
+import br.envyGames.imunoDefense.jogo.Jogo;
 
 public class Program {
 

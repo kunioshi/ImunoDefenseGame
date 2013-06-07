@@ -8,4 +8,7 @@ public abstract class Cenario extends Scenario {
 		super(id, nome, largura, altura);
 	}
 
+	public void adicionarLayer(CenarioLayer layer) {
+		this.addScenarioLayer(layer);
+	}
 }

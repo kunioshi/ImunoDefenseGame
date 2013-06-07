@@ -1,5 +1,6 @@
-package br.envyGames.imunoDefense.game;
+package br.envyGames.imunoDefense.jogo;
 
+import br.envyGames.imunoDefense.motor.Cenario;
 import br.envyGames.imunoDefense.motor.Janela;
 import br.envyGames.imunoDefense.motor.JogoMotor;
 
@@ -19,7 +20,9 @@ public class Jogo implements Runnable {
 	
 	@Override
 	public void run() {
-		
+		Cenario menu = new MenuCenario(WIDTH, HEIGHT);
+		motor.getCenarioGerenciador().adicionarCenario(menu);
+		motor.loadCenario(menu.getScenarioId());
 	}
 	
 	private void inicializarSistema() {
