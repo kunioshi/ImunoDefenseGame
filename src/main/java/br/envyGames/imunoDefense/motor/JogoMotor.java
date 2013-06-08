@@ -5,6 +5,7 @@ import s3t.gameControl.system.GameSystem;
 public class JogoMotor {
 	
 	private CenarioGerenciador cenarioGerenciador;
+	private EntidadeGerenciador entidadeGerenciador;
 	
 	public void inicializar() {
 		GameSystem.init();
@@ -23,6 +24,13 @@ public class JogoMotor {
 			cenarioGerenciador = new CenarioGerenciador();
 		
 		return cenarioGerenciador;
+	}
+	
+	public EntidadeGerenciador getEntidadeGerenciador() {
+		if (entidadeGerenciador == null)
+			entidadeGerenciador = new EntidadeGerenciador();
+		
+		return entidadeGerenciador;
 	}
 	
 	public void loadCenario(String cenarioID) {
