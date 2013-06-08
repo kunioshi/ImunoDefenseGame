@@ -5,7 +5,7 @@ import br.envyGames.imunoDefense.jogo.Jogo;
 public class Program {
 
 	/**
-	 * @param args
+	 * @param args 
 	 */
 	public static void main(String[] args) {
 		Jogo jogo = new Jogo();
