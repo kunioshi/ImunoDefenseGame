@@ -14,7 +14,7 @@ public abstract class Inimigo extends Entidade {
 	private int vida = 2;
 	private int forca = 1;
 	private float velocidadeNatural = 1;
-	private float lentidao = 0;
+	private float lentidao = 1;
 	
 	/*
 	 * Construtor<br/>
@@ -43,7 +43,7 @@ public abstract class Inimigo extends Entidade {
 			lentidao = 1 - porcentagem;
 	}
 	public void removeSlow() {
-		lentidao = 0;
+		lentidao = 1;
 	}
 	
 	public void recebeDano(int dano) {

@@ -14,7 +14,7 @@ public class AIGripe extends AIAction {
 		Inimigo inimigo = (Inimigo)entity;
 		
 		if(!atacando) {
-			entity.doMove(inimigo.getVelocidade(), 0);
+			entity.doMove(10, 0);
 		} else {
 			GameSystem.sendAIMessage(inimigo, alvo, "ataque", 0);
 		}
