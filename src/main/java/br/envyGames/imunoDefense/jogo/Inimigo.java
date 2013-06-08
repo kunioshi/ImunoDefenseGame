@@ -15,13 +15,13 @@ public abstract class Inimigo extends Entity {
 	private float lentidao = 0;
 	
 	/*
-	 * Construtor
+	 * Construtor<br/>
+	 * Por padrão os inimigos iniciam com força 1, velocidade 1 e com 2 de vida.
 	 * @param <code>name</code> - Nome do inimigo do qual será usado para encontra-lo na EntityCollection.
 	 * @param <code>xy</code>   - Coordenadas "(x, y)" iniciais. 
 	 */
 	public Inimigo(String name, Point xy) {
 		super(name, xy.x, xy.y, GameSystem.getScenarioCollection().getScenarioAtual());
-		GameSystem.getEntityCollection().addEntity(this);
 	}
 	
 	// Getters & Setters
@@ -34,7 +34,7 @@ public abstract class Inimigo extends Entity {
 	
 	/*
 	 * Aplica efeito de lentidão nesta unidade
-	 * @param <code>porcentagem</code> - Quantos porcentos serão removidos (0~1)
+	 * @param <code>porcentagem</code> - Quantos porcentos serão removidos da velocidade (0~1)
 	 */
 	public void addSlow(float porcentagem) {
 		if(lentidao < (1 - porcentagem))
