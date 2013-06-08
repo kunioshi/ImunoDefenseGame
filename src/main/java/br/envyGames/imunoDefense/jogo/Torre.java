@@ -2,10 +2,12 @@ package br.envyGames.imunoDefense.jogo;
 
 import java.awt.Point;
 
-import s3t.gameControl.system.GameSystem;
-import s3t.gameEntities.Entity;
+import br.envyGames.imunoDefense.motor.Cenario;
+import br.envyGames.imunoDefense.motor.Entidade;
 
-public abstract class Torre extends Entity {
+import s3t.gameControl.system.GameSystem;
+
+public abstract class Torre extends Entidade {
 	private int vida = 5;
 	private int forca = 0;
 	private int level = 1;
@@ -15,8 +17,8 @@ public abstract class Torre extends Entity {
 	 * @param <code>nomeInstancia</code> - Nome do inimigo do qual será usado para encontra-lo na EntityCollection.
 	 * @param <code>xy</code>   - Coordenadas "(x, y)" iniciais. 
 	 */
-	public Torre(String nomeInstancia, Point xy) {
-		super(nomeInstancia, xy.x, xy.y, GameSystem.getScenarioCollection().getScenario("JogoCenario"));
+	public Torre(String nomeInstancia, Point xy, Cenario cenario) {
+		super(nomeInstancia, xy.x, xy.y, cenario);
 		GameSystem.getEntityCollection().addEntity(this);
 	}
 	
