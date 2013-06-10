@@ -18,6 +18,7 @@ public class MenuCenario extends Cenario {
 
 	public MenuCenario(int largura, int altura){
 		super("MenuCenario", "Menu", largura, altura);
+		
 		try {
 		    setBackgroundColor(Color.black);
 			
@@ -51,6 +52,8 @@ public class MenuCenario extends Cenario {
 			background.adicionarItem(itemMenu);
 			adicionarLayer(background);
 			
+			//System.out.println("DAHFUIOAHEFUIOAEH");
+			
 			
 			
 			// for (int i = 0; i < largura; i += 32)
@@ -69,6 +72,7 @@ public class MenuCenario extends Cenario {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 	    
 	}
 
