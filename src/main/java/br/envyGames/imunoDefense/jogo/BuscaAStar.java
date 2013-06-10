@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class BuscaAStar {
-	private CasaBusca atual;
-	private ArrayList<CasaBusca> lista_aberta;
-	private ArrayList<CasaBusca> lista_fechada;
+	private static CasaBusca atual;
+	private static ArrayList<CasaBusca> lista_aberta;
+	private static ArrayList<CasaBusca> lista_fechada;
 	
 	/*
 	 * Realiza a Busca A* no <code>tabuleiro</code>, tendo seu inico a casa <code>inicio</code> e ponto final <code>fim</code>.
@@ -16,14 +16,14 @@ public class BuscaAStar {
 	 * @param <code>fim</code>       - Coordenadas da casa no <code>tabuleiro</code> na qual a busca buscará alcançar.
 	 * @return <code>ArrayList<Point></code> - Caminho composto de casa por casa de onde a Entidade deverá passar para alcançar a casa <code>fim</code>, não obtendo a casa <code>inicio</code> em seu corpo.
 	 */
-	public ArrayList<Point> busca(int[][] tabuleiro, Point inicio, Point fim) {
+	public static ArrayList<Point> busca(Casa[][] tabuleiro, Point inicio, Point fim) {
 		atual = null;
 		lista_aberta = new ArrayList<CasaBusca>();
 		lista_fechada = new ArrayList<CasaBusca>();
 		
 		lista_aberta.add(new CasaBusca(inicio, null, fim));
 		
-		boolean caminhoEncontrado = encontraCaminho(tabuleiro, fim);
+		boolean caminhoEncontrado = encontraCaminho(fim);
 		
 		if(!caminhoEncontrado)
 			return null;
@@ -31,7 +31,7 @@ public class BuscaAStar {
 			return obtemCaminho();
 	}
 	
-	private ArrayList<Point> obtemCaminho() {
+	private static ArrayList<Point> obtemCaminho() {
 		ArrayList<Point> caminho = new ArrayList<Point>();
 		CasaBusca aux = atual;
 		
@@ -44,7 +44,7 @@ public class BuscaAStar {
 		return caminho;
 	}
 	
-	private boolean encontraCaminho(int[][] tabuleiro, Point fim) {
+	private static boolean encontraCaminho(Point fim) {
 		while(!lista_aberta.isEmpty()) {
 			atual = lista_aberta.remove(0);
 			lista_fechada.add(atual);
@@ -52,37 +52,30 @@ public class BuscaAStar {
 			if(atual.getCasa().equals(fim)) {
 				return true;
 			} else {
-				verificaCasa(new Point(-1, 0), fim, tabuleiro);
-				verificaCasa(new Point(0, -1), fim, tabuleiro);
-				verificaCasa(new Point(1, 0), fim, tabuleiro);
-				verificaCasa(new Point(0, 1), fim, tabuleiro);
+				verificaCasa(new Point(-1, 0), fim);
+				verificaCasa(new Point(0, -1), fim);
+				verificaCasa(new Point(1, 0), fim);
+				verificaCasa(new Point(0, 1), fim);
 			}
 		}
 		
 		return false;
 	}
 	
-	private void verificaCasa(Point soma, Point fim, int[][] tabuleiro) {
+	private static void verificaCasa(Point soma, Point fim) {
 		int x = atual.getCasa().x + soma.x;
 		int y = atual.getCasa().y + soma.y;
 		
-		if(x < 0 || x >= tabuleiro[0].length  ||  y < 0 || y >= tabuleiro.length) {
+		if(x < 0 || x >= Tabuleiro.getWidth()  ||  y < 0 || y >= Tabuleiro.getHeight()) {
 			Point casaAux = new Point(x, y);
 			
-			if(casaLivre(casaAux, tabuleiro))
+			if(Tabuleiro.checaCasa(casaAux) != Casa.VAZIA)
 				if(!existeNaListaFechada(casaAux))
 					adicionaCasa(casaAux, fim);
 		}
 	}
 	
-	private boolean casaLivre(Point casa, int[][] tabuleiro) {
-		if(tabuleiro[casa.y][casa.x] == 0)
-			return true;
-		
-		return false;
-	}
-	
-	private void adicionaCasa(Point casaAux, Point fim) {
+	private static void adicionaCasa(Point casaAux, Point fim) {
 		if(!existeNaListaAberta(casaAux))
 			lista_aberta.add(new CasaBusca(casaAux, atual, fim));
 		else {
@@ -90,7 +83,7 @@ public class BuscaAStar {
 		}
 	}
 	
-	private CasaBusca pegaIndexDaCasa(Point casa) {
+	private static CasaBusca pegaIndexDaCasa(Point casa) {
 		for(CasaBusca n : lista_aberta) {
 			if(n.mesmaCasa(casa))
 				return n;
@@ -99,7 +92,7 @@ public class BuscaAStar {
 		return null;
 	}
 	
-	private boolean existeNaListaFechada(Point vizinho) {
+	private static boolean existeNaListaFechada(Point vizinho) {
 		boolean existenaFechada = false;
 		for(CasaBusca n : lista_fechada) {
 			if(n.mesmaCasa(vizinho))
@@ -109,7 +102,7 @@ public class BuscaAStar {
 		return existenaFechada;
 	}
 	
-	private boolean existeNaListaAberta(Point vizinho) {
+	private static boolean existeNaListaAberta(Point vizinho) {
 		boolean existeNaAberta = false;
 		for(CasaBusca n : lista_aberta) {
 			if(n.mesmaCasa(vizinho))

@@ -7,6 +7,10 @@ import br.envyGames.imunoDefense.motor.Entidade;
 
 import s3t.gameControl.system.GameSystem;
 
+enum Estado {
+	ANDANDO, PARADO, ATACANDO;
+}
+
 /*
  * Classe abstrata base dos inimigos
  */
