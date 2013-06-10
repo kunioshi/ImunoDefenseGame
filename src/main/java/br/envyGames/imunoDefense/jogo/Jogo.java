@@ -15,7 +15,7 @@ public class Jogo implements Runnable, MouseListener
 {
 	
 	private static final int WIDTH = 800;
-	private static final int HEIGHT = 512;
+	private static final int HEIGHT = 542;
 	
 	private Janela janelaPrincipal;
 	private JogoMotor motor;

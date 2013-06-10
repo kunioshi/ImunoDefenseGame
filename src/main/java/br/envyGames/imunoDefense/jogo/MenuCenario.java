@@ -22,7 +22,7 @@ public class MenuCenario extends Cenario {
 		try {
 		    setBackgroundColor(Color.black);
 			
-			CenarioLayer background = CenarioLayer.criarSolidLayer("BackGround");
+			CenarioLayer background = CenarioLayer.criarSolidLayer("background");
 			//Imagem grama = new ArquivoImagem("/imagens/grama.jpg");
 			Imagem bg = new ArquivoImagem("/imagens/backgroundFixo.png");
 			Imagem logo = new ArquivoImagem("/imagens/bgLogo.png");
@@ -48,9 +48,27 @@ public class MenuCenario extends Cenario {
 			CenarioItem itemTelaInstrucoes2 = new CenarioItem("telaInstrucoes2", telaInstrucoes2, i, j);
 			CenarioItem itemTelaCreditos = new CenarioItem("telaCreditos", telaCreditos, i, j);
 			
-		    
+			
 			background.adicionarItem(itemMenu);
+			background.getScenarioItem("Menu").setVisible(true);
+			background.adicionarItem(itemMenuJogar);
+			background.getScenarioItem("menuJogar").setVisible(false);
+			background.adicionarItem(itemMenuInstrucoes);
+			background.getScenarioItem("menuInstrucoes").setVisible(false);
+			background.adicionarItem(itemMenuCreditos);
+			background.getScenarioItem("menuCreditos").setVisible(false);
+			background.adicionarItem(itemMenuSair);
+			background.getScenarioItem("menuSair").setVisible(false);
+			background.adicionarItem(itemTelaInstrucoes);
+			background.getScenarioItem("telaInstrucoes").setVisible(false);
+			background.adicionarItem(itemTelaInstrucoes2);
+			background.getScenarioItem("telaInstrucoes2").setVisible(false);
+			background.adicionarItem(itemTelaCreditos);
+			background.getScenarioItem("telaCreditos").setVisible(false);			
+		    
+			
 			adicionarLayer(background);
+			
 			
 			//System.out.println("DAHFUIOAHEFUIOAEH");
 			
