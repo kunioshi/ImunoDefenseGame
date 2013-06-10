@@ -3,32 +3,41 @@ package br.envyGames.imunoDefense.jogo;
 import java.awt.Point;
 
 public class Tabuleiro {
-	private static int tamanhoCasa = 32;
-	private static Casa[][] tabuleiro = new Casa[1][1];
-	private static Point casaFinal = new Point(1, 1);
+	private static Tabuleiro tabuleiro;
 	
-	public Tabuleiro() {
+	private int tamanhoCasa = 32;
+	private Casa[][] casas = new Casa[1][1];
+	private Point casaFinal = new Point(1, 1);
+	
+	public static Tabuleiro getTabuleiroAtual() {
+		if (tabuleiro == null)
+			tabuleiro = new Tabuleiro();
+		
+		return tabuleiro;
+	}
+	
+	private Tabuleiro() {
 		zeraTabuleiro();
 	}
 	
-	private static void zeraTabuleiro() {
-		for(int i = 0; i < tabuleiro.length; i++)
-			for(int j = 0; j < tabuleiro[i].length; j++)
-				tabuleiro[i][j] = Casa.VAZIA;
+	private void zeraTabuleiro() {
+		for(int i = 0; i < casas.length; i++)
+			for(int j = 0; j < casas[i].length; j++)
+				casas[i][j] = Casa.VAZIA;
 	}
 	
-	public static int getHeight() { return tabuleiro.length; }
-	public static int getWidth() { return tabuleiro[0].length; }
-	public static Point getFinal() { return casaFinal; }
-	public static int getTamanhoCasa() { return tamanhoCasa; }
-	public static Casa[][] getTabuleiro() { return tabuleiro; }
+	public int getHeight() { return casas.length; }
+	public int getWidth() { return casas[0].length; }
+	public Point getFinal() { return casaFinal; }
+	public int getTamanhoCasa() { return tamanhoCasa; }
+	public Casa[][] getCasas() { return casas; }
 	
 	/*
 	 * Verifica qual o estado/tipo da coordenada da <code>casa</code>.
 	 * @return Retorna o tipo da casa em <code>Casa</code>.
 	 */
-	public static Casa checaCasa(Point casa) {
-		return tabuleiro[casa.y][casa.x];
+	public Casa checaCasa(Point casa) {
+		return casas[casa.y][casa.x];
 	}
 	
 	/*
@@ -36,15 +45,15 @@ public class Tabuleiro {
 	 * @param <code>casa</code> - Coordenadas (x, y) da casa no tabuleiro.
 	 * @param <code>tipo</code> - Novo estado/tipo da casa alterada.
 	 */
-	public static void mudaTipo(Point casa, Casa tipo) {
-		tabuleiro[casa.y][casa.x] = tipo; 
+	public void mudaTipo(Point casa, Casa tipo) {
+		casas[casa.y][casa.x] = tipo; 
 	}
 	
 	/*
 	 * Converte as coordenadas da janela em coordenadas do tabuleiro (número de casas).
 	 * @return Retorna as coordenadas do tabuleiro em formato <code>Point</code>.
 	 */
-	public static Point converteCoord(int x, int y) {
+	public Point converteCoord(int x, int y) {
 		return new Point( (x / tamanhoCasa), (y / tamanhoCasa) );
 	}
 	
@@ -52,7 +61,7 @@ public class Tabuleiro {
 	 * Converte um <code>x</code>, ou um <code>y</code>, do tabuleiro (número de casas) em coordenadas da janela.
 	 * @return Retorna o <code>x</code>, ou o <code>y</code>, em escada da janela.
 	 */
-	public static int converteCoord(int xy) {
+	public int converteCoord(int xy) {
 		return xy * tamanhoCasa;
 	}
 	
@@ -61,7 +70,7 @@ public class Tabuleiro {
 	 * PS: Pronto para Inimigos, pois retorna a coordenada do final do que seria a casa da diagonal superior esquerda da coordenada passada.
 	 * @return Retorna coordenada em escada da janela.
 	 */
-	public static Point converteCoord(Point xy) {
+	public Point converteCoord(Point xy) {
 		return new Point( (xy.x - 1) * tamanhoCasa, (xy.y - 1) * tamanhoCasa );
 	}
 }

@@ -11,6 +11,10 @@ public class JogoCenario extends Cenario {
 		super("JogoCenario", "Jogo", largura, altura);
 		
 
+		carregarBackground();
+	}
+	
+	private void carregarBackground() {
 	    setBackgroundColor(Color.black);
 		
 		CenarioLayer background = CenarioLayer.criarSolidLayer("BackGround");

@@ -66,10 +66,10 @@ public class BuscaAStar {
 		int x = atual.getCasa().x + soma.x;
 		int y = atual.getCasa().y + soma.y;
 		
-		if(x < 0 || x >= Tabuleiro.getWidth()  ||  y < 0 || y >= Tabuleiro.getHeight()) {
+		if(x < 0 || x >= Tabuleiro.getTabuleiroAtual().getWidth()  ||  y < 0 || y >= Tabuleiro.getTabuleiroAtual().getHeight()) {
 			Point casaAux = new Point(x, y);
 			
-			if(Tabuleiro.checaCasa(casaAux) != Casa.VAZIA)
+			if(Tabuleiro.getTabuleiroAtual().checaCasa(casaAux) != Casa.VAZIA)
 				if(!existeNaListaFechada(casaAux))
 					adicionaCasa(casaAux, fim);
 		}

@@ -31,12 +31,12 @@ public class AIMalaria extends AIAction {
 	public void receiveMessage(IAMessage msg) {}
 	
 	private void atualizaCaminho(Entity entity) {
-		caminho = BuscaAStar.busca(Tabuleiro.getTabuleiro(), new Point((int)entity.getX(), (int)entity.getY()), Tabuleiro.getFinal());
+		caminho = BuscaAStar.busca(Tabuleiro.getTabuleiroAtual().getCasas(), new Point((int)entity.getX(), (int)entity.getY()), Tabuleiro.getTabuleiroAtual().getFinal());
 		
 		if(caminho == null)
 			estado = Estado.ATACANDO;
-		if( caminho.get(0).equals( Tabuleiro.converteCoord((int)entity.getX(), (int)entity.getY()) ) )
-			alvo = Coração;
+		//if( caminho.get(0).equals( Tabuleiro.converteCoord((int)entity.getX(), (int)entity.getY()) ) )
+		//	alvo = Coração;
 	}
 	
 	private void comecaAndar() {
@@ -59,18 +59,18 @@ public class AIMalaria extends AIAction {
 	}
 	
 	private void ataca() {
-		Ataca(alvo);
+		//Ataca(alvo);
 	}
 	
 	private boolean chegouProx(InimigoMalaria entity) {
-		if( new Point((int)entity.getX(), (int)entity.getY()).equals(Tabuleiro.converteCoord(proxCasa)) )
+		if( new Point((int)entity.getX(), (int)entity.getY()).equals(Tabuleiro.getTabuleiroAtual().converteCoord(proxCasa)) )
 			return true;
 		
 		return false;
 	}
 	
 	private void checaCaminho(Entity entity) {
-		if(Tabuleiro.checaCasa(proxCasa) != Casa.VAZIA || Tabuleiro.checaCasa(proxCasa) != Casa.INIMIGO)
+		if(Tabuleiro.getTabuleiroAtual().checaCasa(proxCasa) != Casa.VAZIA || Tabuleiro.getTabuleiroAtual().checaCasa(proxCasa) != Casa.INIMIGO)
 			atualizaCaminho(entity);
 	}
 }

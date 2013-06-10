@@ -27,16 +27,16 @@ public class Jogo implements Runnable, MouseListener
 	}
 	
 	@Override
-	public void run() {
-		Cenario menu = new MenuCenario(WIDTH, HEIGHT);
-		motor.getCenarioGerenciador().adicionarCenario(menu);
-		motor.loadCenario(menu.getScenarioId());
-		try {
-			InimigoGripe gripe = new InimigoGripe("gripe", new Point(32, 32), menu);
-			GameSystem.getEntityCollection().addEntity(gripe);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public void run() {		
+		Cenario jogo = new JogoCenario(WIDTH, HEIGHT);
+		  motor.getCenarioGerenciador().adicionarCenario(jogo);
+		  motor.loadCenario(jogo.getScenarioId());
+		  try {
+		   InimigoGripe gripe = new InimigoGripe("gripe", new Point(32, 32), jogo);
+		   GameSystem.getEntityCollection().addEntity(gripe);
+		  } catch (IOException e) {
+		   e.printStackTrace();
+		  }
 	}
 	
 	private void inicializarSistema() {
