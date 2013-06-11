@@ -8,36 +8,67 @@ import java.awt.event.MouseMotionListener;
 import s3t.gameControl.system.GameSystem;
 import s3t.gameEntities.Scenario;
 
+import br.envyGames.imunoDefense.motor.Cenario;
 import br.envyGames.imunoDefense.motor.CenarioGerenciador;
 import br.envyGames.imunoDefense.motor.CenarioItem;
+import br.envyGames.imunoDefense.motor.JogoMotor;
+
 
 public class MouseHandler implements MouseListener, MouseMotionListener {
 	
 	public static Point mousePos = new Point();
 	public static MouseHandler mouseHandler = new MouseHandler();
 	public int condicao = 0;
+	private JogoMotor motor;
+	public int aux = 0;
 
 	@Override
 	public void mouseClicked(MouseEvent e) 
 	{
-		switch(condicao)
-		{
-		case 1:
-			break;
-		case 2:
-			break;
-		case 3:
-			break;
-		case 4:
-			break;
-		default:
-			break;			
-		}
+		Scenario cenario = GameSystem.getScenarioCollection().getScenarioAtual();
 		
 		int gridX = (int) (e.getX() / 32);
 		int gridY = (int) (e.getY() / 32);
 		
 		System.out.println(gridX + "|" + gridY);
+		
+		
+		
+		switch(condicao)
+		{
+		case 1:
+			GameSystem.getScenarioCollection().setScenarioAtual("JogoCenario");
+			motor.loadCenario("JogoCenario");
+			break;
+		case 2:
+			GameSystem.getScenarioCollection().setScenarioAtual("InstrucoesCenario");
+			motor.loadCenario("InstrucoesCenario");
+			break;
+		case 3:
+			GameSystem.getScenarioCollection().setScenarioAtual("CreditosCenario");
+			motor.loadCenario("CreditosCenario");
+			break;
+		case 4:
+			System.exit(0);
+			break;
+		case 5:
+			GameSystem.getScenarioCollection().setScenarioAtual("MenuCenario");
+			motor.loadCenario("MenuCenario");
+			break;
+		case 6:
+			cenario.getScenarioLayer("instrucoes").getScenarioItem("imgInstrucoes").setVisible(false);
+			cenario.getScenarioLayer("instrucoes").getScenarioItem("imgInstrucoes2").setVisible(true);
+			break;
+		case 7:
+			cenario.getScenarioLayer("instrucoes").getScenarioItem("imgInstrucoes").setVisible(true);
+			cenario.getScenarioLayer("instrucoes").getScenarioItem("imgInstrucoes2").setVisible(false);
+			break;
+		default:
+			break;			
+		}
+		
+		
+		
 		
 		//Scenario cenario = new CenarioGerenciador().getCenario();
 		
@@ -57,10 +88,16 @@ public class MouseHandler implements MouseListener, MouseMotionListener {
 		int gridX = (int) (e.getX() / 32);
 		int gridY = (int) (e.getY() / 32);	
 		
-		boolean jogar = (gridX >= 10 && gridX <= 15 && (gridY == 7 || gridY == 8));
-		boolean instrucoes = (gridX >= 7 && gridX <= 17 && (gridY == 9 || gridY == 10));
-		boolean creditos = (gridX >= 8 && gridX <= 16 && (gridY == 11 || gridY == 12));
-		boolean sair = (gridX >= 10 && gridX <= 14 && (gridY == 14 || gridY == 15));
+		Scenario cenario = GameSystem.getScenarioCollection().getScenarioAtual();
+		
+		
+		//Menu
+		if (cenario.getScenarioId().equals("MenuCenario"))
+		{
+		boolean jogar = (gridX >= 0 && gridX <= 5 && (gridY == 8 || gridY == 9));
+		boolean instrucoes = (gridX >= 1 && gridX <= 7 && (gridY == 10 || gridY == 11));
+		boolean creditos = (gridX >= 1 && gridX <= 6 && (gridY == 12 || gridY == 13));
+		boolean sair = (gridX >= 22 && gridX <= 23 && (gridY == 1 || gridY == 2));
 		
 		
 		if(jogar)
@@ -74,13 +111,12 @@ public class MouseHandler implements MouseListener, MouseMotionListener {
 		
 		//System.out.println(gridX + "|" + gridY);
 		
-		Scenario cenario = GameSystem.getScenarioCollection().getScenarioAtual();
 		
-		if (cenario.getScenarioId().equals("MenuCenario"))
-		{
+		
+		
 			switch (condicao)
 			{
-			case 1:				
+			case 1:
 				cenario.getScenarioLayer("background").getScenarioItem("Menu").setVisible(false);
 				cenario.getScenarioLayer("background").getScenarioItem("menuJogar").setVisible(true);
 				cenario.getScenarioLayer("background").getScenarioItem("menuInstrucoes").setVisible(false);
@@ -121,6 +157,43 @@ public class MouseHandler implements MouseListener, MouseMotionListener {
 				cenario.getScenarioLayer("background").getScenarioItem("menuCreditos").setVisible(false);
 				cenario.getScenarioLayer("background").getScenarioItem("menuSair").setVisible(false);
 				break;
+				
+				}
+			
+		}
+		
+		
+		
+		//Creditos
+		if (cenario.getScenarioId().equals("CreditosCenario"))
+		{
+			if (gridX >= 0 && gridX <= 1 && (gridY == 15 || gridY == 16))
+			{
+				condicao = 5;
+			}
+		}
+		
+		//Instrucoes
+		if (cenario.getScenarioId().equals("InstrucoesCenario"))
+		{
+			
+			if (gridX >= 1 && gridX <= 2 && (gridY == 14 || gridY == 15))
+			{
+				condicao = 5;
+			}
+			if (gridX >= 21 && gridX <= 23 && (gridY == 14 || gridY == 15))
+			{
+				
+				if (aux == 0)
+				{ 
+					aux = 1;
+					condicao = 6;
+				}
+				else if (aux == 1)
+				{
+					aux = 0;
+					condicao = 7;					
+				}
 			}
 		}
 		

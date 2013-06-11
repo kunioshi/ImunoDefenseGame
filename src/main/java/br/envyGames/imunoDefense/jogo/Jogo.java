@@ -27,16 +27,36 @@ public class Jogo implements Runnable, MouseListener
 	}
 	
 	@Override
-	public void run() {		
-		Cenario jogo = new JogoCenario(WIDTH, HEIGHT);
-		  motor.getCenarioGerenciador().adicionarCenario(jogo);
-		  motor.loadCenario(jogo.getScenarioId());
-		  try {
-		   InimigoGripe gripe = new InimigoGripe("gripe", new Point(32, 32), jogo);
-		   GameSystem.getEntityCollection().addEntity(gripe);
-		  } catch (IOException e) {
-		   e.printStackTrace();
-		  }
+	public void run() {  
+		//cria o cenário INTRO LOGO
+		 Cenario logo = new LogoCenario(WIDTH, HEIGHT);
+		 motor.getCenarioGerenciador().adicionarCenario(logo);
+		
+		 //cria o cenário JOGO
+		 Cenario jogo = new JogoCenario(WIDTH, HEIGHT);
+		 motor.getCenarioGerenciador().adicionarCenario(jogo);
+		 
+		 //cria o cenário MENU
+		 Cenario menu = new MenuCenario(WIDTH, HEIGHT);
+		 motor.getCenarioGerenciador().adicionarCenario(menu);
+		 
+		 //cria o cenário CRÉDITOS
+		 Cenario creditos = new CreditosCenario(WIDTH, HEIGHT);
+		 motor.getCenarioGerenciador().adicionarCenario(creditos);
+		 
+		//cria o cenário INSTRUÇÕES
+		 Cenario instrucoes = new InstrucoesCenario(WIDTH, HEIGHT);
+		 motor.getCenarioGerenciador().adicionarCenario(instrucoes);
+		 
+		 //Carrega o cenário
+		 motor.loadCenario(logo.getScenarioId());
+		 try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 motor.loadCenario(menu.getScenarioId());
 	}
 	
 	private void inicializarSistema() {
