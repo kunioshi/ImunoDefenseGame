@@ -31,31 +31,31 @@ public class Jogo implements Runnable, MouseListener
 		//cria o cenário INTRO LOGO
 		 Cenario logo = new LogoCenario(WIDTH, HEIGHT);
 		 motor.getCenarioGerenciador().adicionarCenario(logo);
-		
-		 //cria o cenário JOGO
-		 Cenario jogo = new JogoCenario(WIDTH, HEIGHT);
-		 motor.getCenarioGerenciador().adicionarCenario(jogo);
 		 
 		 //cria o cenário MENU
 		 Cenario menu = new MenuCenario(WIDTH, HEIGHT);
 		 motor.getCenarioGerenciador().adicionarCenario(menu);
+		 menu.getScenarioLayer(menu.getScenarioName()).getScenarioItem("menuJogar").setVisible(false);
+		 menu.getScenarioLayer(menu.getScenarioName()).getScenarioItem("menuInstrucoes").setVisible(false);
+		 menu.getScenarioLayer(menu.getScenarioName()).getScenarioItem("menuCreditos").setVisible(false);
+		 menu.getScenarioLayer(menu.getScenarioName()).getScenarioItem("menuSair").setVisible(false);
+		 
 		 
 		 //cria o cenário CRÉDITOS
 		 Cenario creditos = new CreditosCenario(WIDTH, HEIGHT);
 		 motor.getCenarioGerenciador().adicionarCenario(creditos);
+		 creditos.getScenarioLayer(creditos.getScenarioName()).getScenarioItem("telaCreditos").setVisible(false);
+		 creditos.getScenarioLayer(creditos.getScenarioName()).getScenarioItem("telaCreditos2").setVisible(false);
 		 
 		//cria o cenário INSTRUÇÕES
 		 Cenario instrucoes = new InstrucoesCenario(WIDTH, HEIGHT);
 		 motor.getCenarioGerenciador().adicionarCenario(instrucoes);
 		 
-		 //Carrega o cenário
-		 motor.loadCenario(logo.getScenarioId());
-		 try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		//cria o cenário JOGO
+		 Cenario jogo = new JogoCenario(WIDTH, HEIGHT);
+		 motor.getCenarioGerenciador().adicionarCenario(jogo);
+		 
+		 //Carrega o cenário		
 		 motor.loadCenario(menu.getScenarioId());
 	}
 	

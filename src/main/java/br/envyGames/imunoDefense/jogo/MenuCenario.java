@@ -59,11 +59,11 @@ public class MenuCenario extends Cenario {
 			background.getScenarioItem("menuSair").setVisible(false);		
 		    
 			background.adicionarItem(itemMenu);	
+			
 			adicionarLayer(background);
 			
-			Thread.sleep(3000);
 			background.getScenarioItem("logo").setVisible(true);
-			Thread.sleep(3000);
+			Thread.sleep(2000);
 			
 			background.getScenarioItem("logo").setVisible(false);
 			background.getScenarioItem("Menu").setVisible(true);
@@ -74,7 +74,8 @@ public class MenuCenario extends Cenario {
 		catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (InterruptedException e) {
+		} 
+		catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
