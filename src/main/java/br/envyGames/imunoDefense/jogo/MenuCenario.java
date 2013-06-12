@@ -20,37 +20,56 @@ public class MenuCenario extends Cenario {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if (isJogarButton(e.getX(), e.getY())) {
+		int gridX = (int) (e.getX() / 32);
+		int gridY = (int) (e.getY() / 32);
+		
+		if (isJogarButton(gridX, gridY)) {
 			JogarButtonClicked();
 		}
-		else if (isInstrucoesButton(e.getX(), e.getY())) {
+		else if (isInstrucoesButton(gridX, gridY)) {
 			InstrucoesButtonClicked();
 		}
-		else if (isCreditosButton(e.getX(), e.getY())) {
+		else if (isCreditosButton(gridX, gridY)) {
 			CreditosButtonClicked();
 		}
-		else if (isSairButton(e.getX(), e.getY())) {
+		else if (isSairButton(gridX, gridY)) {
 			SairButtonClicked();
 		}
 	}
 	
 	@Override
 	public void mouseMoved(MouseEvent e) {		
-		if (isJogarButton(e.getX(), e.getY())) {
-			this.getLayerPorID("background").getItemPorNome("Menu").setVisible(false);
-			this.getLayerPorID("background").getItemPorNome("menuJogar").setVisible(true);
+		
+		int gridX = (int) (e.getX() / 32);
+		int gridY = (int) (e.getY() / 32);	
+		
+		if (isJogarButton(gridX, gridY)) {
+			this.getLayerPorID("background").getScenarioItem("Menu").setVisible(false);
+			this.getLayerPorID("background").getScenarioItem("menuJogar").setVisible(true);
+			this.getLayerPorID("background").getScenarioItem("menuInstrucoes").setVisible(false);
+			this.getLayerPorID("background").getScenarioItem("menuCreditos").setVisible(false);
+			this.getLayerPorID("background").getScenarioItem("menuSair").setVisible(false);
 		}
-		else if (isInstrucoesButton(e.getX(), e.getY())) {
-			this.getLayerPorID("background").getItemPorNome("Menu").setVisible(false);
-			this.getLayerPorID("background").getItemPorNome("menuInstrucoes").setVisible(true);
+		else if (isInstrucoesButton(gridX, gridY)) {
+			this.getLayerPorID("background").getScenarioItem("Menu").setVisible(false);
+			this.getLayerPorID("background").getScenarioItem("menuJogar").setVisible(false);
+			this.getLayerPorID("background").getScenarioItem("menuInstrucoes").setVisible(true);
+			this.getLayerPorID("background").getScenarioItem("menuCreditos").setVisible(false);
+			this.getLayerPorID("background").getScenarioItem("menuSair").setVisible(false);
 		}
-		else if (isCreditosButton(e.getX(), e.getY())) {
-			this.getLayerPorID("background").getItemPorNome("Menu").setVisible(false);
-			this.getLayerPorID("background").getItemPorNome("menuCreditos").setVisible(true);
+		else if (isCreditosButton(gridX, gridY)) {
+			this.getLayerPorID("background").getScenarioItem("Menu").setVisible(false);
+			this.getLayerPorID("background").getScenarioItem("menuJogar").setVisible(false);
+			this.getLayerPorID("background").getScenarioItem("menuInstrucoes").setVisible(false);
+			this.getLayerPorID("background").getScenarioItem("menuCreditos").setVisible(true);
+			this.getLayerPorID("background").getScenarioItem("menuSair").setVisible(false);
 		}
-		else if (isSairButton(e.getX(), e.getY())) {
-			this.getLayerPorID("background").getItemPorNome("Menu").setVisible(false);
-			this.getLayerPorID("background").getItemPorNome("menuSair").setVisible(true);
+		else if (isSairButton(gridX, gridY)) {
+			this.getLayerPorID("background").getScenarioItem("Menu").setVisible(false);
+			this.getLayerPorID("background").getScenarioItem("menuJogar").setVisible(false);
+			this.getLayerPorID("background").getScenarioItem("menuInstrucoes").setVisible(false);
+			this.getLayerPorID("background").getScenarioItem("menuCreditos").setVisible(false);
+			this.getLayerPorID("background").getScenarioItem("menuSair").setVisible(true);
 		}
 		else {
 			this.getLayerPorID("background").getItemPorNome("Menu").setVisible(true);
@@ -110,19 +129,19 @@ public class MenuCenario extends Cenario {
 	}
 	
 	private boolean isJogarButton(int x, int y) {
-		return x >= 32 && x <= 160 && y >= 256 && y <= 288;
+		return x >= 0 && x <= 5 && (y == 8 || y == 9);
 	}
 	
 	private boolean isInstrucoesButton(int x, int y) {
-		return x >= 32 && x <= 224 && y >= 320 && y <= 352;
+		return x >= 1 && x <= 7 && (y == 10 || y == 11);
 	}
 	
 	private boolean isCreditosButton(int x, int y) {
-		return x >= 32 && x <= 192 && y >= 384 && y <= 416;
+		return x >= 1 && x <= 6 && (y == 12 || y == 13);
 	}
 	
 	private boolean isSairButton(int x, int y) {
-		return x >= 736 && x <= 768 && y >= 32 && y <= 64;
+		return x >= 22 && x <= 23 && (y == 1 || y == 2);
 	}
 	
 	private void JogarButtonClicked() {

@@ -1,5 +1,6 @@
 package br.envyGames.imunoDefense.motor;
 
+
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
@@ -29,6 +30,9 @@ public class JogoMotor implements AlterarCenarioListener {
 	
 	public void exibirJanela() {
 		janelaPrincipal.setVisible(true);
+		
+//		janelaPrincipal.addMouseListener( MouseHandler.mouseHandler );
+//		janelaPrincipal.addMouseMotionListener( MouseHandler.mouseHandler );
 	}
 	
 	public void adicionarCenario(Cenario cenario) {

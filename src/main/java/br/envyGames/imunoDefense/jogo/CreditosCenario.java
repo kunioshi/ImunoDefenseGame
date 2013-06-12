@@ -1,5 +1,6 @@
 package br.envyGames.imunoDefense.jogo;
 
+
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 
@@ -11,6 +12,7 @@ import br.envyGames.imunoDefense.motor.Imagem;
 
 public class CreditosCenario extends Cenario {
 	
+	
 	public CreditosCenario(int largura, int altura) {
 		super("CreditosCenario", "Creditos", largura, altura);
 		
@@ -19,19 +21,25 @@ public class CreditosCenario extends Cenario {
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if (isVoltarButton(e.getX(), e.getY()))
+		int gridX = (int) (e.getX() / 32);
+		int gridY = (int) (e.getY() / 32);	
+		
+		if (isVoltarButton(gridX, gridY))
 			VoltarButtonClicked();
 	}
 	
 	@Override
-	public void mouseMoved(MouseEvent e) {		
-		if (isVoltarButton(e.getX(), e.getY())) {
-			this.getLayerPorID("creditos").getItemPorNome("telaCreditos").setVisible(true);
-			this.getLayerPorID("creditos").getItemPorNome("telaCreditosOver").setVisible(false);			
+	public void mouseMoved(MouseEvent e) {
+		int gridX = (int) (e.getX() / 32);
+		int gridY = (int) (e.getY() / 32);	
+		
+		if (isVoltarButton(gridX, gridY)) {
+			this.getLayerPorID("creditos").getItemPorNome("telaCreditos").setVisible(false);
+			this.getLayerPorID("creditos").getItemPorNome("telaCreditosOver").setVisible(true);			
 		}
 		else {
-			this.getLayerPorID("creditos").getItemPorNome("telaCreditos").setVisible(false);
-			this.getLayerPorID("creditos").getItemPorNome("telaCreditosOver").setVisible(true);
+			this.getLayerPorID("creditos").getItemPorNome("telaCreditos").setVisible(true);
+			this.getLayerPorID("creditos").getItemPorNome("telaCreditosOver").setVisible(false);
 		}
 	}
 	
@@ -44,13 +52,13 @@ public class CreditosCenario extends Cenario {
 			CenarioLayer creditos = CenarioLayer.criarSolidLayer("creditos");
 			
 			Imagem telaCreditos = new ArquivoImagem("/imagens/Creditos.jpg");
-			Imagem telaCreditos2 = new ArquivoImagem("/imagens/Creditos1.jpg");
+			Imagem telaCreditosOver = new ArquivoImagem("/imagens/Creditos1.jpg");
 			
 			CenarioItem itemTelaCreditos = new CenarioItem("telaCreditos", telaCreditos, x, y);
 			creditos.adicionarItem(itemTelaCreditos);
 			creditos.getItemPorNome("telaCreditos").setVisible(true);
 			
-			CenarioItem itemTelaCreditos2 = new CenarioItem("telaCreditosOver", telaCreditos2, x, y);
+			CenarioItem itemTelaCreditos2 = new CenarioItem("telaCreditosOver", telaCreditosOver, x, y);
 			creditos.adicionarItem(itemTelaCreditos2);
 			creditos.getItemPorNome("telaCreditosOver").setVisible(false);
 			
@@ -64,7 +72,7 @@ public class CreditosCenario extends Cenario {
 	}
 	
 	private boolean isVoltarButton(int x, int y) {
-		return x >= 0 && x <= 32 && y >= 480 && y <= 512;
+		return x >= 0 && x <= 1 && (y == 15 || y == 16);
 	}
 	
 	private void VoltarButtonClicked() {
