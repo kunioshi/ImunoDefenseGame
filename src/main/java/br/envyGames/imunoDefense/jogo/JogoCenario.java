@@ -16,6 +16,8 @@ public class JogoCenario extends Cenario implements ChegarHordaListener {
 	public JogoCenario(int largura, int altura) {
 		super("JogoCenario", "Jogo", largura, altura);	
 		
+		hordaGerenciador.addChegarHordaListener(this);
+		
 		try {
 			carregarBackground(largura, altura);
 		} catch (IOException e) {
@@ -25,8 +27,7 @@ public class JogoCenario extends Cenario implements ChegarHordaListener {
 
 	@Override
 	public void run() {
-		hordaGerenciador.run();
-		hordaGerenciador.addChegarHordaListener(this);		
+		hordaGerenciador.run();			
 	}
 	
 	@Override
