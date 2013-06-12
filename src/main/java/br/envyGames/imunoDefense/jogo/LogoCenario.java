@@ -9,9 +9,6 @@ import br.envyGames.imunoDefense.motor.CenarioLayer;
 import br.envyGames.imunoDefense.motor.Imagem;
 
 public class LogoCenario extends Cenario {
-	
-	public int i = 0;
-	public int j = 0;
 
 	public LogoCenario(int largura, int altura) {
 		super("LogoCenario", "Logo", largura, altura);
@@ -20,12 +17,13 @@ public class LogoCenario extends Cenario {
 	}
 
 	private void configurarCenario() {
-		try{
-			
+		try {
+			int x = 0;
+			int y = 0;
 			CenarioLayer logo = CenarioLayer.criarSolidLayer("logo");
 			
 			Imagem telaLogo = new ArquivoImagem("/imagens/bgLogo.jpg");
-			CenarioItem itemLogo = new CenarioItem("telaLogo", telaLogo, i, j);
+			CenarioItem itemLogo = new CenarioItem("telaLogo", telaLogo, x, y);
 			logo.adicionarItem(itemLogo);
 			
 			adicionarLayer(logo);			
