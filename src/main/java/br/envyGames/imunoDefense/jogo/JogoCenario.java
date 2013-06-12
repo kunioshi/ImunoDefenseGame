@@ -1,6 +1,12 @@
 package br.envyGames.imunoDefense.jogo;
 
+import java.awt.Point;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
+
+import s3t.gameControl.system.GameSystem;
+import s3t.graphicsElements.ImageCollection;
+import s3t.graphicsElements.SimpleImage;
 
 import br.envyGames.imunoDefense.motor.ArquivoImagem;
 import br.envyGames.imunoDefense.motor.Cenario;
@@ -8,16 +14,62 @@ import br.envyGames.imunoDefense.motor.CenarioItem;
 import br.envyGames.imunoDefense.motor.CenarioLayer;
 import br.envyGames.imunoDefense.motor.Imagem;
 
-public class JogoCenario extends Cenario {
+public class JogoCenario extends Cenario implements ChegarHordaListener {
 
+	private HordaGerenciador hordaGerenciador = new HordaGerenciador();
+	
 	public JogoCenario(int largura, int altura) {
-		super("JogoCenario", "Jogo", largura, altura);		
+		super("JogoCenario", "Jogo", largura, altura);	
+		
+		hordaGerenciador.run();
+		hordaGerenciador.addChegarHordaListener(this);
 
 		try {
 			carregarBackground(largura, altura);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@Override
+	public void handleChegarHorda() {
+		System.out.println("Horde is comming...");
+	}
+	
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		System.out.println(e.getX() + "|" + e.getY());
+//		if (isTorreButton(e.getX(), e.getY())) {
+//			TorreButtonClicked();
+//		}
+//		else if (isGrid(e.getX(), e.getY())) {
+//			Torre torre = new MiocardioTorre("teste", new Point(e.getX(), e.getY() - 25), this);
+//			GameSystem.getEntityCollection().addEntity(torre);
+//		}
+	}
+	
+	//private TEntite entidade;
+	@Override
+	public void mouseMoved(MouseEvent e) {	
+//		if (isGrid(e.getX(), e.getY())) {
+//			try {
+//				if (entidade == null) {
+//					entidade = new TEntite(e.getX(), e.getY(), this);
+//					GameSystem.getEntityCollection().addEntity(entidade);
+//				}
+//				else {
+//					entidade.setX(e.getX());
+//					entidade.setY(e.getY());
+//				}
+//				
+//			} 
+//			catch (IOException e1) {
+//				// TODO Auto-generated catch block
+//				e1.printStackTrace();
+//			}			
+//		}
+//		//else
+//		//	GameSystem.getEntityCollection().removeEntity(entidade);
 	}
 	
 	private void carregarBackground(int largura, int altura) throws IOException {		
@@ -50,5 +102,16 @@ public class JogoCenario extends Cenario {
 	private int convertGridPixel(int n) {
 		return n * 32;
 	}
+	
+	private boolean isGrid(int x, int y) {
+		return (x >= 0 && x <= 384 && y >= 0 && y <= 420);
+	}
+	
+	private boolean isTorreButton(int x, int y) {
+		return x >= 6 && x <= 96 && y >= 420 && y <= 510;
+	}
+	
+	private void TorreButtonClicked() {
 		
+	}		
 }

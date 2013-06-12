@@ -16,7 +16,7 @@ public class Jogo implements Runnable
 	}
 	
 	@Override
-	public void run() {  
+	public void run() {  		
 		 //cria o cenário INTRO LOGO
 		 Cenario logo = new LogoCenario(WIDTH, HEIGHT);
 		 motor.adicionarCenario(logo);
