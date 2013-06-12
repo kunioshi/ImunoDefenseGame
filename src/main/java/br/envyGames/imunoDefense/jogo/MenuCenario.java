@@ -17,6 +17,11 @@ public class MenuCenario extends Cenario {
 		
 		configurarCenario();
 	}
+	
+	@Override
+	public void run() {
+		
+	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
