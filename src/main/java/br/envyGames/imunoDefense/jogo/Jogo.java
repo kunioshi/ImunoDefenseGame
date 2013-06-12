@@ -36,6 +36,10 @@ public class Jogo implements Runnable
 		//cria o cenário CRÉDITOS
 		Cenario creditos = new CreditosCenario(WIDTH, HEIGHT);
 		motor.adicionarCenario(creditos);
+		
+		//cria o cenário Game Over
+		Cenario gameover = new GameOverCenario(WIDTH, HEIGHT);
+		motor.adicionarCenario(gameover);
 
 		motor.exibirJanela();
 		motor.inicializar();

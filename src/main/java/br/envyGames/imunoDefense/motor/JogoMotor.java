@@ -1,5 +1,6 @@
 package br.envyGames.imunoDefense.motor;
 
+//import br.envyGames.imunoDefense.jogo.MouseHandler;
 
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
