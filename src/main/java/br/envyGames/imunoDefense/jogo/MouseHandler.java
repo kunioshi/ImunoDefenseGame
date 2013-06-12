@@ -13,7 +13,7 @@ import br.envyGames.imunoDefense.motor.CenarioGerenciador;
 import br.envyGames.imunoDefense.motor.CenarioItem;
 import br.envyGames.imunoDefense.motor.JogoMotor;
 
-
+//CLASSE DESCONTINUADA VAI SER APAGA
 public class MouseHandler implements MouseListener, MouseMotionListener {
 	
 	public static Point mousePos = new Point();

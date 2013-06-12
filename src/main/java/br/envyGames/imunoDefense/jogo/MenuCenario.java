@@ -4,20 +4,64 @@ import java.awt.event.MouseEvent;
 
 import java.io.IOException;
 
-import s3t.gameControl.system.GameSystem;
-
 import br.envyGames.imunoDefense.motor.ArquivoImagem;
 import br.envyGames.imunoDefense.motor.Cenario;
 import br.envyGames.imunoDefense.motor.CenarioItem;
 import br.envyGames.imunoDefense.motor.CenarioLayer;
 import br.envyGames.imunoDefense.motor.Imagem;
-import br.envyGames.imunoDefense.motor.JogoMotor;
 
 public class MenuCenario extends Cenario {
 
 	public MenuCenario(int largura, int altura){
 		super("MenuCenario", "Menu", largura, altura);
 		
+		configurarCenario();
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		if (isJogarButton(e.getX(), e.getY())) {
+			JogarButtonClicked();
+		}
+		else if (isInstrucoesButton(e.getX(), e.getY())) {
+			InstrucoesButtonClicked();
+		}
+		else if (isCreditosButton(e.getX(), e.getY())) {
+			CreditosButtonClicked();
+		}
+		else if (isSairButton(e.getX(), e.getY())) {
+			SairButtonClicked();
+		}
+	}
+	
+	@Override
+	public void mouseMoved(MouseEvent e) {		
+		if (isJogarButton(e.getX(), e.getY())) {
+			this.getLayerPorID("background").getItemPorNome("Menu").setVisible(false);
+			this.getLayerPorID("background").getItemPorNome("menuJogar").setVisible(true);
+		}
+		else if (isInstrucoesButton(e.getX(), e.getY())) {
+			this.getLayerPorID("background").getItemPorNome("Menu").setVisible(false);
+			this.getLayerPorID("background").getItemPorNome("menuInstrucoes").setVisible(true);
+		}
+		else if (isCreditosButton(e.getX(), e.getY())) {
+			this.getLayerPorID("background").getItemPorNome("Menu").setVisible(false);
+			this.getLayerPorID("background").getItemPorNome("menuCreditos").setVisible(true);
+		}
+		else if (isSairButton(e.getX(), e.getY())) {
+			this.getLayerPorID("background").getItemPorNome("Menu").setVisible(false);
+			this.getLayerPorID("background").getItemPorNome("menuSair").setVisible(true);
+		}
+		else {
+			this.getLayerPorID("background").getItemPorNome("Menu").setVisible(true);
+			this.getLayerPorID("background").getItemPorNome("menuJogar").setVisible(false);
+			this.getLayerPorID("background").getItemPorNome("menuInstrucoes").setVisible(false);
+			this.getLayerPorID("background").getItemPorNome("menuCreditos").setVisible(false);
+			this.getLayerPorID("background").getItemPorNome("menuSair").setVisible(false);
+		}
+	}
+	
+	private void configurarCenario() {		
 		try {			
 			int x = 0;
 			int y = 0;
@@ -64,49 +108,6 @@ public class MenuCenario extends Cenario {
 			e.printStackTrace();
 		}
 	}
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		if (isJogarButton(e.getX(), e.getY())) {
-			JogoMotor.get().loadCenario("JogoCenario");
-		}
-		else if (isInstrucoesButton(e.getX(), e.getY())) {
-			JogoMotor.get().loadCenario("InstrucoesCenario");
-		}
-		else if (isCreditosButton(e.getX(), e.getY())) {
-			JogoMotor.get().loadCenario("CreditosCenario");
-		}
-		else if (isSairButton(e.getX(), e.getY())) {
-			SairJogo();
-		}
-	}
-	
-	@Override
-	public void mouseMoved(MouseEvent e) {		
-		if (isJogarButton(e.getX(), e.getY())) {
-			this.getLayerPorID("background").getItemPorNome("Menu").setVisible(false);
-			this.getLayerPorID("background").getItemPorNome("menuJogar").setVisible(true);
-		}
-		else if (isInstrucoesButton(e.getX(), e.getY())) {
-			this.getLayerPorID("background").getItemPorNome("Menu").setVisible(false);
-			this.getLayerPorID("background").getItemPorNome("menuInstrucoes").setVisible(true);
-		}
-		else if (isCreditosButton(e.getX(), e.getY())) {
-			this.getLayerPorID("background").getItemPorNome("Menu").setVisible(false);
-			this.getLayerPorID("background").getItemPorNome("menuCreditos").setVisible(true);
-		}
-		else if (isSairButton(e.getX(), e.getY())) {
-			this.getLayerPorID("background").getItemPorNome("Menu").setVisible(false);
-			this.getLayerPorID("background").getItemPorNome("menuSair").setVisible(true);
-		}
-		else {
-			this.getLayerPorID("background").getItemPorNome("Menu").setVisible(true);
-			this.getLayerPorID("background").getItemPorNome("menuJogar").setVisible(false);
-			this.getLayerPorID("background").getItemPorNome("menuInstrucoes").setVisible(false);
-			this.getLayerPorID("background").getItemPorNome("menuCreditos").setVisible(false);
-			this.getLayerPorID("background").getItemPorNome("menuSair").setVisible(false);
-		}
-	}
 	
 	private boolean isJogarButton(int x, int y) {
 		return x >= 32 && x <= 160 && y >= 256 && y <= 288;
@@ -123,6 +124,22 @@ public class MenuCenario extends Cenario {
 	private boolean isSairButton(int x, int y) {
 		return x >= 736 && x <= 768 && y >= 32 && y <= 64;
 	}
+	
+	private void JogarButtonClicked() {
+		carregarNovoCenario("JogoCenario");
+	}
+	
+	private void InstrucoesButtonClicked() {
+		carregarNovoCenario("InstrucoesCenario");
+	}
+	
+	private void CreditosButtonClicked() {
+		carregarNovoCenario("CreditosCenario");
+	}
+	
+	private void SairButtonClicked() {
+		SairJogo();
+	}	
 	
 	private void SairJogo() {
 		System.exit(0);

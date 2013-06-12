@@ -8,13 +8,34 @@ import br.envyGames.imunoDefense.motor.Cenario;
 import br.envyGames.imunoDefense.motor.CenarioItem;
 import br.envyGames.imunoDefense.motor.CenarioLayer;
 import br.envyGames.imunoDefense.motor.Imagem;
-import br.envyGames.imunoDefense.motor.JogoMotor;
 
 public class CreditosCenario extends Cenario {
 	
 	public CreditosCenario(int largura, int altura) {
 		super("CreditosCenario", "Creditos", largura, altura);
 		
+		configurarCenario();
+	}
+	
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		if (isVoltarButton(e.getX(), e.getY()))
+			VoltarButtonClicked();
+	}
+	
+	@Override
+	public void mouseMoved(MouseEvent e) {		
+		if (isVoltarButton(e.getX(), e.getY())) {
+			this.getLayerPorID("creditos").getItemPorNome("telaCreditos").setVisible(true);
+			this.getLayerPorID("creditos").getItemPorNome("telaCreditosOver").setVisible(false);			
+		}
+		else {
+			this.getLayerPorID("creditos").getItemPorNome("telaCreditos").setVisible(false);
+			this.getLayerPorID("creditos").getItemPorNome("telaCreditosOver").setVisible(true);
+		}
+	}
+	
+	private void configurarCenario() {
 		try{
 			
 			int x = 0;
@@ -29,9 +50,9 @@ public class CreditosCenario extends Cenario {
 			creditos.adicionarItem(itemTelaCreditos);
 			creditos.getItemPorNome("telaCreditos").setVisible(true);
 			
-			CenarioItem itemTelaCreditos2 = new CenarioItem("telaCreditos2", telaCreditos2, x, y);
+			CenarioItem itemTelaCreditos2 = new CenarioItem("telaCreditosOver", telaCreditos2, x, y);
 			creditos.adicionarItem(itemTelaCreditos2);
-			creditos.getItemPorNome("telaCreditos2").setVisible(false);
+			creditos.getItemPorNome("telaCreditosOver").setVisible(false);
 			
 			creditos.adicionarItem(itemTelaCreditos);
 			
@@ -42,28 +63,11 @@ public class CreditosCenario extends Cenario {
 		}
 	}
 	
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		if (isVoltarButton(e.getX(), e.getY())) {
-			JogoMotor.get().loadCenario("MenuCenario");
-		}
-	}
-	
-	@Override
-	public void mouseMoved(MouseEvent e) {		
-		if (isVoltarButton(e.getX(), e.getY())) {
-			this.getLayerPorID("creditos").getItemPorNome("telaCreditos").setVisible(true);
-			this.getLayerPorID("creditos").getItemPorNome("telaCreditos2").setVisible(false);			
-		}
-		else
-		{
-			this.getLayerPorID("creditos").getItemPorNome("telaCreditos").setVisible(false);
-			this.getLayerPorID("creditos").getItemPorNome("telaCreditos2").setVisible(true);
-		}
-	}
-	
 	private boolean isVoltarButton(int x, int y) {
 		return x >= 0 && x <= 32 && y >= 480 && y <= 512;
 	}
-
+	
+	private void VoltarButtonClicked() {
+		carregarNovoCenario("MenuCenario");
+	}
 }

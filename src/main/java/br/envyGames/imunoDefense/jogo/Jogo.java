@@ -6,7 +6,7 @@ import br.envyGames.imunoDefense.motor.JogoMotor;
 public class Jogo implements Runnable
 {	
 	private static final int WIDTH = 800;
-	private static final int HEIGHT = 544;
+	private static final int HEIGHT = 540;
 
 	private JogoMotor motor;
 
@@ -49,7 +49,7 @@ public class Jogo implements Runnable
 	}
 	
 	private void inicializarSistema() {
-		motor = JogoMotor.get();
+		motor = new JogoMotor();
 		motor.inicializar();		 
 	}
 }
