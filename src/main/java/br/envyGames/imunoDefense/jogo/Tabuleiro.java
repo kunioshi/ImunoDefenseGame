@@ -71,6 +71,6 @@ public class Tabuleiro {
 	 * @return Retorna coordenada em escada da janela.
 	 */
 	public Point converteCoord(Point xy) {
-		return new Point( (xy.x - 1) * tamanhoCasa, (xy.y - 1) * tamanhoCasa );
+		return new Point( xy.x * tamanhoCasa, xy.y * tamanhoCasa );
 	}
 }
