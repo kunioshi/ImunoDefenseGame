@@ -14,53 +14,53 @@ public class Jogo implements Runnable
 		inicializarSistema();
 		motor.criarJanela(WIDTH, HEIGHT);		
 	}
-	
+
 	@Override
 	public void run() {  
-		 //cria o cenário INTRO LOGO
-		 Cenario logo = new LogoCenario(WIDTH, HEIGHT);
-		 motor.adicionarCenario(logo);
-		
-		 //cria o cenário MENU
-		 Cenario menu = new MenuCenario(WIDTH, HEIGHT);
-		 motor.adicionarCenario(menu);
-		 
-		 //cria o cenário JOGO
-		 Cenario jogo = new JogoCenario(WIDTH, HEIGHT);
-		 motor.adicionarCenario(jogo);
-		 
-		 //cria o cenário INSTRUÇÕES
-		 Cenario instrucoes = new InstrucoesCenario(WIDTH, HEIGHT);
-		 motor.adicionarCenario(instrucoes);
-		 
-		 //cria o cenário CRÉDITOS
-		 Cenario creditos = new CreditosCenario(WIDTH, HEIGHT);
-		 motor.adicionarCenario(creditos);
-		 
-		 motor.exibirJanela();
-		 motor.inicializar();
-		 
-		 motor.loadCenario(logo.getScenarioId());
-		 
-		 try {
+		//cria o cenário INTRO LOGO
+		Cenario logo = new LogoCenario(WIDTH, HEIGHT);
+		motor.adicionarCenario(logo);
+
+		//cria o cenário MENU
+		Cenario menu = new MenuCenario(WIDTH, HEIGHT);
+		motor.adicionarCenario(menu);
+
+		//cria o cenário JOGO
+		Cenario jogo = new JogoCenario(WIDTH, HEIGHT);
+		motor.adicionarCenario(jogo);
+
+		//cria o cenário INSTRUÇÕES
+		Cenario instrucoes = new InstrucoesCenario(WIDTH, HEIGHT);
+		motor.adicionarCenario(instrucoes);
+
+		//cria o cenário CRÉDITOS
+		Cenario creditos = new CreditosCenario(WIDTH, HEIGHT);
+		motor.adicionarCenario(creditos);
+
+		motor.exibirJanela();
+		motor.inicializar();
+
+		motor.loadCenario(logo.getScenarioId());
+
+		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		 motor.loadCenario(menu.getScenarioId());
-		 
+		motor.loadCenario(menu.getScenarioId());
 
-		 
+
+
 		/*
 		 Cenario jogo = new JogoCenario(WIDTH, HEIGHT);
 		 motor.adicionarCenario(jogo);
 		 motor.loadCenario(jogo.getScenarioId());
 		 */
 	}
-	
+
 	private void inicializarSistema() {
 		motor = new JogoMotor();
-				 
+
 	}
 }
