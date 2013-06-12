@@ -6,7 +6,7 @@ import br.envyGames.imunoDefense.motor.JogoMotor;
 public class Jogo implements Runnable
 {	
 	private static final int WIDTH = 800;
-	private static final int HEIGHT = 542;
+	private static final int HEIGHT = 544;
 
 	private JogoMotor motor;
 
@@ -40,6 +40,12 @@ public class Jogo implements Runnable
 		 
 		 //Carrega o cenário
 		 motor.loadCenario(menu.getScenarioId());
+		 
+		/*
+		 Cenario jogo = new JogoCenario(WIDTH, HEIGHT);
+		 motor.adicionarCenario(jogo);
+		 motor.loadCenario(jogo.getScenarioId());
+		 */
 	}
 	
 	private void inicializarSistema() {
