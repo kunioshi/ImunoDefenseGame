@@ -12,8 +12,7 @@ public class Jogo implements Runnable
 
 	public void setup() {
 		inicializarSistema();
-		motor.criarJanela(WIDTH, HEIGHT);
-		motor.exibirJanela();
+		motor.criarJanela(WIDTH, HEIGHT);		
 	}
 	
 	@Override
@@ -26,7 +25,7 @@ public class Jogo implements Runnable
 		 Cenario menu = new MenuCenario(WIDTH, HEIGHT);
 		 motor.adicionarCenario(menu);
 		 
-		//cria o cenário JOGO
+		 //cria o cenário JOGO
 		 Cenario jogo = new JogoCenario(WIDTH, HEIGHT);
 		 motor.adicionarCenario(jogo);
 		 
@@ -36,10 +35,22 @@ public class Jogo implements Runnable
 		 
 		 //cria o cenário CRÉDITOS
 		 Cenario creditos = new CreditosCenario(WIDTH, HEIGHT);
-		 motor.adicionarCenario(creditos);		 
+		 motor.adicionarCenario(creditos);
 		 
-		 //Carrega o cenário
+		 motor.exibirJanela();
+		 motor.inicializar();
+		 
+		 motor.loadCenario(logo.getScenarioId());
+		 
+		 try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		 motor.loadCenario(menu.getScenarioId());
+		 
+
 		 
 		/*
 		 Cenario jogo = new JogoCenario(WIDTH, HEIGHT);
@@ -50,6 +61,6 @@ public class Jogo implements Runnable
 	
 	private void inicializarSistema() {
 		motor = new JogoMotor();
-		motor.inicializar();		 
+				 
 	}
 }

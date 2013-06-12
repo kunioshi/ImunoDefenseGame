@@ -16,6 +16,10 @@ public class LogoCenario extends Cenario {
 	public LogoCenario(int largura, int altura) {
 		super("LogoCenario", "Logo", largura, altura);
 		
+		configurarCenario();
+	}
+
+	private void configurarCenario() {
 		try{
 			
 			CenarioLayer logo = CenarioLayer.criarSolidLayer("logo");
@@ -24,11 +28,11 @@ public class LogoCenario extends Cenario {
 			CenarioItem itemLogo = new CenarioItem("telaLogo", telaLogo, i, j);
 			logo.adicionarItem(itemLogo);
 			
-			adicionarLayer(logo);
+			adicionarLayer(logo);			
 		}
 		catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+		
 		}
 	}
 
