@@ -1,12 +1,7 @@
 package br.envyGames.imunoDefense.jogo;
 
-import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
-
-import s3t.gameControl.system.GameSystem;
-import s3t.graphicsElements.ImageCollection;
-import s3t.graphicsElements.SimpleImage;
 
 import br.envyGames.imunoDefense.motor.ArquivoImagem;
 import br.envyGames.imunoDefense.motor.Cenario;
@@ -82,16 +77,16 @@ public class JogoCenario extends Cenario implements ChegarHordaListener {
 		
 		Imagem botaoTorre = new ArquivoImagem("/imagens/botaoTorre1.jpg");
 		
-		for (int i = 0; convertGridPixel(i) < largura; i++)
-	    	for (int j = 0; convertGridPixel(j) < altura; j++) {
-	    		if (i < 23) {
-	    			if (j < 13)
-	    				background.adicionarItem(new CenarioItem("grid_" + i + "_" + j, gridImagem, convertGridPixel(i), convertGridPixel(j)));
+		for (int i = 0; Tabuleiro.getTabuleiroAtual().converteCoord(i) < largura; i++)
+	    	for (int j = 0; Tabuleiro.getTabuleiroAtual().converteCoord(j) < altura; j++) {
+	    		if (i < Tabuleiro.getTabuleiroAtual().getWidth()) {
+	    			if (j < Tabuleiro.getTabuleiroAtual().getHeight())
+	    				background.adicionarItem(new CenarioItem("grid_" + i + "_" + j, gridImagem, Tabuleiro.getTabuleiroAtual().converteCoord(i), Tabuleiro.getTabuleiroAtual().converteCoord(j)));
 	    			else
-	    				background.adicionarItem(new CenarioItem("menuBar_" + i + "_" + j, menuBarImagem, convertGridPixel(i), convertGridPixel(j)));
+	    				background.adicionarItem(new CenarioItem("menuBar_" + i + "_" + j, menuBarImagem, Tabuleiro.getTabuleiroAtual().converteCoord(i), Tabuleiro.getTabuleiroAtual().converteCoord(j)));
 	    		}
 	    		else
-	    			background.adicionarItem(new CenarioItem("coracao_" + i + "_" + j, coracaoImagem, convertGridPixel(i), convertGridPixel(j)));
+	    			background.adicionarItem(new CenarioItem("coracao_" + i + "_" + j, coracaoImagem, Tabuleiro.getTabuleiroAtual().converteCoord(i), Tabuleiro.getTabuleiroAtual().converteCoord(j)));
 	    	}
 		
 		background.adicionarItem(new CenarioItem("botaoTorre_1", botaoTorre, 6, 420));
