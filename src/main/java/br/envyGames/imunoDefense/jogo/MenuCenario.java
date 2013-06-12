@@ -1,9 +1,8 @@
 package br.envyGames.imunoDefense.jogo;
 
-import java.awt.Color;
-import java.awt.SplashScreen;
+import java.awt.event.MouseEvent;
+
 import java.io.IOException;
-import java.util.concurrent.CountDownLatch;
 
 import br.envyGames.imunoDefense.motor.ArquivoImagem;
 import br.envyGames.imunoDefense.motor.Cenario;
@@ -13,85 +12,136 @@ import br.envyGames.imunoDefense.motor.Imagem;
 
 public class MenuCenario extends Cenario {
 
-	public int i = 0;
-	public int j = 0;
-
 	public MenuCenario(int largura, int altura){
 		super("MenuCenario", "Menu", largura, altura);
 		
-		try {
-		    setBackgroundColor(Color.black);
+		configurarCenario();
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		if (isJogarButton(e.getX(), e.getY())) {
+			JogarButtonClicked();
+		}
+		else if (isInstrucoesButton(e.getX(), e.getY())) {
+			InstrucoesButtonClicked();
+		}
+		else if (isCreditosButton(e.getX(), e.getY())) {
+			CreditosButtonClicked();
+		}
+		else if (isSairButton(e.getX(), e.getY())) {
+			SairButtonClicked();
+		}
+	}
+	
+	@Override
+	public void mouseMoved(MouseEvent e) {		
+		if (isJogarButton(e.getX(), e.getY())) {
+			this.getLayerPorID("background").getItemPorNome("Menu").setVisible(false);
+			this.getLayerPorID("background").getItemPorNome("menuJogar").setVisible(true);
+		}
+		else if (isInstrucoesButton(e.getX(), e.getY())) {
+			this.getLayerPorID("background").getItemPorNome("Menu").setVisible(false);
+			this.getLayerPorID("background").getItemPorNome("menuInstrucoes").setVisible(true);
+		}
+		else if (isCreditosButton(e.getX(), e.getY())) {
+			this.getLayerPorID("background").getItemPorNome("Menu").setVisible(false);
+			this.getLayerPorID("background").getItemPorNome("menuCreditos").setVisible(true);
+		}
+		else if (isSairButton(e.getX(), e.getY())) {
+			this.getLayerPorID("background").getItemPorNome("Menu").setVisible(false);
+			this.getLayerPorID("background").getItemPorNome("menuSair").setVisible(true);
+		}
+		else {
+			this.getLayerPorID("background").getItemPorNome("Menu").setVisible(true);
+			this.getLayerPorID("background").getItemPorNome("menuJogar").setVisible(false);
+			this.getLayerPorID("background").getItemPorNome("menuInstrucoes").setVisible(false);
+			this.getLayerPorID("background").getItemPorNome("menuCreditos").setVisible(false);
+			this.getLayerPorID("background").getItemPorNome("menuSair").setVisible(false);
+		}
+	}
+	
+	private void configurarCenario() {		
+		try {			
+			int x = 0;
+			int y = 0;
 			
 			CenarioLayer background = CenarioLayer.criarSolidLayer("background");
-			//Imagem grama = new ArquivoImagem("/imagens/grama.jpg");
-			Imagem bg = new ArquivoImagem("/imagens/backgroundFixo.png");
-			Imagem logo = new ArquivoImagem("/imagens/bgLogo.png");
-			Imagem Menu = new ArquivoImagem("/imagens/Menu.png");
-			Imagem menuJogar = new ArquivoImagem("/imagens/jogar.png");
-			Imagem menuInstrucoes = new ArquivoImagem("/imagens/instrucoesMenu.png");
-			Imagem menuCreditos = new ArquivoImagem("/imagens/creditosMenu.png");
-			Imagem menuSair = new ArquivoImagem("/imagens/sair.png");
-			Imagem telaInstrucoes = new ArquivoImagem("/imagens/instrucoes1.png");
-			Imagem telaInstrucoes2 = new ArquivoImagem("/imagens/instrucoes2.png");
-			Imagem telaCreditos = new ArquivoImagem("/imagens/Creditos.png");
-	
-		  	
 			
-			CenarioItem itemBg = new CenarioItem("background", bg, i, j);
-			CenarioItem itemLogo = new CenarioItem("logo", logo, i, j);
-			CenarioItem itemMenu = new CenarioItem("Menu", Menu, i, j);
-			CenarioItem itemMenuJogar = new CenarioItem("menuJogar", menuJogar, i, j);
-			CenarioItem itemMenuInstrucoes = new CenarioItem("menuInstrucoes", menuInstrucoes, i, j);
-			CenarioItem itemMenuCreditos = new CenarioItem("menuCreditos", menuCreditos, i, j);
-			CenarioItem itemMenuSair = new CenarioItem("menuSair", menuSair, i, j);
-			CenarioItem itemTelaInstrucoes = new CenarioItem("telaInstrucoes", telaInstrucoes, i, j);
-			CenarioItem itemTelaInstrucoes2 = new CenarioItem("telaInstrucoes2", telaInstrucoes2, i, j);
-			CenarioItem itemTelaCreditos = new CenarioItem("telaCreditos", telaCreditos, i, j);
+			Imagem bg = new ArquivoImagem("/imagens/bgFixo.jpg");
+			Imagem logo = new ArquivoImagem("/imagens/bgLogo.jpg");
+			Imagem Menu = new ArquivoImagem("/imagens/Menu.jpg");
+			Imagem menuJogar = new ArquivoImagem("/imagens/jogar.jpg");
+			Imagem menuInstrucoes = new ArquivoImagem("/imagens/instrucoesMenu.jpg");
+			Imagem menuCreditos = new ArquivoImagem("/imagens/creditosMenu.jpg");
+			Imagem menuSair = new ArquivoImagem("/imagens/sair.jpg");		  	
 			
+			CenarioItem itemBg = new CenarioItem("background", bg, x, y);
+			CenarioItem itemLogo = new CenarioItem("logo", logo, x, y);
+			CenarioItem itemMenu = new CenarioItem("Menu", Menu, x, y);
+			CenarioItem itemMenuJogar = new CenarioItem("menuJogar", menuJogar, x, y);
+			CenarioItem itemMenuInstrucoes = new CenarioItem("menuInstrucoes", menuInstrucoes, x, y);
+			CenarioItem itemMenuCreditos = new CenarioItem("menuCreditos", menuCreditos, x, y);
+			CenarioItem itemMenuSair = new CenarioItem("menuSair", menuSair, x, y);				
 			
-			background.adicionarItem(itemMenu);
-			background.getScenarioItem("Menu").setVisible(true);
+			background.adicionarItem(itemBg);
+			background.getItemPorNome("background").setVisible(false);
+			background.adicionarItem(itemLogo);
+			background.getItemPorNome("logo").setVisible(false);
+					
 			background.adicionarItem(itemMenuJogar);
-			background.getScenarioItem("menuJogar").setVisible(false);
+			background.getItemPorNome("menuJogar").setVisible(false);
 			background.adicionarItem(itemMenuInstrucoes);
-			background.getScenarioItem("menuInstrucoes").setVisible(false);
+			background.getItemPorNome("menuInstrucoes").setVisible(false);
 			background.adicionarItem(itemMenuCreditos);
-			background.getScenarioItem("menuCreditos").setVisible(false);
+			background.getItemPorNome("menuCreditos").setVisible(false);
 			background.adicionarItem(itemMenuSair);
-			background.getScenarioItem("menuSair").setVisible(false);
-			background.adicionarItem(itemTelaInstrucoes);
-			background.getScenarioItem("telaInstrucoes").setVisible(false);
-			background.adicionarItem(itemTelaInstrucoes2);
-			background.getScenarioItem("telaInstrucoes2").setVisible(false);
-			background.adicionarItem(itemTelaCreditos);
-			background.getScenarioItem("telaCreditos").setVisible(false);			
+			background.getItemPorNome("menuSair").setVisible(false);		
 		    
+			background.adicionarItem(itemMenu);	
 			
 			adicionarLayer(background);
 			
-			
-			//System.out.println("DAHFUIOAHEFUIOAEH");
-			
-			
-			
-			// for (int i = 0; i < largura; i += 32)
-			  //  for (int j = 0; j < altura; j += 32) {
-			  //  	CenarioItem item = new CenarioItem("grama" + i + "_" + j, grama, i, j);
-			    		
-			  //  background.adicionarItem(item);
-			//}    	
-			
-			
-			
-			
-		    	    
+			background.getItemPorNome("Menu").setVisible(true);		    	    
 		} 
 		catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-	    
 	}
-
+	
+	private boolean isJogarButton(int x, int y) {
+		return x >= 32 && x <= 160 && y >= 256 && y <= 288;
+	}
+	
+	private boolean isInstrucoesButton(int x, int y) {
+		return x >= 32 && x <= 224 && y >= 320 && y <= 352;
+	}
+	
+	private boolean isCreditosButton(int x, int y) {
+		return x >= 32 && x <= 192 && y >= 384 && y <= 416;
+	}
+	
+	private boolean isSairButton(int x, int y) {
+		return x >= 736 && x <= 768 && y >= 32 && y <= 64;
+	}
+	
+	private void JogarButtonClicked() {
+		carregarNovoCenario("JogoCenario");
+	}
+	
+	private void InstrucoesButtonClicked() {
+		carregarNovoCenario("InstrucoesCenario");
+	}
+	
+	private void CreditosButtonClicked() {
+		carregarNovoCenario("CreditosCenario");
+	}
+	
+	private void SairButtonClicked() {
+		SairJogo();
+	}	
+	
+	private void SairJogo() {
+		System.exit(0);
+	}
 }

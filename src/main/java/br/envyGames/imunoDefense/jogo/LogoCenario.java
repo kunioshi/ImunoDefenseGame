@@ -1,0 +1,37 @@
+package br.envyGames.imunoDefense.jogo;
+
+import java.io.IOException;
+
+import br.envyGames.imunoDefense.motor.ArquivoImagem;
+import br.envyGames.imunoDefense.motor.Cenario;
+import br.envyGames.imunoDefense.motor.CenarioItem;
+import br.envyGames.imunoDefense.motor.CenarioLayer;
+import br.envyGames.imunoDefense.motor.Imagem;
+
+public class LogoCenario extends Cenario {
+
+	public LogoCenario(int largura, int altura) {
+		super("LogoCenario", "Logo", largura, altura);
+		
+		configurarCenario();
+	}
+
+	private void configurarCenario() {
+		try {
+			int x = 0;
+			int y = 0;
+			CenarioLayer logo = CenarioLayer.criarSolidLayer("logo");
+			
+			Imagem telaLogo = new ArquivoImagem("/imagens/bgLogo.jpg");
+			CenarioItem itemLogo = new CenarioItem("telaLogo", telaLogo, x, y);
+			logo.adicionarItem(itemLogo);
+			
+			adicionarLayer(logo);			
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		
+		}
+	}
+
+}
