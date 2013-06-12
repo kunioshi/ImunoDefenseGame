@@ -16,5 +16,8 @@ public class CenarioLayer extends ScenarioLayer {
 	public void adicionarItem(CenarioItem item) {
 		addScenarioItem(item);
 	}
-
+	
+	public CenarioItem getItemPorNome(String nome) {
+		return (CenarioItem)this.getScenarioItem(nome);
+	}
 }

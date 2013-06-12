@@ -28,9 +28,9 @@ public class InstrucoesCenario extends Cenario {
 			CenarioItem itemInstrucoes2 = new CenarioItem("imgInstrucoes2", imgInstrucoes2, i, j);
 			
 			instrucoes.adicionarItem(itemInstrucoes);
-			instrucoes.getScenarioItem("imgInstrucoes").setVisible(true);
+			instrucoes.getItemPorNome("imgInstrucoes").setVisible(true);
 			instrucoes.adicionarItem(itemInstrucoes2);
-			instrucoes.getScenarioItem("imgInstrucoes2").setVisible(false);
+			instrucoes.getItemPorNome("imgInstrucoes2").setVisible(false);
 			
 			adicionarLayer(instrucoes);
 			

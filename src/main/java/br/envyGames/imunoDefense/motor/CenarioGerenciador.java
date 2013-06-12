@@ -1,7 +1,6 @@
 package br.envyGames.imunoDefense.motor;
 
 import s3t.gameControl.system.GameSystem;
-import s3t.gameEntities.Scenario;
 
 public class CenarioGerenciador {
 	
@@ -13,12 +12,11 @@ public class CenarioGerenciador {
 		GameSystem.getScenarioCollection().removeScenario(id);
 	}
 	
-	public void loadCenario(String cenarioID) {
+	public void setCenarioAtual(String cenarioID) {
 		GameSystem.getScenarioCollection().setScenarioAtual(cenarioID);
 	}
 	
-	public Scenario getCenario() {		
-		return GameSystem.getScenarioCollection().getScenarioAtual();
+	public Cenario getCenarioAtual() {		
+		return (Cenario)GameSystem.getScenarioCollection().getScenarioAtual();
 	}
-
 }
