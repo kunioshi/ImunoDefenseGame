@@ -57,15 +57,14 @@ public class MenuCenario extends Cenario {
 			background.getScenarioItem("menuSair").setVisible(false);		
 		    
 			background.adicionarItem(itemMenu);	
+			
 			adicionarLayer(background);
 			
-			background.getScenarioItem("Menu").setVisible(true);
-		    	    
+			background.getScenarioItem("Menu").setVisible(true);		    	    
 		} 
 		catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}	    
+		}
 	}
 
 }

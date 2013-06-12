@@ -32,14 +32,11 @@ public class Jogo implements Runnable, MouseListener
 		//cria o cenário INTRO LOGO
 		 Cenario logo = new LogoCenario(WIDTH, HEIGHT);
 		 motor.getCenarioGerenciador().adicionarCenario(logo);
-		
-		 //cria o cenário JOGO
-		 Cenario jogo = new JogoCenario(WIDTH, HEIGHT);
-		 motor.getCenarioGerenciador().adicionarCenario(jogo);
 		 
 		 //cria o cenário MENU
 		 Cenario menu = new MenuCenario(WIDTH, HEIGHT);
 		 motor.getCenarioGerenciador().adicionarCenario(menu);
+		 
 		 
 		 //cria o cenário CRÉDITOS
 		 Cenario creditos = new CreditosCenario(WIDTH, HEIGHT);
@@ -49,22 +46,17 @@ public class Jogo implements Runnable, MouseListener
 		 Cenario instrucoes = new InstrucoesCenario(WIDTH, HEIGHT);
 		 motor.getCenarioGerenciador().adicionarCenario(instrucoes);
 		 
-		 motor.inicializar();
+		//cria o cenário JOGO
+		 Cenario jogo = new JogoCenario(WIDTH, HEIGHT);
+		 motor.getCenarioGerenciador().adicionarCenario(jogo);
+		 
 		 //Carrega o cenário
-		 motor.loadCenario(logo.getScenarioId());
-		 try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		 motor.loadCenario(menu.getScenarioId());
 	}
 	
 	private void inicializarSistema() {
 		motor = new JogoMotor();
-
-		 
+		motor.inicializar();		 
 	}
 
 	private void exibirJanela() {
