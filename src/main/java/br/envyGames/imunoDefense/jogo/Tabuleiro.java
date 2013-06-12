@@ -6,7 +6,7 @@ public class Tabuleiro {
 	private static Tabuleiro tabuleiro;
 	
 	private int tamanhoCasa = 32;
-	private Casa[][] casas = new Casa[1][1];
+	private Casa[][] casas = new Casa[13][23];
 	private Point casaFinal = new Point(1, 1);
 	
 	public static Tabuleiro getTabuleiroAtual() {
