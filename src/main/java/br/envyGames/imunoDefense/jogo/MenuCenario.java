@@ -21,10 +21,8 @@ public class MenuCenario extends Cenario {
 		super("MenuCenario", "Menu", largura, altura);
 		
 		try {
-		    setBackgroundColor(Color.black);
-			
 			CenarioLayer background = CenarioLayer.criarSolidLayer("background");
-			//Imagem grama = new ArquivoImagem("/imagens/grama.jpg");
+			
 			Imagem bg = new ArquivoImagem("/imagens/bgFixo.jpg");
 			Imagem logo = new ArquivoImagem("/imagens/bgLogo.jpg");
 			Imagem Menu = new ArquivoImagem("/imagens/Menu.jpg");
@@ -61,25 +59,13 @@ public class MenuCenario extends Cenario {
 			background.adicionarItem(itemMenu);	
 			adicionarLayer(background);
 			
-			Thread.sleep(3000);
-			background.getScenarioItem("logo").setVisible(true);
-			Thread.sleep(3000);
-			
-			background.getScenarioItem("logo").setVisible(false);
 			background.getScenarioItem("Menu").setVisible(true);
-			
-			
 		    	    
 		} 
 		catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	    
+		}	    
 	}
 
 }

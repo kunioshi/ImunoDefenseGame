@@ -27,7 +27,6 @@ public class CreditosCenario extends Cenario {
 			adicionarLayer(creditos);
 		}
 		catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

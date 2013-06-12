@@ -14,9 +14,7 @@ public class JogoCenario extends Cenario {
 		carregarBackground();
 	}
 	
-	private void carregarBackground() {
-	    setBackgroundColor(Color.black);
-		
+	private void carregarBackground() {		
 		CenarioLayer background = CenarioLayer.criarSolidLayer("BackGround");
 		
 		adicionarLayer(background);

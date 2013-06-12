@@ -28,6 +28,7 @@ public class Jogo implements Runnable, MouseListener
 	
 	@Override
 	public void run() {  
+		 
 		//cria o cenário INTRO LOGO
 		 Cenario logo = new LogoCenario(WIDTH, HEIGHT);
 		 motor.getCenarioGerenciador().adicionarCenario(logo);
@@ -48,6 +49,7 @@ public class Jogo implements Runnable, MouseListener
 		 Cenario instrucoes = new InstrucoesCenario(WIDTH, HEIGHT);
 		 motor.getCenarioGerenciador().adicionarCenario(instrucoes);
 		 
+		 motor.inicializar();
 		 //Carrega o cenário
 		 motor.loadCenario(logo.getScenarioId());
 		 try {
@@ -61,7 +63,8 @@ public class Jogo implements Runnable, MouseListener
 	
 	private void inicializarSistema() {
 		motor = new JogoMotor();
-		motor.inicializar();
+
+		 
 	}
 
 	private void exibirJanela() {

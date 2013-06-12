@@ -37,7 +37,6 @@ public class InstrucoesCenario extends Cenario {
 			
 		}
 		catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
