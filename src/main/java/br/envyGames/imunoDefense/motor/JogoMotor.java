@@ -51,8 +51,9 @@ public class JogoMotor implements AlterarCenarioListener {
 		removerListenerCenarioAntorior();
 		
 		cenarioGerenciador.setCenarioAtual(cenarioID);
-		
-		registrarMouseListenerFromCenario(cenarioGerenciador.getCenarioAtual());
+		Cenario atual = cenarioGerenciador.getCenarioAtual();
+		atual.run();
+		registrarMouseListenerFromCenario(atual);
 	}
 
 	private void removerListenerCenarioAntorior() {

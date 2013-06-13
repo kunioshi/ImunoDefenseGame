@@ -17,41 +17,32 @@ public class Jogo implements Runnable
 
 	@Override
 	public void run() {  
-		//cria o cenário INTRO LOGO
-		Cenario logo = new LogoCenario(WIDTH, HEIGHT);
-		motor.adicionarCenario(logo);
-
-		//cria o cenário MENU
-		Cenario menu = new MenuCenario(WIDTH, HEIGHT);
-		motor.adicionarCenario(menu);
-
-		//cria o cenário JOGO
-		Cenario jogo = new JogoCenario(WIDTH, HEIGHT);
-		motor.adicionarCenario(jogo);
-
-		//cria o cenário INSTRUÇÕES
-		Cenario instrucoes = new InstrucoesCenario(WIDTH, HEIGHT);
-		motor.adicionarCenario(instrucoes);
-
-		//cria o cenário CRÉDITOS
-		Cenario creditos = new CreditosCenario(WIDTH, HEIGHT);
-		motor.adicionarCenario(creditos);
-		
-		//cria o cenário Game Over
-		Cenario gameover = new GameOverCenario(WIDTH, HEIGHT);
-		motor.adicionarCenario(gameover);
+		criarCenarios();
 
 		motor.exibirJanela();
 		motor.inicializar();
 
-		motor.loadCenario(logo.getScenarioId());
+		motor.loadCenario("LogoCenario");
+	}
 
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		motor.loadCenario(menu.getScenarioId());
+	private void criarCenarios() {
+		//cria o cenário INTRO LOGO
+		motor.adicionarCenario(new LogoCenario(WIDTH, HEIGHT));
+
+		//cria o cenário MENU
+		motor.adicionarCenario(new MenuCenario(WIDTH, HEIGHT));
+
+		//cria o cenário JOGO
+		motor.adicionarCenario(new JogoCenario(WIDTH, HEIGHT));
+
+		//cria o cenário INSTRUÇÕES
+		motor.adicionarCenario(new InstrucoesCenario(WIDTH, HEIGHT));
+
+		//cria o cenário CRÉDITOS
+		motor.adicionarCenario(new CreditosCenario(WIDTH, HEIGHT));
+		
+		//cria o cenário Game Over
+		motor.adicionarCenario(new GameOverCenario(WIDTH, HEIGHT));
 	}
 
 	private void inicializarSistema() {

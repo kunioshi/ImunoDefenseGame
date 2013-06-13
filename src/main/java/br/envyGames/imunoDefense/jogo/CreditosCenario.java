@@ -20,6 +20,11 @@ public class CreditosCenario extends Cenario {
 	}
 	
 	@Override
+	public void run() {
+		
+	}
+	
+	@Override
 	public void mouseClicked(MouseEvent e) {
 		int gridX = (int) (e.getX() / 32);
 		int gridY = (int) (e.getY() / 32);	

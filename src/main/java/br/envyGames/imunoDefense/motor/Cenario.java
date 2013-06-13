@@ -8,7 +8,7 @@ import java.util.List;
 
 import s3t.gameEntities.Scenario;
 
-public class Cenario extends Scenario implements MouseListener, MouseMotionListener {
+public abstract class Cenario extends Scenario implements MouseListener, MouseMotionListener, Runnable {
 	
 	private List<AlterarCenarioListener> alterarCenarioListeners;
 
@@ -36,7 +36,7 @@ public class Cenario extends Scenario implements MouseListener, MouseMotionListe
 	
 	protected void carregarNovoCenario(String novoCenarioID) {
 		fireAlterarCenarioEvent(novoCenarioID);
-	}	
+	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {

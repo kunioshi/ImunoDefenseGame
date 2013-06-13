@@ -17,6 +17,11 @@ public class GameOverCenario extends Cenario {
 		configurarCenario();
 	}
 	
+	@Override
+	public void run() {
+		
+	}
+	
 	public void mouseClicked(MouseEvent e) {
 		int gridX = (int) (e.getX() / 32);
 		int gridY = (int) (e.getY() / 32);

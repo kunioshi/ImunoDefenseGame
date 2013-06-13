@@ -18,14 +18,18 @@ public class JogoCenario extends Cenario implements ChegarHordaListener {
 	public JogoCenario(int largura, int altura) {
 		super("JogoCenario", "Jogo", largura, altura);	
 		
-		hordaGerenciador.run();
 		hordaGerenciador.addChegarHordaListener(this);
-
+		
 		try {
 			carregarBackground(largura, altura);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}	
+
+	@Override
+	public void run() {
+		hordaGerenciador.run();			
 	}
 	
 	@Override

@@ -18,6 +18,16 @@ public class LogoCenario extends Cenario {
 		
 		configurarCenario();
 	}
+	
+	@Override
+	public void run() {
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		carregarNovoCenario("MenuCenario");
+	}
 
 	private void configurarCenario() {
 		try {
