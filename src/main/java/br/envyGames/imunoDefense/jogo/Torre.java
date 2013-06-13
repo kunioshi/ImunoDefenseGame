@@ -7,8 +7,7 @@ import br.envyGames.imunoDefense.motor.Entidade;
 
 import s3t.gameControl.system.GameSystem;
 
-public abstract class Torre extends Entidade {
-	private int vida = 5;
+public abstract class Torre extends FormaDeVida {
 	private int forca = 0;
 	private int level = 1;
 
@@ -18,29 +17,20 @@ public abstract class Torre extends Entidade {
 	 * @param <code>xy</code>   - Coordenadas "(x, y)" iniciais. 
 	 */
 	public Torre(String nomeInstancia, Point xy, Cenario cenario) {
-		super(nomeInstancia, xy.x, xy.y, cenario);
+		super(nomeInstancia, xy, cenario);
 	}
 	
 	// Getters & Setters
 	public int getForca() { return forca; }
 	public int getLevel() { return level; }
-	public int getVida() { return vida; }
-	public Point getCasaAtual() { return Tabuleiro.getTabuleiroAtual().converteCoord((int)getX(), (int)getY()); }
 	
 	public void setForca(int dano) { forca = dano; }
 	public void upgrade() { level++; forca++; }
-	public void receberDano(int dano) {
-		vida -= dano;
-		
-		isDead();
-	}
 	
-	private void isDead() {
-		if(vida <= 0)
-			destroiTorre();
-	}
+	public abstract boolean isUpgradable();
 	
-	public void destroiTorre() {
+	@Override
+	public void morrer() {
 		GameSystem.getEntityCollection().getEntityByName(getName());
 	}
 }

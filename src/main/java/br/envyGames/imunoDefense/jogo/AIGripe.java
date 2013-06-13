@@ -7,7 +7,7 @@ import s3t.gameEntities.IAMessage;
 
 public class AIGripe extends AIAction {
 	private boolean atacando = false;
-	private Torre alvo;
+	private FormaDeVida alvo;
 	
 	@Override
 	public void doAction(Entity entity) {

@@ -4,17 +4,16 @@ import java.awt.Point;
 
 import br.envyGames.imunoDefense.motor.Cenario;
 
-public class Coracao extends Torre {
-	private int vida = 20;
+public class Coracao extends FormaDeVida {
 	
 	public Coracao(Cenario cenario) {
 		super("Coracao", new Point(Tabuleiro.getTabuleiroAtual().getWidth(), 0), cenario);
+		
+		vida = 20;
 	}
-	
-	public int getVida() { return vida; }
-	public void setVida(int novaVida) { vida = novaVida; }
-	
-	public void receberDano(int dmg) { vida -= dmg; }
-	
-	public void receberCura(int heal) { vida += heal; }
+
+	@Override
+	public void morrer() {
+		
+	}
 }

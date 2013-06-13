@@ -11,7 +11,7 @@ public class AIMalaria extends AIAction {
 	private ArrayList<Point> caminho = null;
 	private Estado estado = Estado.PARADO;
 	private Point proxCasa = null;
-	private Torre alvo = null;
+	private FormaDeVida alvo = null;
 	private BuscaAStar busca = new BuscaAStar();
 	
 	@Override
@@ -79,15 +79,15 @@ public class AIMalaria extends AIAction {
 		Tabuleiro.getTabuleiroAtual().setCasa(proxCasa, entity);
 	}
 	
-	private void atacar(Inimigo entity) {
+	private void atacar(Inimigo inimigo) {
 		if(alvo instanceof Coracao)
-			((Coracao)alvo).receberDano(entity.getForca());
+			((Coracao)alvo).receberDano(inimigo.getForca());
 		else if(alvo instanceof Torre)
-			((Torre)alvo).receberDano(entity.getForca());
+			((Torre)alvo).receberDano(inimigo.getForca());
 		
 		if(alvo.getVida() <= 0) {
 			Tabuleiro.getTabuleiroAtual().setCasa(alvo.getCasaAtual(), null);
-			atualizarCaminho(entity);
+			atualizarCaminho(inimigo);
 		}
 	}
 	

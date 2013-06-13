@@ -30,4 +30,9 @@ public class MedulaTorre extends Torre {
         setDoNotStop(true);
 	}
 
+	@Override
+	public boolean isUpgradable() {
+		return true;
+	}
+
 }

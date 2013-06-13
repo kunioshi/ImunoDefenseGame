@@ -23,8 +23,7 @@ enum TipoLocomocao {
 /*
  * Classe abstrata base dos inimigos
  */
-public abstract class Inimigo extends Entidade {
-	private int vida = 2;
+public abstract class Inimigo extends FormaDeVida {
 	private int forca = 1;
 	private float velocidadeNatural = 32;
 	private float lentidao = 1;
@@ -37,11 +36,11 @@ public abstract class Inimigo extends Entidade {
 	 * @param <code>xy</code>   - Coordenadas "(x, y)" iniciais. 
 	 */
 	public Inimigo(String name, Point xy, Cenario cenario) {
-		super(name, Tabuleiro.getTabuleiroAtual().converteCoordToTab(xy.x), Tabuleiro.getTabuleiroAtual().converteCoordToTab(xy.y), cenario);
+		super(name, xy, cenario);
+		//super(name, Tabuleiro.getTabuleiroAtual().converteCoordToTab(xy.x), Tabuleiro.getTabuleiroAtual().converteCoordToTab(xy.y), cenario);
 	}
 	
 	// Getters & Setters
-	public int getVida() { return vida; }
 	public int getForca() { return forca; }
 	public float getVelocidade() { return velocidadeNatural * lentidao; }
 	public TipoLocomocao getTipoLocomocao() { return tipoLocomocao; }
@@ -61,18 +60,8 @@ public abstract class Inimigo extends Entidade {
 		lentidao = 1;
 	}
 	
-	public void recebeDano(int dano) {
-		vida -= dano;
-		
-		isDead();
-	}
-	
-	private void isDead() {
-		if(vida <= 0)
-			mataInimigo();
-	}
-	
-	public void mataInimigo() {
+	@Override
+	public void morrer() {
 		GameSystem.getEntityCollection().getEntityByName(getName());
 	}
 	
@@ -89,8 +78,4 @@ public abstract class Inimigo extends Entidade {
         animImage.setBehavior(behavior);
         return animImage;
     }
-	
-	public Point getCasaAtual() {
-		return Tabuleiro.getTabuleiroAtual().converteCoord((int)getX(), (int)getY());
-	}
 }
