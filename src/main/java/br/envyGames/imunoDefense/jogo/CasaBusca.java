@@ -3,10 +3,10 @@ package br.envyGames.imunoDefense.jogo;
 import java.awt.Point;
 
 public class CasaBusca {
-	private Point casa;
-	private CasaBusca antecessor;
-	private double heuristica;
-	private int custoAcumulado;
+	private Point casa = null;
+	private CasaBusca antecessor = null;
+	private double heuristica = 0;
+	private int custoAcumulado = 0;
 	
 	/*
 	 * Construtor<br/>
@@ -21,7 +21,10 @@ public class CasaBusca {
 		
 		heuristica = calculaHeuristica(alvo);
 		
-		custoAcumulado = deOnde.getAcumulado() + 1;
+		if(deOnde == null)
+			custoAcumulado = 0;
+		else
+			custoAcumulado = deOnde.getAcumulado() + 1;
 	}
 	
 	public Point getCasa() { return casa; }

@@ -3,6 +3,8 @@ package br.envyGames.imunoDefense.jogo;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 
+import s3t.gameControl.system.GameSystem;
+
 import br.envyGames.imunoDefense.motor.ArquivoImagem;
 import br.envyGames.imunoDefense.motor.Cenario;
 import br.envyGames.imunoDefense.motor.CenarioItem;
@@ -29,11 +31,19 @@ public class JogoCenario extends Cenario implements ChegarHordaListener {
 	@Override
 	public void handleChegarHorda() {
 		System.out.println("Horde is comming...");
+
+		InimigoMalaria malaria;
+		try {
+			malaria = new InimigoMalaria("inimigo0", this);
+			GameSystem.getEntityCollection().addEntity(malaria);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		System.out.println(e.getX() + "|" + e.getY());
 //		if (isTorreButton(e.getX(), e.getY())) {
 //			TorreButtonClicked();
 //		}

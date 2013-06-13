@@ -1,11 +1,15 @@
 package br.envyGames.imunoDefense.jogo;
 
 import java.awt.Point;
+import java.awt.Rectangle;
+import java.io.IOException;
 
 import br.envyGames.imunoDefense.motor.Cenario;
 import br.envyGames.imunoDefense.motor.Entidade;
 
 import s3t.gameControl.system.GameSystem;
+import s3t.graphicsElements.AnimImage;
+import s3t.graphicsElements.SimpleImage;
 
 enum Estado {
 	ANDANDO, PARADO, ATACANDO;
@@ -17,7 +21,7 @@ enum Estado {
 public abstract class Inimigo extends Entidade {
 	private int vida = 2;
 	private int forca = 1;
-	private float velocidadeNatural = 1;
+	private float velocidadeNatural = 32;
 	private float lentidao = 1;
 	
 	/*
@@ -27,7 +31,7 @@ public abstract class Inimigo extends Entidade {
 	 * @param <code>xy</code>   - Coordenadas "(x, y)" iniciais. 
 	 */
 	public Inimigo(String name, Point xy, Cenario cenario) {
-		super(name, xy.x, xy.y, cenario);
+		super(name, Tabuleiro.getTabuleiroAtual().converteCoord(xy.x), Tabuleiro.getTabuleiroAtual().converteCoord(xy.y), cenario);
 	}
 	
 	// Getters & Setters
@@ -64,4 +68,18 @@ public abstract class Inimigo extends Entidade {
 	public void mataInimigo() {
 		GameSystem.getEntityCollection().getEntityByName(getName());
 	}
+	
+	public static AnimImage loadAnimation(String firstName, String extension, int endNumber, int period, int behavior) throws IOException {
+        AnimImage animImage = new AnimImage();
+
+        for (int i = 0; i <= endNumber; i++) {
+            SimpleImage img = new SimpleImage(firstName + i + extension);
+            img.setCollisionRectangle(new Rectangle(0, 0, Tabuleiro.getTabuleiroAtual().getTamanhoCasa(), Tabuleiro.getTabuleiroAtual().getTamanhoCasa()));
+            animImage.addImage(img);
+        }
+        
+        animImage.setPeriod(period);
+        animImage.setBehavior(behavior);
+        return animImage;
+    }
 }

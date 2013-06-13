@@ -12,14 +12,26 @@ public class AIMalaria extends AIAction {
 	private Estado estado = Estado.PARADO;
 	private Point proxCasa = null;
 	private Entity alvo = null;
+	private BuscaAStar busca = new BuscaAStar();
 	
 	@Override
 	public void doAction(Entity entity) {
 		if(caminho == null)
-			atualizaCaminho(entity);
+			try {
+				atualizaCaminho(entity);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
 		if(estado ==  Estado.PARADO) {
 			comecaAndar();
-			checaCaminho(entity);
+			try {
+				checaCaminho(entity);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		else if(estado == Estado.ANDANDO)
 			anda((InimigoMalaria)entity);
@@ -30,17 +42,26 @@ public class AIMalaria extends AIAction {
 	@Override
 	public void receiveMessage(IAMessage msg) {}
 	
-	private void atualizaCaminho(Entity entity) {
-		caminho = BuscaAStar.busca(Tabuleiro.getTabuleiroAtual().getCasas(), new Point((int)entity.getX(), (int)entity.getY()), Tabuleiro.getTabuleiroAtual().getFinal());
+	private void atualizaCaminho(Entity entity) throws InterruptedException {
+		caminho = busca.busca(Tabuleiro.getTabuleiroAtual().getCasas(), new Point((int)entity.getX(), (int)entity.getY()), Tabuleiro.getTabuleiroAtual().getFinal());
+		
+		Thread.sleep(1000);
 		
 		if(caminho == null)
 			estado = Estado.ATACANDO;
+		else {
+			estado = Estado.ANDANDO;
+			comecaAndar();
+		}
 		//if( caminho.get(0).equals( Tabuleiro.converteCoord((int)entity.getX(), (int)entity.getY()) ) )
 		//	alvo = Coração;
 	}
 	
 	private void comecaAndar() {
-		proxCasa = caminho.remove(0);
+		if(caminho.size() != 0)
+			proxCasa = caminho.remove(0);
+		else
+			estado = Estado.ATACANDO;
 	}
 	
 	private void anda(InimigoMalaria entity) {
@@ -55,7 +76,7 @@ public class AIMalaria extends AIAction {
 			entity.doMove(0, -entity.getVelocidade());
 
 		if(chegouProx(entity))
-			estado = Estado.PARADO;
+			comecaAndar();
 	}
 	
 	private void ataca() {
@@ -69,7 +90,7 @@ public class AIMalaria extends AIAction {
 		return false;
 	}
 	
-	private void checaCaminho(Entity entity) {
+	private void checaCaminho(Entity entity) throws InterruptedException {
 		if(Tabuleiro.getTabuleiroAtual().checaCasa(proxCasa) != Casa.VAZIA || Tabuleiro.getTabuleiroAtual().checaCasa(proxCasa) != Casa.INIMIGO)
 			atualizaCaminho(entity);
 	}
