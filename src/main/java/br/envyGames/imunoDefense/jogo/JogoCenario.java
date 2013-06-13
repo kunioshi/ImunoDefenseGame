@@ -39,10 +39,10 @@ public class JogoCenario extends Cenario implements ChegarHordaListener {
 	
 	@Override
 	public void handleChegarHorda() {
-		InimigoMalaria malaria;
+		InimigoGripe gripe;
 		try {
-			malaria = new InimigoMalaria("inimigo0", this);
-			GameSystem.getEntityCollection().addEntity(malaria);
+			gripe = new InimigoGripe("inimigo0", this);
+			GameSystem.getEntityCollection().addEntity(gripe);
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}

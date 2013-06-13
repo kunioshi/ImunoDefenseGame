@@ -15,6 +15,10 @@ enum Estado {
 	ANDANDO, PARADO, ATACANDO;
 }
 
+enum Direcao {
+	BAIXO, CIMA, DIREITA, ESQUERDA;
+}
+
 /*
  * Classe abstrata base dos inimigos
  */
@@ -23,6 +27,7 @@ public abstract class Inimigo extends Entidade {
 	private int forca = 1;
 	private float velocidadeNatural = 32;
 	private float lentidao = 1;
+	private Direcao direcao = Direcao.DIREITA;
 	
 	/*
 	 * Construtor<br/>
@@ -38,9 +43,11 @@ public abstract class Inimigo extends Entidade {
 	public int getVida() { return vida; }
 	public int getForca() { return forca; }
 	public float getVelocidade() { return velocidadeNatural * lentidao; }
+	public Direcao getDirecao() { return direcao; }
 	
 	public void setForca(int dano) { forca = dano; }
 	public void setVelocidadeNormal(int vel) { velocidadeNatural = vel; }
+	public void setDirecao(Direcao novaDirecao) { direcao = novaDirecao; }
 	
 	/*
 	 * Aplica efeito de lentidão nesta unidade
