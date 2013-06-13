@@ -47,8 +47,10 @@ public class AIMalaria extends AIAction {
 			estado = Estado.ANDANDO;
 			comecaAndar();
 		}
-		//if( caminho.get(0).equals( Tabuleiro.converteCoord((int)entity.getX(), (int)entity.getY()) ) )
-		//	alvo = Coração;
+//		if( caminho.get(0).equals( Tabuleiro.getTabuleiroAtual().converteCoord((int)entity.getX(), (int)entity.getY()) ) ) {
+//			estado = Estado.ATACANDO;
+//			alvo = 
+//		}
 	}
 	
 	private void comecaAndar() {
@@ -61,17 +63,19 @@ public class AIMalaria extends AIAction {
 	private void anda(InimigoMalaria entity) {
 		checaCaminho(entity);
 		
-		if(Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) entity.getX()) < proxCasa.getX())
-			entity.doMove(entity.getVelocidade(), 0);
-		else if(Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) entity.getX()) > proxCasa.getX())
-			entity.doMove(-entity.getVelocidade(), 0);
-		else if(Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) entity.getY()) < proxCasa.getY())
-			entity.doMove(0, entity.getVelocidade());
-		else if(Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) entity.getY()) > proxCasa.getY())
-			entity.doMove(0, -entity.getVelocidade());
+		if(estado != Estado.ANDANDO) {
+			if(Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) entity.getX()) < proxCasa.getX())
+				entity.doMove(entity.getVelocidade(), 0);
+			else if(Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) entity.getX()) > proxCasa.getX())
+				entity.doMove(-entity.getVelocidade(), 0);
+			else if(Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) entity.getY()) < proxCasa.getY())
+				entity.doMove(0, entity.getVelocidade());
+			else if(Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) entity.getY()) > proxCasa.getY())
+				entity.doMove(0, -entity.getVelocidade());
 
-		if(chegouProx(entity) && caminho != null)
-			comecaAndar();
+			if(chegouProx(entity) && caminho != null)
+				comecaAndar();
+		}
 	}
 	
 	private void ataca() {
@@ -86,7 +90,6 @@ public class AIMalaria extends AIAction {
 	}
 	
 	private void checaCaminho(Entity entity) {
-		System.out.println(Tabuleiro.getTabuleiroAtual().isTorre(proxCasa));
 		if(Tabuleiro.getTabuleiroAtual().isTorre(proxCasa))
 			atualizaCaminho(entity);
 	}
