@@ -84,7 +84,7 @@ public class BuscaAStar {
 	}
 	
 	private boolean isInimigo(Point casa) {
-		return source[casa.y][casa.x] != null && source[casa.y][casa.x].getClass().isInstance(Inimigo.class);
+		return source[casa.y][casa.x] != null && source[casa.y][casa.x] instanceof Inimigo;
 	}
 	
 	private void adicionaCasa(Point casaAux, Point fim) {

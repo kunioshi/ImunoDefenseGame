@@ -19,12 +19,14 @@ public class CasaBusca {
 		casa = praOnde;
 		antecessor = deOnde;
 		
-		heuristica = calculaHeuristica(alvo);
 		
-		if(deOnde == null)
+		if(deOnde == null) {
+			heuristica = 0;
 			custoAcumulado = 0;
-		else
+		} else {
+			heuristica = calculaHeuristica(alvo);
 			custoAcumulado = deOnde.getAcumulado() + 1;
+		}
 	}
 	
 	public Point getCasa() { return casa; }
