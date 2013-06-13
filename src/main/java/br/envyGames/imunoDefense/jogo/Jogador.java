@@ -2,8 +2,8 @@ package br.envyGames.imunoDefense.jogo;
 
 public class Jogador {
 
-	private int dinheiro;
-	private int pontos;
+	private int dinheiro = 40;
+	private int pontos = 0;
 	
 	public int getDinheiro() {
 		return dinheiro;

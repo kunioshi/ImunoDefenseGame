@@ -9,7 +9,7 @@ public class Tabuleiro {
 	
 	private int tamanhoCasa = 32;
 	private Entidade[][] casas = new Entidade[13][23];
-	private Point casaFinal = new Point(2, 0);
+	private Point casaFinal = new Point(22, 6);
 	
 	public static Tabuleiro getTabuleiroAtual() {
 		if (tabuleiro == null)

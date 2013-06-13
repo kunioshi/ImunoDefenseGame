@@ -6,7 +6,7 @@ import br.envyGames.imunoDefense.motor.JogoMotor;
 
 public class Coracao extends FormaDeVida {
 
-	private JogoMotor motor;
+	private JogoMotor motor = new JogoMotor();
 	
 	public Coracao(Cenario cenario) {
 		super("Coracao", new Point(Tabuleiro.getTabuleiroAtual().getWidth(), 0), cenario);
@@ -16,8 +16,8 @@ public class Coracao extends FormaDeVida {
 
 	@Override
 	public void morrer() {
-		motor.loadCenario("GameOverCenario");
-		motor.getEntidadeGerenciador().clear();
+//		motor.loadCenario("GameOverCenario");
+//		motor.getEntidadeGerenciador().clear();
 		
 	}
 }
