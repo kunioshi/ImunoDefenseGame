@@ -16,7 +16,7 @@ public class AIGripe extends AIAction {
 		Inimigo inimigo = (Inimigo)entidade;
 		
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(700);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
