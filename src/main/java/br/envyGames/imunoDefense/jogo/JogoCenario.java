@@ -14,7 +14,7 @@ import br.envyGames.imunoDefense.motor.Imagem;
 import br.envyGames.imunoDefense.motor.ResourceManager;
 
 public class JogoCenario extends Cenario implements ChegarHordaListener {
-
+	private Coracao coracao = new Coracao(this);
 	private HordaGerenciador hordaGerenciador = new HordaGerenciador();
 	//private Torre torreSelecionado;
 	
@@ -131,4 +131,6 @@ public class JogoCenario extends Cenario implements ChegarHordaListener {
 		GameSystem.getEntityCollection().addEntity(torre);
 		Tabuleiro.getTabuleiroAtual().setCasa(new Point(coluna, linha), torre);
 	}
+	
+	public Coracao getCoracao() { return coracao; }
 }

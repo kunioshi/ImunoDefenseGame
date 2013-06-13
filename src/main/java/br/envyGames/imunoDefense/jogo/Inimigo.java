@@ -82,4 +82,8 @@ public abstract class Inimigo extends Entidade {
         animImage.setBehavior(behavior);
         return animImage;
     }
+	
+	public Point getCasaAtual() {
+		return Tabuleiro.getTabuleiroAtual().converteCoord((int)getX(), (int)getY());
+	}
 }
