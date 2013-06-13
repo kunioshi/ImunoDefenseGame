@@ -22,7 +22,6 @@ public class AIMalaria extends AIAction {
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -40,7 +39,7 @@ public class AIMalaria extends AIAction {
 	public void receiveMessage(IAMessage msg) {}
 	
 	private void atualizaCaminho(Entity entity) {
-		caminho = busca.busca(Tabuleiro.getTabuleiroAtual().getCasas(), new Point((int)entity.getX(), (int)entity.getY()), Tabuleiro.getTabuleiroAtual().getFinal());
+		caminho = busca.busca(Tabuleiro.getTabuleiroAtual().getCasas(), new Point( Tabuleiro.getTabuleiroAtual().converteCoord((int)entity.getX(), (int)entity.getY()) ), Tabuleiro.getTabuleiroAtual().getFinal());
 		
 		if(caminho == null)
 			estado = Estado.ATACANDO;
@@ -60,6 +59,8 @@ public class AIMalaria extends AIAction {
 	}
 	
 	private void anda(InimigoMalaria entity) {
+		checaCaminho(entity);
+		
 		if(Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) entity.getX()) < proxCasa.getX())
 			entity.doMove(entity.getVelocidade(), 0);
 		else if(Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) entity.getX()) > proxCasa.getX())
@@ -68,11 +69,8 @@ public class AIMalaria extends AIAction {
 			entity.doMove(0, entity.getVelocidade());
 		else if(Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) entity.getY()) > proxCasa.getY())
 			entity.doMove(0, -entity.getVelocidade());
-		
-		System.out.println(Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) entity.getX()) + "|" + Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) entity.getY()));
-		System.out.println(proxCasa.getX() + "|" + proxCasa.getY());
 
-		if(chegouProx(entity))
+		if(chegouProx(entity) && caminho != null)
 			comecaAndar();
 	}
 	
@@ -88,7 +86,8 @@ public class AIMalaria extends AIAction {
 	}
 	
 	private void checaCaminho(Entity entity) {
-		if(Tabuleiro.getTabuleiroAtual().isCasaVazia(proxCasa) || Tabuleiro.getTabuleiroAtual().isTorre(proxCasa))
+		System.out.println(Tabuleiro.getTabuleiroAtual().isTorre(proxCasa));
+		if(Tabuleiro.getTabuleiroAtual().isTorre(proxCasa))
 			atualizaCaminho(entity);
 	}
 }

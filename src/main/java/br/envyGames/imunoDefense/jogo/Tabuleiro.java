@@ -35,11 +35,11 @@ public class Tabuleiro {
 	}
 	
 	public boolean isInimigo(Point casa) {
-		return tabuleiro.getCasa(casa) != null && tabuleiro.getCasa(casa).getClass().isInstance(Inimigo.class);
+		return tabuleiro.getCasa(casa) != null && tabuleiro.getCasa(casa) instanceof Inimigo;
 	}
 	
 	public boolean isTorre(Point casa) {
-		return tabuleiro.getCasa(casa) != null && tabuleiro.getCasa(casa).getClass().isInstance(Torre.class);
+		return tabuleiro.getCasa(casa) != null && tabuleiro.getCasa(casa) instanceof Torre;
 	}
 	
 	/*
