@@ -19,4 +19,8 @@ public class EntidadeGerenciador {
 	public void removerEntidade(String nome) {
 		GameSystem.getEntityCollection().removeEntity(nome);
 	}
+	
+	public void clear() {
+		GameSystem.getEntityCollection().clear();
+	}
 }
