@@ -40,7 +40,7 @@ public class AIMalaria extends AIAction {
 	public void receiveMessage(IAMessage msg) {}
 	
 	private void atualizaCaminho(Entity entity) {
-		caminho = busca.busca(Tabuleiro.getTabuleiroAtual(), new Point((int)entity.getX(), (int)entity.getY()), Tabuleiro.getTabuleiroAtual().getFinal());
+		caminho = busca.busca(Tabuleiro.getTabuleiroAtual().getCasas(), new Point((int)entity.getX(), (int)entity.getY()), Tabuleiro.getTabuleiroAtual().getFinal());
 		
 		if(caminho == null)
 			estado = Estado.ATACANDO;

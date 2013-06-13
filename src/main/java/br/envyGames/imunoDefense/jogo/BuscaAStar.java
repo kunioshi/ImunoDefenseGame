@@ -10,7 +10,7 @@ public class BuscaAStar {
 	private CasaBusca atual;
 	private ArrayList<CasaBusca> lista_aberta;
 	private ArrayList<CasaBusca> lista_fechada;
-	private Tabuleiro tabuleiro;
+	private Entidade[][] source;
 	
 	/*
 	 * Realiza a Busca A* no <code>tabuleiro</code>, tendo seu inico a casa <code>inicio</code> e ponto final <code>fim</code>.
@@ -19,8 +19,8 @@ public class BuscaAStar {
 	 * @param <code>fim</code>       - Coordenadas da casa no <code>tabuleiro</code> na qual a busca buscará alcançar.
 	 * @return <code>ArrayList<Point></code> - Caminho composto de casa por casa de onde a Entidade deverá passar para alcançar a casa <code>fim</code>, não obtendo a casa <code>inicio</code> em seu corpo.
 	 */
-	public ArrayList<Point> busca(Tabuleiro tabuleiro, Point inicio, Point fim) {
-		this.tabuleiro = tabuleiro;
+	public ArrayList<Point> busca(Entidade[][] source, Point inicio, Point fim) {
+		this.source = source;
 		atual = null;
 		lista_aberta = new ArrayList<CasaBusca>();
 		lista_fechada = new ArrayList<CasaBusca>();
@@ -70,21 +70,21 @@ public class BuscaAStar {
 		int x = atual.getCasa().x + soma.x;
 		int y = atual.getCasa().y + soma.y;
 		
-		if(x >= 0 && x < tabuleiro.getWidth()  &&  y >= 0 && y < tabuleiro.getHeight()) {
+		if(x >= 0 && x < source[0].length &&  y >= 0 && y < source.length) {
 			Point casaAux = new Point(x, y);
 			
-			if(isCasaVazia(casaAux) || isInimigo(casaAux))
+		if (isCasaVazia(casaAux) || isInimigo(casaAux))
 				if(!existeNaListaFechada(casaAux))
 					adicionaCasa(casaAux, fim);
 		}
 	}
 	
 	private boolean isCasaVazia(Point casa) {
-		return tabuleiro.getCasa(casa) == null;
+		return source[casa.y][casa.x] == null;
 	}
 	
 	private boolean isInimigo(Point casa) {
-		return tabuleiro.getCasa(casa) != null && tabuleiro.getCasa(casa).getClass() == Inimigo.class;
+		return source[casa.y][casa.x] != null && source[casa.y][casa.x].getClass() == Inimigo.class;
 	}
 	
 	private void adicionaCasa(Point casaAux, Point fim) {
