@@ -17,13 +17,12 @@ public class AIMalaria extends AIAction {
 	@Override
 	public void doAction(Entity entidade) {
 		Inimigo entity = (Inimigo)entidade;
-		System.out.println(estado.toString());
 		
 		if(caminho == null)
 			atualizarCaminho(entity);
 
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(700);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

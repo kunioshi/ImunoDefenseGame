@@ -4,22 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HordaGerenciador implements Runnable {
-	private int waveSpot = 5;
-	private long tempoEspera = 3000;
+	private long tempoEspera = 2000;
 	private boolean isRunning = false;
 	private Thread temporizador;
 	private List<ChegarHordaListener> chegarHordaListeners = new ArrayList<ChegarHordaListener>();
 	
 	public class Temporizador extends Thread {
 		public void run() {
-			//while (isRunning) {
+			while (isRunning) {
 				try {
 					Thread.sleep(tempoEspera);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 				fireAlterarCenarioEvent();
-			//}
+			}
 	    }
 	}
 	
@@ -29,7 +28,7 @@ public class HordaGerenciador implements Runnable {
 			temporizador = new Thread(new Temporizador());
 		
 		isRunning = true;
-		temporizador.start();		
+		temporizador.start();
 	}
 	
 	public void stop() {

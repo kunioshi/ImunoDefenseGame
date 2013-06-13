@@ -13,6 +13,7 @@ import br.envyGames.imunoDefense.motor.Imagem;
 import br.envyGames.imunoDefense.motor.ResourceManager;
 
 public class JogoCenario extends Cenario implements ChegarHordaListener {
+	private int waveSpot = 5;
 	private Coracao coracao = new Coracao(this);
 	private HordaGerenciador hordaGerenciador = new HordaGerenciador();
 	
@@ -37,10 +38,14 @@ public class JogoCenario extends Cenario implements ChegarHordaListener {
 	
 	@Override
 	public void handleChegarHorda() {
-		InimigoGripe gripe;
+		InimigoMalaria gripe;
 		try {
-			gripe = new InimigoGripe("inimigo0", this);
+			gripe = new InimigoMalaria("inimigo0", waveSpot, this);
 			adicionarEntidade(gripe);
+			
+			waveSpot++;
+			if(waveSpot > 7)
+				waveSpot = 5;
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}

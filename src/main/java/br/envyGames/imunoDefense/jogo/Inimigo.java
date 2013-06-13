@@ -5,7 +5,6 @@ import java.awt.Rectangle;
 import java.io.IOException;
 
 import br.envyGames.imunoDefense.motor.Cenario;
-import br.envyGames.imunoDefense.motor.Entidade;
 
 import s3t.gameControl.system.GameSystem;
 import s3t.graphicsElements.AnimImage;
