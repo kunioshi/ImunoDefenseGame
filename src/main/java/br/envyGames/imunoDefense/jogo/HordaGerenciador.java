@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HordaGerenciador implements Runnable {
-	
+	private int waveSpot = 5;
 	private long tempoEspera = 3000;
 	private boolean isRunning = false;
 	private Thread temporizador;

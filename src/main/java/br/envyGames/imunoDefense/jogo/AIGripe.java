@@ -21,8 +21,6 @@ public class AIGripe extends AIAction {
 			e.printStackTrace();
 		}
 		
-		System.out.println(estado.toString());
-		
 		if(estado == Estado.PARADO) {
 			comecarAndar(inimigo);
 		} else if(estado == Estado.ANDANDO) {
