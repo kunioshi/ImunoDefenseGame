@@ -19,7 +19,6 @@ public abstract class Torre extends Entidade {
 	 */
 	public Torre(String nomeInstancia, Point xy, Cenario cenario) {
 		super(nomeInstancia, xy.x, xy.y, cenario);
-		GameSystem.getEntityCollection().addEntity(this);
 	}
 	
 	// Getters & Setters

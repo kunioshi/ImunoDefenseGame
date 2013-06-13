@@ -1,13 +1,17 @@
 package br.envyGames.imunoDefense.jogo;
 
+import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+
+import s3t.gameControl.system.GameSystem;
 
 import br.envyGames.imunoDefense.motor.ArquivoImagem;
 import br.envyGames.imunoDefense.motor.Cenario;
 import br.envyGames.imunoDefense.motor.CenarioItem;
 import br.envyGames.imunoDefense.motor.CenarioLayer;
 import br.envyGames.imunoDefense.motor.Imagem;
+import br.envyGames.imunoDefense.motor.ResourceManager;
 
 public class JogoCenario extends Cenario implements ChegarHordaListener {
 
@@ -38,48 +42,41 @@ public class JogoCenario extends Cenario implements ChegarHordaListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		System.out.println(e.getX() + "|" + e.getY());
-//		if (isTorreButton(e.getX(), e.getY())) {
-//			TorreButtonClicked();
-//		}
-//		else if (isGrid(e.getX(), e.getY())) {
-//			Torre torre = new MiocardioTorre("teste", new Point(e.getX(), e.getY() - 25), this);
-//			GameSystem.getEntityCollection().addEntity(torre);
-//		}
+		if (isTorreButton(e.getX(), e.getY())) {
+			TorreButtonClicked();
+		}
+		else if (isGrid(e.getX(), e.getY())) {
+			Torre torre = new MiocardioTorre("teste", new Point(e.getX() - 20, e.getY() - 25), this);
+			GameSystem.getEntityCollection().addEntity(torre);
+		}
 	}
 	
-	//private TEntite entidade;
+	private Torre torre;
 	@Override
 	public void mouseMoved(MouseEvent e) {	
-//		if (isGrid(e.getX(), e.getY())) {
-//			try {
-//				if (entidade == null) {
-//					entidade = new TEntite(e.getX(), e.getY(), this);
-//					GameSystem.getEntityCollection().addEntity(entidade);
-//				}
-//				else {
-//					entidade.setX(e.getX());
-//					entidade.setY(e.getY());
-//				}
-//				
-//			} 
-//			catch (IOException e1) {
-//				// TODO Auto-generated catch block
-//				e1.printStackTrace();
-//			}			
-//		}
-//		//else
-//		//	GameSystem.getEntityCollection().removeEntity(entidade);
+		if (isGrid(e.getX(), e.getY())) {
+			if (torre == null) {
+				torre = new MiocardioTorre("seguindo", new Point(e.getX() - 20, e.getY() - 25), this);
+				GameSystem.getEntityCollection().addEntity(torre);
+			}
+			else {
+				torre.setX(e.getX() - 20);
+				torre.setY(e.getY() - 25);
+			}			
+		}
+		//else
+		//	GameSystem.getEntityCollection().removeEntity(entidade);
 	}
 	
 	private void carregarBackground(int largura, int altura) throws IOException {		
 		CenarioLayer background = CenarioLayer.criarSolidLayer("BackGround");
 		
 		//criando um HUD para teste
-		Imagem gridImagem = new ArquivoImagem("/imagens/grid.jpg");
-		Imagem coracaoImagem = new ArquivoImagem("/imagens/coracao.jpg");
-		Imagem menuBarImagem = new ArquivoImagem("/imagens/menuBar.jpg");
+		Imagem gridImagem = ResourceManager.getImagem("/imagens/grid.jpg");
+		Imagem coracaoImagem = ResourceManager.getImagem("/imagens/coracao.jpg");
+		Imagem menuBarImagem = ResourceManager.getImagem("/imagens/menuBar.jpg");
 		
-		Imagem botaoTorre = new ArquivoImagem("/imagens/botaoTorre1.jpg");
+		Imagem botaoTorre = ResourceManager.getImagem("/imagens/botaoTorre1.jpg");
 		
 		for (int i = 0; Tabuleiro.getTabuleiroAtual().converteCoord(i) < largura; i++)
 	    	for (int j = 0; Tabuleiro.getTabuleiroAtual().converteCoord(j) < altura; j++) {

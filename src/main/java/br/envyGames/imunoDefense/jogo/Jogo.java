@@ -22,7 +22,7 @@ public class Jogo implements Runnable
 		motor.exibirJanela();
 		motor.inicializar();
 
-		motor.loadCenario("LogoCenario");
+		motor.loadCenario("JogoCenario");
 	}
 
 	private void criarCenarios() {

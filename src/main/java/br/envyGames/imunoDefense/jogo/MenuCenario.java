@@ -9,6 +9,7 @@ import br.envyGames.imunoDefense.motor.Cenario;
 import br.envyGames.imunoDefense.motor.CenarioItem;
 import br.envyGames.imunoDefense.motor.CenarioLayer;
 import br.envyGames.imunoDefense.motor.Imagem;
+import br.envyGames.imunoDefense.motor.ResourceManager;
 
 public class MenuCenario extends Cenario {
 
@@ -86,51 +87,46 @@ public class MenuCenario extends Cenario {
 	}
 	
 	private void configurarCenario() {		
-		try {			
-			int x = 0;
-			int y = 0;
-			
-			CenarioLayer background = CenarioLayer.criarSolidLayer("background");
-			
-			Imagem bg = new ArquivoImagem("/imagens/bgFixo.jpg");
-			Imagem logo = new ArquivoImagem("/imagens/bgLogo.jpg");
-			Imagem Menu = new ArquivoImagem("/imagens/Menu.jpg");
-			Imagem menuJogar = new ArquivoImagem("/imagens/jogar.jpg");
-			Imagem menuInstrucoes = new ArquivoImagem("/imagens/instrucoesMenu.jpg");
-			Imagem menuCreditos = new ArquivoImagem("/imagens/creditosMenu.jpg");
-			Imagem menuSair = new ArquivoImagem("/imagens/sair.jpg");		  	
-			
-			CenarioItem itemBg = new CenarioItem("background", bg, x, y);
-			CenarioItem itemLogo = new CenarioItem("logo", logo, x, y);
-			CenarioItem itemMenu = new CenarioItem("Menu", Menu, x, y);
-			CenarioItem itemMenuJogar = new CenarioItem("menuJogar", menuJogar, x, y);
-			CenarioItem itemMenuInstrucoes = new CenarioItem("menuInstrucoes", menuInstrucoes, x, y);
-			CenarioItem itemMenuCreditos = new CenarioItem("menuCreditos", menuCreditos, x, y);
-			CenarioItem itemMenuSair = new CenarioItem("menuSair", menuSair, x, y);				
-			
-			background.adicionarItem(itemBg);
-			background.getItemPorNome("background").setVisible(false);
-			background.adicionarItem(itemLogo);
-			background.getItemPorNome("logo").setVisible(false);
-					
-			background.adicionarItem(itemMenuJogar);
-			background.getItemPorNome("menuJogar").setVisible(false);
-			background.adicionarItem(itemMenuInstrucoes);
-			background.getItemPorNome("menuInstrucoes").setVisible(false);
-			background.adicionarItem(itemMenuCreditos);
-			background.getItemPorNome("menuCreditos").setVisible(false);
-			background.adicionarItem(itemMenuSair);
-			background.getItemPorNome("menuSair").setVisible(false);		
-		    
-			background.adicionarItem(itemMenu);	
-			
-			adicionarLayer(background);
-			
-			background.getItemPorNome("Menu").setVisible(true);		    	    
-		} 
-		catch (IOException e) {
-			e.printStackTrace();
-		}
+		int x = 0;
+		int y = 0;
+		
+		CenarioLayer background = CenarioLayer.criarSolidLayer("background");
+		
+		Imagem bg = ResourceManager.getImagem("/imagens/bgFixo.jpg");
+		Imagem logo = ResourceManager.getImagem("/imagens/bgLogo.jpg");
+		Imagem Menu = ResourceManager.getImagem("/imagens/Menu.jpg");
+		Imagem menuJogar = ResourceManager.getImagem("/imagens/jogar.jpg");
+		Imagem menuInstrucoes = ResourceManager.getImagem("/imagens/instrucoesMenu.jpg");
+		Imagem menuCreditos = ResourceManager.getImagem("/imagens/creditosMenu.jpg");
+		Imagem menuSair = ResourceManager.getImagem("/imagens/sair.jpg");		  	
+		
+		CenarioItem itemBg = new CenarioItem("background", bg, x, y);
+		CenarioItem itemLogo = new CenarioItem("logo", logo, x, y);
+		CenarioItem itemMenu = new CenarioItem("Menu", Menu, x, y);
+		CenarioItem itemMenuJogar = new CenarioItem("menuJogar", menuJogar, x, y);
+		CenarioItem itemMenuInstrucoes = new CenarioItem("menuInstrucoes", menuInstrucoes, x, y);
+		CenarioItem itemMenuCreditos = new CenarioItem("menuCreditos", menuCreditos, x, y);
+		CenarioItem itemMenuSair = new CenarioItem("menuSair", menuSair, x, y);				
+		
+		background.adicionarItem(itemBg);
+		background.getItemPorNome("background").setVisible(false);
+		background.adicionarItem(itemLogo);
+		background.getItemPorNome("logo").setVisible(false);
+				
+		background.adicionarItem(itemMenuJogar);
+		background.getItemPorNome("menuJogar").setVisible(false);
+		background.adicionarItem(itemMenuInstrucoes);
+		background.getItemPorNome("menuInstrucoes").setVisible(false);
+		background.adicionarItem(itemMenuCreditos);
+		background.getItemPorNome("menuCreditos").setVisible(false);
+		background.adicionarItem(itemMenuSair);
+		background.getItemPorNome("menuSair").setVisible(false);		
+	    
+		background.adicionarItem(itemMenu);	
+		
+		adicionarLayer(background);
+		
+		background.getItemPorNome("Menu").setVisible(true);
 	}
 	
 	private boolean isJogarButton(int x, int y) {

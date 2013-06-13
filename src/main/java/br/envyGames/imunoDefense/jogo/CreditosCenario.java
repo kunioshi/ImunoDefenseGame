@@ -9,6 +9,7 @@ import br.envyGames.imunoDefense.motor.Cenario;
 import br.envyGames.imunoDefense.motor.CenarioItem;
 import br.envyGames.imunoDefense.motor.CenarioLayer;
 import br.envyGames.imunoDefense.motor.Imagem;
+import br.envyGames.imunoDefense.motor.ResourceManager;
 
 public class CreditosCenario extends Cenario {
 	
@@ -49,31 +50,25 @@ public class CreditosCenario extends Cenario {
 	}
 	
 	private void configurarCenario() {
-		try{
-			
-			int x = 0;
-			int y = 0;
-			
-			CenarioLayer creditos = CenarioLayer.criarSolidLayer("creditos");
-			
-			Imagem telaCreditos = new ArquivoImagem("/imagens/Creditos.jpg");
-			Imagem telaCreditosOver = new ArquivoImagem("/imagens/Creditos1.jpg");
-			
-			CenarioItem itemTelaCreditos = new CenarioItem("telaCreditos", telaCreditos, x, y);
-			creditos.adicionarItem(itemTelaCreditos);
-			creditos.getItemPorNome("telaCreditos").setVisible(true);
-			
-			CenarioItem itemTelaCreditos2 = new CenarioItem("telaCreditosOver", telaCreditosOver, x, y);
-			creditos.adicionarItem(itemTelaCreditos2);
-			creditos.getItemPorNome("telaCreditosOver").setVisible(false);
-			
-			creditos.adicionarItem(itemTelaCreditos);
-			
-			adicionarLayer(creditos);
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
+		int x = 0;
+		int y = 0;
+		
+		CenarioLayer creditos = CenarioLayer.criarSolidLayer("creditos");
+		
+		Imagem telaCreditos = ResourceManager.getImagem("/imagens/Creditos.jpg");
+		Imagem telaCreditosOver = ResourceManager.getImagem("/imagens/Creditos1.jpg");
+		
+		CenarioItem itemTelaCreditos = new CenarioItem("telaCreditos", telaCreditos, x, y);
+		creditos.adicionarItem(itemTelaCreditos);
+		creditos.getItemPorNome("telaCreditos").setVisible(true);
+		
+		CenarioItem itemTelaCreditos2 = new CenarioItem("telaCreditosOver", telaCreditosOver, x, y);
+		creditos.adicionarItem(itemTelaCreditos2);
+		creditos.getItemPorNome("telaCreditosOver").setVisible(false);
+		
+		creditos.adicionarItem(itemTelaCreditos);
+		
+		adicionarLayer(creditos);
 	}
 	
 	private boolean isVoltarButton(int x, int y) {

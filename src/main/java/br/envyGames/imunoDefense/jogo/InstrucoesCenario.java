@@ -8,6 +8,7 @@ import br.envyGames.imunoDefense.motor.Cenario;
 import br.envyGames.imunoDefense.motor.CenarioItem;
 import br.envyGames.imunoDefense.motor.CenarioLayer;
 import br.envyGames.imunoDefense.motor.Imagem;
+import br.envyGames.imunoDefense.motor.ResourceManager;
 
 public class InstrucoesCenario extends Cenario{
 	
@@ -93,47 +94,41 @@ public class InstrucoesCenario extends Cenario{
 	}
 	
 	private void configurarCenario() {
-		try{
-			
-			int x = 0;
-			int y = 0;
-			
-			CenarioLayer instrucoes = CenarioLayer.criarSolidLayer("instrucoes");
-			
-			Imagem imgInstrucoes = new ArquivoImagem("/imagens/Instrucoes1.jpg");
-			Imagem imgInstrucoes2 = new ArquivoImagem("/imagens/Instrucoes2.jpg");
-			Imagem imgInstrucoes1Next = new ArquivoImagem("/imagens/Instrucoes1Next.jpg");
-			Imagem imgInstrucoes1Home = new ArquivoImagem("/imagens/Instrucoes1Home.jpg");
-			Imagem imgInstrucoes2Back = new ArquivoImagem("/imagens/Instrucoes2Back.jpg");
-			Imagem imgInstrucoes2Home = new ArquivoImagem("/imagens/Instrucoes2Home.jpg");
-			
-			CenarioItem itemInstrucoes = new CenarioItem("imgInstrucoes", imgInstrucoes, x, y);
-			CenarioItem itemInstrucoes2 = new CenarioItem("imgInstrucoes2", imgInstrucoes2, x, y);
-			CenarioItem itemInstrucoes1Next = new CenarioItem("imgInstrucoes1Next", imgInstrucoes1Next, x, y);
-			CenarioItem itemInstrucoes1Home = new CenarioItem("imgInstrucoes1Home", imgInstrucoes1Home, x, y);
-			CenarioItem itemInstrucoes2Back = new CenarioItem("imgInstrucoes2Back", imgInstrucoes2Back, x, y);
-			CenarioItem itemInstrucoes2Home = new CenarioItem("imgInstrucoes2Home", imgInstrucoes2Home, x, y);
-			
-			
-			instrucoes.adicionarItem(itemInstrucoes);
-			instrucoes.getItemPorNome("imgInstrucoes").setVisible(true);
-			instrucoes.adicionarItem(itemInstrucoes2);
-			instrucoes.getItemPorNome("imgInstrucoes2").setVisible(false);
-			instrucoes.adicionarItem(itemInstrucoes1Next);
-			instrucoes.getItemPorNome("imgInstrucoes1Next").setVisible(false);
-			instrucoes.adicionarItem(itemInstrucoes1Home);
-			instrucoes.getItemPorNome("imgInstrucoes1Home").setVisible(false);
-			instrucoes.adicionarItem(itemInstrucoes2Back);
-			instrucoes.getItemPorNome("imgInstrucoes2Back").setVisible(false);
-			instrucoes.adicionarItem(itemInstrucoes2Home);
-			instrucoes.getItemPorNome("imgInstrucoes2Home").setVisible(false);
-			
-			
-			adicionarLayer(instrucoes);
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
+		int x = 0;
+		int y = 0;
+		
+		CenarioLayer instrucoes = CenarioLayer.criarSolidLayer("instrucoes");
+		
+		Imagem imgInstrucoes = ResourceManager.getImagem("/imagens/Instrucoes1.jpg");
+		Imagem imgInstrucoes2 = ResourceManager.getImagem("/imagens/Instrucoes2.jpg");
+		Imagem imgInstrucoes1Next = ResourceManager.getImagem("/imagens/Instrucoes1Next.jpg");
+		Imagem imgInstrucoes1Home = ResourceManager.getImagem("/imagens/Instrucoes1Home.jpg");
+		Imagem imgInstrucoes2Back = ResourceManager.getImagem("/imagens/Instrucoes2Back.jpg");
+		Imagem imgInstrucoes2Home = ResourceManager.getImagem("/imagens/Instrucoes2Home.jpg");
+		
+		CenarioItem itemInstrucoes = new CenarioItem("imgInstrucoes", imgInstrucoes, x, y);
+		CenarioItem itemInstrucoes2 = new CenarioItem("imgInstrucoes2", imgInstrucoes2, x, y);
+		CenarioItem itemInstrucoes1Next = new CenarioItem("imgInstrucoes1Next", imgInstrucoes1Next, x, y);
+		CenarioItem itemInstrucoes1Home = new CenarioItem("imgInstrucoes1Home", imgInstrucoes1Home, x, y);
+		CenarioItem itemInstrucoes2Back = new CenarioItem("imgInstrucoes2Back", imgInstrucoes2Back, x, y);
+		CenarioItem itemInstrucoes2Home = new CenarioItem("imgInstrucoes2Home", imgInstrucoes2Home, x, y);
+		
+		
+		instrucoes.adicionarItem(itemInstrucoes);
+		instrucoes.getItemPorNome("imgInstrucoes").setVisible(true);
+		instrucoes.adicionarItem(itemInstrucoes2);
+		instrucoes.getItemPorNome("imgInstrucoes2").setVisible(false);
+		instrucoes.adicionarItem(itemInstrucoes1Next);
+		instrucoes.getItemPorNome("imgInstrucoes1Next").setVisible(false);
+		instrucoes.adicionarItem(itemInstrucoes1Home);
+		instrucoes.getItemPorNome("imgInstrucoes1Home").setVisible(false);
+		instrucoes.adicionarItem(itemInstrucoes2Back);
+		instrucoes.getItemPorNome("imgInstrucoes2Back").setVisible(false);
+		instrucoes.adicionarItem(itemInstrucoes2Home);
+		instrucoes.getItemPorNome("imgInstrucoes2Home").setVisible(false);
+		
+		
+		adicionarLayer(instrucoes);
 	}
 	
 	private boolean isHomeButton(int x, int y) {

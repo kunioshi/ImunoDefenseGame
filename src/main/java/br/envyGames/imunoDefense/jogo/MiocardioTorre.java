@@ -8,6 +8,7 @@ import s3t.graphicsElements.ImageCollection;
 import br.envyGames.imunoDefense.motor.ArquivoImagem;
 import br.envyGames.imunoDefense.motor.Cenario;
 import br.envyGames.imunoDefense.motor.Imagem;
+import br.envyGames.imunoDefense.motor.ResourceManager;
 
 public class MiocardioTorre extends Torre {
 	
@@ -17,12 +18,7 @@ public class MiocardioTorre extends Torre {
 		super(nomeInstancia, xy, cenario);
 		   
 		   if (imagem == null)
-			try {
-				imagem = new ArquivoImagem("/imagens/Torre1.jpg");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+				imagem = ResourceManager.getImagem("/imagens/TimoI.png");
 			
 	        ImageCollection imgCollection = new ImageCollection();
 	        imgCollection.add("default", imagem);

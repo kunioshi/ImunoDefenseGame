@@ -8,6 +8,7 @@ import br.envyGames.imunoDefense.motor.Cenario;
 import br.envyGames.imunoDefense.motor.CenarioItem;
 import br.envyGames.imunoDefense.motor.CenarioLayer;
 import br.envyGames.imunoDefense.motor.Imagem;
+import br.envyGames.imunoDefense.motor.ResourceManager;
 
 public class GameOverCenario extends Cenario {
 	
@@ -58,36 +59,30 @@ public class GameOverCenario extends Cenario {
 	}
 	
 	private void configurarCenario() {
-		try{
-			
-			int x = 0;
-			int y = 0;
-			
-			CenarioLayer gameover = CenarioLayer.criarSolidLayer("gameover");
-			
-			Imagem telaGameOver = new ArquivoImagem("/imagens/gameOver.jpg");
-			Imagem telaGameOverSim = new ArquivoImagem("/imagens/gameOverSim.jpg");
-			Imagem telaGameOverNao = new ArquivoImagem("/imagens/gameOverNao.jpg");
-			
-			
-			CenarioItem itemGameOver = new CenarioItem("telaGameOver", telaGameOver, x, y);
-			CenarioItem itemGameOverSim = new CenarioItem("telaGameOverSim", telaGameOverSim, x, y);
-			CenarioItem itemGameOverNao = new CenarioItem("telaGameOverNao", telaGameOverNao, x, y);
-			
-			
-			gameover.adicionarItem(itemGameOver);
-			gameover.getItemPorNome("telaGameOver").setVisible(true);
-			gameover.adicionarItem(itemGameOverSim);
-			gameover.getItemPorNome("telaGameOverSim").setVisible(false);
-			gameover.adicionarItem(itemGameOverNao);
-			gameover.getItemPorNome("telaGameOverNao").setVisible(false);
-			
-			
-			adicionarLayer(gameover);
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
+		int x = 0;
+		int y = 0;
+		
+		CenarioLayer gameover = CenarioLayer.criarSolidLayer("gameover");
+		
+		Imagem telaGameOver = ResourceManager.getImagem("/imagens/gameOver.jpg");
+		Imagem telaGameOverSim = ResourceManager.getImagem("/imagens/gameOverSim.jpg");
+		Imagem telaGameOverNao = ResourceManager.getImagem("/imagens/gameOverNao.jpg");
+		
+		
+		CenarioItem itemGameOver = new CenarioItem("telaGameOver", telaGameOver, x, y);
+		CenarioItem itemGameOverSim = new CenarioItem("telaGameOverSim", telaGameOverSim, x, y);
+		CenarioItem itemGameOverNao = new CenarioItem("telaGameOverNao", telaGameOverNao, x, y);
+		
+		
+		gameover.adicionarItem(itemGameOver);
+		gameover.getItemPorNome("telaGameOver").setVisible(true);
+		gameover.adicionarItem(itemGameOverSim);
+		gameover.getItemPorNome("telaGameOverSim").setVisible(false);
+		gameover.adicionarItem(itemGameOverNao);
+		gameover.getItemPorNome("telaGameOverNao").setVisible(false);
+		
+		
+		adicionarLayer(gameover);
 	}
 	
 	private boolean isSimButton(int x, int y) {
