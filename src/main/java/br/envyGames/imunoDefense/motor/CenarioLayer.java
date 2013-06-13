@@ -8,6 +8,10 @@ public class CenarioLayer extends ScenarioLayer {
 	public static CenarioLayer criarSolidLayer(String id) {
 		return new CenarioLayer(id, eScenarioBehavior.SOLID);
 	}
+	
+	public static CenarioLayer criarPassLayer(String id) {
+		return new CenarioLayer(id, eScenarioBehavior.PASS);
+	}
 
 	private CenarioLayer(String id, eScenarioBehavior behavior) {
 		super(id, behavior);

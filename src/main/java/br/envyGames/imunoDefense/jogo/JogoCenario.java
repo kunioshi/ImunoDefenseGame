@@ -77,7 +77,7 @@ public class JogoCenario extends Cenario implements ChegarHordaListener {
 	}
 	
 	private void carregarBackground(int largura, int altura) throws IOException {		
-		CenarioLayer background = CenarioLayer.criarSolidLayer("BackGround");
+		CenarioLayer background = CenarioLayer.criarPassLayer("BackGround");
 		
 		//criando um HUD para teste
 		Imagem backgroundImagem = ResourceManager.getImagem("/imagens/BackgroundJogo.png");
