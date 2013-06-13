@@ -12,14 +12,14 @@ public class HordaGerenciador implements Runnable {
 	
 	public class Temporizador extends Thread {
 		public void run() {
-			while (isRunning) {
+			//while (isRunning) {
 				try {
 					Thread.sleep(tempoEspera);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 				fireAlterarCenarioEvent();
-			}
+			//}
 	    }
 	}
 	

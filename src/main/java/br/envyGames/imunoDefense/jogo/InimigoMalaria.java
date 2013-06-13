@@ -21,7 +21,5 @@ public class InimigoMalaria extends Inimigo {
         setDoNotStop(true);
 		
 		GameSystem.setAIforEntity(this, new AIMalaria());
-		
-		System.out.println(this.getX() + "|" + this.getY());
 	}
 }

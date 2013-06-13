@@ -17,21 +17,18 @@ public class AIMalaria extends AIAction {
 	@Override
 	public void doAction(Entity entity) {
 		if(caminho == null)
-			try {
-				atualizaCaminho(entity);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			atualizaCaminho(entity);
+
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		if(estado ==  Estado.PARADO) {
 			comecaAndar();
-			try {
-				checaCaminho(entity);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			checaCaminho(entity);
 		}
 		else if(estado == Estado.ANDANDO)
 			anda((InimigoMalaria)entity);
@@ -42,10 +39,8 @@ public class AIMalaria extends AIAction {
 	@Override
 	public void receiveMessage(IAMessage msg) {}
 	
-	private void atualizaCaminho(Entity entity) throws InterruptedException {
+	private void atualizaCaminho(Entity entity) {
 		caminho = busca.busca(Tabuleiro.getTabuleiroAtual().getCasas(), new Point((int)entity.getX(), (int)entity.getY()), Tabuleiro.getTabuleiroAtual().getFinal());
-		
-		Thread.sleep(1000);
 		
 		if(caminho == null)
 			estado = Estado.ATACANDO;
@@ -65,15 +60,17 @@ public class AIMalaria extends AIAction {
 	}
 	
 	private void anda(InimigoMalaria entity) {
-		if(entity.getX() < proxCasa.getX())
+		if(Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) entity.getX()) < proxCasa.getX())
 			entity.doMove(entity.getVelocidade(), 0);
-		else if(entity.getX() > proxCasa.getX())
+		else if(Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) entity.getX()) > proxCasa.getX())
 			entity.doMove(-entity.getVelocidade(), 0);
-		
-		if(entity.getY() < proxCasa.getY())
+		else if(Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) entity.getY()) < proxCasa.getY())
 			entity.doMove(0, entity.getVelocidade());
-		else if(entity.getY() > proxCasa.getY())
+		else if(Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) entity.getY()) > proxCasa.getY())
 			entity.doMove(0, -entity.getVelocidade());
+		
+		System.out.println(Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) entity.getX()) + "|" + Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) entity.getY()));
+		System.out.println(proxCasa.getX() + "|" + proxCasa.getY());
 
 		if(chegouProx(entity))
 			comecaAndar();
@@ -90,7 +87,7 @@ public class AIMalaria extends AIAction {
 		return false;
 	}
 	
-	private void checaCaminho(Entity entity) throws InterruptedException {
+	private void checaCaminho(Entity entity) {
 		if(Tabuleiro.getTabuleiroAtual().checaCasa(proxCasa) != Casa.VAZIA || Tabuleiro.getTabuleiroAtual().checaCasa(proxCasa) != Casa.INIMIGO)
 			atualizaCaminho(entity);
 	}

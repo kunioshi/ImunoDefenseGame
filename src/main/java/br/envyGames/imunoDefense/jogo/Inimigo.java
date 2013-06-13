@@ -31,7 +31,7 @@ public abstract class Inimigo extends Entidade {
 	 * @param <code>xy</code>   - Coordenadas "(x, y)" iniciais. 
 	 */
 	public Inimigo(String name, Point xy, Cenario cenario) {
-		super(name, Tabuleiro.getTabuleiroAtual().converteCoord(xy.x), Tabuleiro.getTabuleiroAtual().converteCoord(xy.y), cenario);
+		super(name, Tabuleiro.getTabuleiroAtual().converteCoordToTab(xy.x), Tabuleiro.getTabuleiroAtual().converteCoordToTab(xy.y), cenario);
 	}
 	
 	// Getters & Setters

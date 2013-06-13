@@ -91,16 +91,16 @@ public class JogoCenario extends Cenario implements ChegarHordaListener {
 		
 		Imagem botaoTorre = new ArquivoImagem("/imagens/botaoTorre1.jpg");
 		
-		for (int i = 0; Tabuleiro.getTabuleiroAtual().converteCoord(i) < largura; i++)
-	    	for (int j = 0; Tabuleiro.getTabuleiroAtual().converteCoord(j) < altura; j++) {
+		for (int i = 0; Tabuleiro.getTabuleiroAtual().converteCoordToTab(i) < largura; i++)
+	    	for (int j = 0; Tabuleiro.getTabuleiroAtual().converteCoordToTab(j) < altura; j++) {
 	    		if (i < Tabuleiro.getTabuleiroAtual().getWidth()) {
 	    			if (j < Tabuleiro.getTabuleiroAtual().getHeight())
-	    				background.adicionarItem(new CenarioItem("grid_" + i + "_" + j, gridImagem, Tabuleiro.getTabuleiroAtual().converteCoord(i), Tabuleiro.getTabuleiroAtual().converteCoord(j)));
+	    				background.adicionarItem(new CenarioItem("grid_" + i + "_" + j, gridImagem, Tabuleiro.getTabuleiroAtual().converteCoordToTab(i), Tabuleiro.getTabuleiroAtual().converteCoordToTab(j)));
 	    			else
-	    				background.adicionarItem(new CenarioItem("menuBar_" + i + "_" + j, menuBarImagem, Tabuleiro.getTabuleiroAtual().converteCoord(i), Tabuleiro.getTabuleiroAtual().converteCoord(j)));
+	    				background.adicionarItem(new CenarioItem("menuBar_" + i + "_" + j, menuBarImagem, Tabuleiro.getTabuleiroAtual().converteCoordToTab(i), Tabuleiro.getTabuleiroAtual().converteCoordToTab(j)));
 	    		}
 	    		else
-	    			background.adicionarItem(new CenarioItem("coracao_" + i + "_" + j, coracaoImagem, Tabuleiro.getTabuleiroAtual().converteCoord(i), Tabuleiro.getTabuleiroAtual().converteCoord(j)));
+	    			background.adicionarItem(new CenarioItem("coracao_" + i + "_" + j, coracaoImagem, Tabuleiro.getTabuleiroAtual().converteCoordToTab(i), Tabuleiro.getTabuleiroAtual().converteCoordToTab(j)));
 	    	}
 		
 		background.adicionarItem(new CenarioItem("botaoTorre_1", botaoTorre, 6, 420));
