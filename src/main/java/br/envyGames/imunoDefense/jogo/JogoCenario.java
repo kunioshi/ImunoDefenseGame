@@ -36,7 +36,13 @@ public class JogoCenario extends Cenario implements ChegarHordaListener {
 	
 	@Override
 	public void handleChegarHorda() {
-		System.out.println("Horde is comming...");
+		InimigoMalaria malaria;
+		try {
+			malaria = new InimigoMalaria("inimigo0", this);
+			GameSystem.getEntityCollection().addEntity(malaria);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 	
 	@Override
@@ -76,18 +82,18 @@ public class JogoCenario extends Cenario implements ChegarHordaListener {
 		Imagem coracaoImagem = ResourceManager.getImagem("/imagens/coracao.jpg");
 		Imagem menuBarImagem = ResourceManager.getImagem("/imagens/menuBar.jpg");
 		
-		Imagem botaoTorre = ResourceManager.getImagem("/imagens/botaoTorre1.jpg");
+		Imagem botaoTorre = ResourceManager.getImagem("/imagens/torres/botaoMiocardioITorre.jpg");
 		
-		for (int i = 0; Tabuleiro.getTabuleiroAtual().converteCoord(i) < largura; i++)
-	    	for (int j = 0; Tabuleiro.getTabuleiroAtual().converteCoord(j) < altura; j++) {
+		for (int i = 0; Tabuleiro.getTabuleiroAtual().converteCoordToTab(i) < largura; i++)
+	    	for (int j = 0; Tabuleiro.getTabuleiroAtual().converteCoordToTab(j) < altura; j++) {
 	    		if (i < Tabuleiro.getTabuleiroAtual().getWidth()) {
 	    			if (j < Tabuleiro.getTabuleiroAtual().getHeight())
-	    				background.adicionarItem(new CenarioItem("grid_" + i + "_" + j, gridImagem, Tabuleiro.getTabuleiroAtual().converteCoord(i), Tabuleiro.getTabuleiroAtual().converteCoord(j)));
+	    				background.adicionarItem(new CenarioItem("grid_" + i + "_" + j, gridImagem, Tabuleiro.getTabuleiroAtual().converteCoordToTab(i), Tabuleiro.getTabuleiroAtual().converteCoordToTab(j)));
 	    			else
-	    				background.adicionarItem(new CenarioItem("menuBar_" + i + "_" + j, menuBarImagem, Tabuleiro.getTabuleiroAtual().converteCoord(i), Tabuleiro.getTabuleiroAtual().converteCoord(j)));
+	    				background.adicionarItem(new CenarioItem("menuBar_" + i + "_" + j, menuBarImagem, Tabuleiro.getTabuleiroAtual().converteCoordToTab(i), Tabuleiro.getTabuleiroAtual().converteCoordToTab(j)));
 	    		}
 	    		else
-	    			background.adicionarItem(new CenarioItem("coracao_" + i + "_" + j, coracaoImagem, Tabuleiro.getTabuleiroAtual().converteCoord(i), Tabuleiro.getTabuleiroAtual().converteCoord(j)));
+	    			background.adicionarItem(new CenarioItem("coracao_" + i + "_" + j, coracaoImagem, Tabuleiro.getTabuleiroAtual().converteCoordToTab(i), Tabuleiro.getTabuleiroAtual().converteCoordToTab(j)));
 	    	}
 		
 		background.adicionarItem(new CenarioItem("botaoTorre_1", botaoTorre, 6, 420));

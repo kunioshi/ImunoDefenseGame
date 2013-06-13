@@ -7,7 +7,7 @@ public class Tabuleiro {
 	
 	private int tamanhoCasa = 32;
 	private Casa[][] casas = new Casa[13][23];
-	private Point casaFinal = new Point(1, 1);
+	private Point casaFinal = new Point(2, 0);
 	
 	public static Tabuleiro getTabuleiroAtual() {
 		if (tabuleiro == null)
@@ -18,6 +18,9 @@ public class Tabuleiro {
 	
 	private Tabuleiro() {
 		zeraTabuleiro();
+		
+		for(int i = 0; i < getHeight()-1; i++)
+			casas[i][1] = Casa.PAREDE;
 	}
 	
 	private void zeraTabuleiro() {
@@ -61,8 +64,12 @@ public class Tabuleiro {
 	 * Converte um <code>x</code>, ou um <code>y</code>, do tabuleiro (número de casas) em coordenadas da janela.
 	 * @return Retorna o <code>x</code>, ou o <code>y</code>, em escada da janela.
 	 */
-	public int converteCoord(int xy) {
+	public int converteCoordToTab(int xy) {
 		return xy * tamanhoCasa;
+	}
+
+	public int converteCoordToGrid(int xy) {
+		return xy / tamanhoCasa;
 	}
 	
 	/*

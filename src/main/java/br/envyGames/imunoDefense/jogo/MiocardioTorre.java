@@ -18,7 +18,7 @@ public class MiocardioTorre extends Torre {
 		super(nomeInstancia, xy, cenario);
 		   
 		   if (imagem == null)
-				imagem = ResourceManager.getImagem("/imagens/TimoI.png");
+				imagem = ResourceManager.getImagem("/imagens/torres/MiocardioI.png");
 			
 	        ImageCollection imgCollection = new ImageCollection();
 	        imgCollection.add("default", imagem);
