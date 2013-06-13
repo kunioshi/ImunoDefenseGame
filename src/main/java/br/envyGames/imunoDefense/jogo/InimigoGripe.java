@@ -15,7 +15,7 @@ public class InimigoGripe extends Inimigo {
 		
 		ImageCollection imgCollection = new ImageCollection();
 		
-		imgCollection.add("default", loadAnimation("/imagens/bolinha", ".png", 2, 20, AnimImage.GO_AND_BACK));
+		imgCollection.add("gripeDireita", loadAnimation("/imagens/inimigos/Gripe-direita", ".png", 2, 20, AnimImage.GO_AND_BACK));
 		
 		setImageCollection(imgCollection);
         setDoNotStop(true);
