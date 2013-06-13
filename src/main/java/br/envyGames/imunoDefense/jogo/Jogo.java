@@ -1,6 +1,6 @@
 package br.envyGames.imunoDefense.jogo;
 
-import br.envyGames.imunoDefense.motor.Cenario;
+
 import br.envyGames.imunoDefense.motor.JogoMotor;
 
 public class Jogo implements Runnable
@@ -22,7 +22,19 @@ public class Jogo implements Runnable
 		motor.exibirJanela();
 		motor.inicializar();
 
+		
 		motor.loadCenario("JogoCenario");
+		
+//		motor.loadCenario("LogoCenario");
+//		
+//		try {
+//			Thread.sleep(3000);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//		motor.loadCenario("MenuCenario");
 	}
 
 	private void criarCenarios() {

@@ -2,9 +2,14 @@ package br.envyGames.imunoDefense.jogo;
 
 import java.awt.Point;
 
+import s3t.gameControl.system.GameSystem;
+
 import br.envyGames.imunoDefense.motor.Cenario;
+import br.envyGames.imunoDefense.motor.JogoMotor;
 
 public class Coracao extends FormaDeVida {
+
+	private JogoMotor motor;
 	
 	public Coracao(Cenario cenario) {
 		super("Coracao", new Point(Tabuleiro.getTabuleiroAtual().getWidth(), 0), cenario);
@@ -14,6 +19,8 @@ public class Coracao extends FormaDeVida {
 
 	@Override
 	public void morrer() {
+		motor.loadCenario("GameOverCenario");
+		GameSystem.getEntityCollection().clear();	
 		
 	}
 }

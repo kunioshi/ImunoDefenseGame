@@ -39,13 +39,13 @@ public class AIGripe extends AIAction {
 
 		if(alvo.getVida() <= 0) {
 			Tabuleiro.getTabuleiroAtual().setCasa(alvo.getCasaAtual(), null);
-			comecarAndar(inimigo);
+			estado = Estado.ANDANDO;
 		}
 	}
 
 	private void andar(Inimigo inimigo) {
 		inimigo.doMove(inimigo.getVelocidade(), 0);
-		proxCasa.x++;
+		comecarAndar(inimigo);
 	}
 
 	private void comecarAndar(Inimigo inimigo) {
