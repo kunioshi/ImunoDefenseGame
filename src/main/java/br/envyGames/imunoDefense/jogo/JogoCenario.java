@@ -83,7 +83,7 @@ public class JogoCenario extends Cenario implements ChegarHordaListener {
 		CenarioLayer background = CenarioLayer.criarPassLayer("BackGround");
 		
 		//criando um HUD para teste
-		Imagem backgroundImagem = ResourceManager.getImagem("/imagens/BackgroundJogo.png");
+		Imagem backgroundImagem = ResourceManager.getImagem("/imagens/BackgroundJogo.jpg");
 		Imagem botaoMiocardioTorre = ResourceManager.getImagem("/imagens/torres/botaoMiocardioITorre.jpg");
 		Imagem botaoMedulaTorre = ResourceManager.getImagem("/imagens/torres/botaoMedulaITorre.jpg");
 		
