@@ -5,8 +5,6 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 
-import s3t.gameControl.system.GameSystem;
-
 import br.envyGames.imunoDefense.motor.Cenario;
 import br.envyGames.imunoDefense.motor.CenarioItem;
 import br.envyGames.imunoDefense.motor.CenarioLayer;
@@ -39,10 +37,10 @@ public class JogoCenario extends Cenario implements ChegarHordaListener {
 	
 	@Override
 	public void handleChegarHorda() {
-		InimigoMalaria malaria;
+		InimigoGripe gripe;
 		try {
-			malaria = new InimigoMalaria("inimigo0", this);
-			adicionarEntidade(malaria);
+			gripe = new InimigoGripe("inimigo0", this);
+			adicionarEntidade(gripe);
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}

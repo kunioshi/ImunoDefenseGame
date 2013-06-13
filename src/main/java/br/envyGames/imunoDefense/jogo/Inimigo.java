@@ -15,6 +15,10 @@ enum Estado {
 	ANDANDO, PARADO, ATACANDO;
 }
 
+enum Direcao {
+	BAIXO, CIMA, DIREITA, ESQUERDA;
+}
+
 enum TipoLocomocao {
 	Terrestre,
 	Aerio
@@ -27,6 +31,7 @@ public abstract class Inimigo extends FormaDeVida {
 	private int forca = 1;
 	private float velocidadeNatural = 32;
 	private float lentidao = 1;
+	private Direcao direcao = Direcao.DIREITA;
 	private TipoLocomocao tipoLocomocao;
 	
 	/*
@@ -36,17 +41,18 @@ public abstract class Inimigo extends FormaDeVida {
 	 * @param <code>xy</code>   - Coordenadas "(x, y)" iniciais. 
 	 */
 	public Inimigo(String name, Point xy, Cenario cenario) {
-		super(name, xy, cenario);
-		//super(name, Tabuleiro.getTabuleiroAtual().converteCoordToTab(xy.x), Tabuleiro.getTabuleiroAtual().converteCoordToTab(xy.y), cenario);
+		super(name, new Point(Tabuleiro.getTabuleiroAtual().converteCoordToTab(xy.x), Tabuleiro.getTabuleiroAtual().converteCoordToTab(xy.y)), cenario);
 	}
 	
 	// Getters & Setters
 	public int getForca() { return forca; }
 	public float getVelocidade() { return velocidadeNatural * lentidao; }
+	public Direcao getDirecao() { return direcao; }
 	public TipoLocomocao getTipoLocomocao() { return tipoLocomocao; }
 	
 	public void setForca(int dano) { forca = dano; }
 	public void setVelocidadeNormal(int vel) { velocidadeNatural = vel; }
+	public void setDirecao(Direcao novaDirecao) { direcao = novaDirecao; }
 	
 	/*
 	 * Aplica efeito de lentidão nesta unidade
@@ -65,7 +71,7 @@ public abstract class Inimigo extends FormaDeVida {
 		GameSystem.getEntityCollection().getEntityByName(getName());
 	}
 	
-	public static AnimImage loadAnimation(String firstName, String extension, int endNumber, int period, int behavior) throws IOException {
+	public AnimImage loadAnimation(String firstName, String extension, int endNumber, int period, int behavior) throws IOException {
         AnimImage animImage = new AnimImage();
 
         for (int i = 0; i <= endNumber; i++) {

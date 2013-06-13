@@ -14,10 +14,14 @@ public class InimigoMalaria extends Inimigo {
 		super(name, new Point( 0, 0 ), cenario);
 		
 		ImageCollection imgCollection = new ImageCollection();
-		
-		imgCollection.add("malariaDefault", loadAnimation("/imagens/bolinha", ".png", 2, 20, AnimImage.GO_AND_BACK));
+
+		imgCollection.add("malariaDireita", loadAnimation("/imagens/inimigos/Malaria-direita", ".png", 1, 20, AnimImage.GO_AND_BACK));
+		imgCollection.add("malariaEsquerda", loadAnimation("/imagens/inimigos/Malaria-esquerda", ".png", 1, 20, AnimImage.GO_AND_BACK));
+		imgCollection.add("malariaBaixo", loadAnimation("/imagens/inimigos/Malaria-frente", ".png", 1, 20, AnimImage.GO_AND_BACK));
+		imgCollection.add("malariaCima", loadAnimation("/imagens/inimigos/Malaria-costas", ".png", 1, 20, AnimImage.GO_AND_BACK));
 		
 		setImageCollection(imgCollection);
+		setImageKey("malariaDireita");
         setDoNotStop(true);
 		
 		GameSystem.setAIforEntity(this, new AIMalaria());

@@ -29,7 +29,7 @@ public class AIMalaria extends AIAction {
 		}
 		
 		if(estado ==  Estado.PARADO) {
-			comecarAndar();
+			comecarAndar(entity);
 			checarProx(entity);
 		} else if(estado == Estado.ANDANDO)
 			andar((InimigoMalaria)entity);
@@ -46,11 +46,13 @@ public class AIMalaria extends AIAction {
 		verificarCaminho(entity);
 	}
 	
-	private void comecarAndar() {
+	private void comecarAndar(Inimigo entity) {
 		if(caminho.size() != 0)
 			proxCasa = caminho.remove(0);
-		else
+		else {
+			alvo = ((JogoCenario)entity.getScenario()).getCoracao();
 			estado = Estado.ATACANDO;
+		}
 	}
 	
 	private void andar(InimigoMalaria entity) {
@@ -59,17 +61,22 @@ public class AIMalaria extends AIAction {
 		if(estado == Estado.ANDANDO) {
 			mudarCasa(entity);
 			
-			if(Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) entity.getX()) < proxCasa.getX())
+			if(Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) entity.getX()) < proxCasa.getX()) {
+				entity.setImageKey("malariaDireita");
 				entity.doMove(entity.getVelocidade(), 0);
-			else if(Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) entity.getX()) > proxCasa.getX())
+			} else if(Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) entity.getX()) > proxCasa.getX()) {
+				entity.setImageKey("malariaEsquerda");
 				entity.doMove(-entity.getVelocidade(), 0);
-			else if(Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) entity.getY()) < proxCasa.getY())
+			} else if(Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) entity.getY()) < proxCasa.getY()) {
+				entity.setImageKey("malariaBaixo");
 				entity.doMove(0, entity.getVelocidade());
-			else if(Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) entity.getY()) > proxCasa.getY())
+			} else if(Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) entity.getY()) > proxCasa.getY()) {
+				entity.setImageKey("malariaCima");
 				entity.doMove(0, -entity.getVelocidade());
-
+			}
+				
 			if(chegouProx(entity) && caminho != null)
-				comecarAndar();
+				comecarAndar(entity);
 		}
 	}
 	
@@ -84,6 +91,7 @@ public class AIMalaria extends AIAction {
 			((Coracao)alvo).receberDano(inimigo.getForca());
 		else if(alvo instanceof Torre)
 			((Torre)alvo).receberDano(inimigo.getForca());
+		alvo.receberDano(inimigo.getForca());
 		
 		if(alvo.getVida() <= 0) {
 			Tabuleiro.getTabuleiroAtual().setCasa(alvo.getCasaAtual(), null);
@@ -114,7 +122,7 @@ public class AIMalaria extends AIAction {
 				alvo = ((JogoCenario)entity.getScenario()).getCoracao();
 			} else {
 				estado = Estado.ANDANDO;
-				comecarAndar();
+				comecarAndar(entity);
 			}
 		}
 	}
