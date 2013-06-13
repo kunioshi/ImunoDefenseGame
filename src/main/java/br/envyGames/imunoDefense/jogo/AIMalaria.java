@@ -11,13 +11,16 @@ public class AIMalaria extends AIAction {
 	private ArrayList<Point> caminho = null;
 	private Estado estado = Estado.PARADO;
 	private Point proxCasa = null;
-	private Entity alvo = null;
+	private Torre alvo = null;
 	private BuscaAStar busca = new BuscaAStar();
 	
 	@Override
-	public void doAction(Entity entity) {
+	public void doAction(Entity entidade) {
+		Inimigo entity = (Inimigo)entidade;
+		System.out.println(estado.toString());
+		
 		if(caminho == null)
-			atualizaCaminho(entity);
+			atualizarCaminho(entity);
 
 		try {
 			Thread.sleep(1000);
@@ -26,44 +29,36 @@ public class AIMalaria extends AIAction {
 		}
 		
 		if(estado ==  Estado.PARADO) {
-			comecaAndar();
-			checaCaminho(entity);
-		}
-		else if(estado == Estado.ANDANDO)
-			anda((InimigoMalaria)entity);
+			comecarAndar();
+			checarProx(entity);
+		} else if(estado == Estado.ANDANDO)
+			andar((InimigoMalaria)entity);
 		else
-			ataca();
+			atacar((Inimigo) entity);
 	}
 
 	@Override
 	public void receiveMessage(IAMessage msg) {}
 	
-	private void atualizaCaminho(Entity entity) {
+	private void atualizarCaminho(Inimigo entity) {
 		caminho = busca.busca(Tabuleiro.getTabuleiroAtual().getCasas(), new Point( Tabuleiro.getTabuleiroAtual().converteCoord((int)entity.getX(), (int)entity.getY()) ), Tabuleiro.getTabuleiroAtual().getFinal());
 		
-		if(caminho == null)
-			estado = Estado.ATACANDO;
-		else {
-			estado = Estado.ANDANDO;
-			comecaAndar();
-		}
-//		if( caminho.get(0).equals( Tabuleiro.getTabuleiroAtual().converteCoord((int)entity.getX(), (int)entity.getY()) ) ) {
-//			estado = Estado.ATACANDO;
-//			alvo = 
-//		}
+		verificarCaminho(entity);
 	}
 	
-	private void comecaAndar() {
+	private void comecarAndar() {
 		if(caminho.size() != 0)
 			proxCasa = caminho.remove(0);
 		else
 			estado = Estado.ATACANDO;
 	}
 	
-	private void anda(InimigoMalaria entity) {
-		checaCaminho(entity);
+	private void andar(InimigoMalaria entity) {
+		checarProx(entity);
 		
-		if(estado != Estado.ANDANDO) {
+		if(estado == Estado.ANDANDO) {
+			mudarCasa(entity);
+			
 			if(Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) entity.getX()) < proxCasa.getX())
 				entity.doMove(entity.getVelocidade(), 0);
 			else if(Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) entity.getX()) > proxCasa.getX())
@@ -74,12 +69,26 @@ public class AIMalaria extends AIAction {
 				entity.doMove(0, -entity.getVelocidade());
 
 			if(chegouProx(entity) && caminho != null)
-				comecaAndar();
+				comecarAndar();
 		}
 	}
 	
-	private void ataca() {
-		//Ataca(alvo);
+	private void mudarCasa(InimigoMalaria entity) {
+		if(Tabuleiro.getTabuleiroAtual().getCasa(entity.getCasaAtual()) == entity)
+			Tabuleiro.getTabuleiroAtual().setCasa(entity.getCasaAtual(), null);
+		Tabuleiro.getTabuleiroAtual().setCasa(proxCasa, entity);
+	}
+	
+	private void atacar(Inimigo entity) {
+		if(alvo instanceof Coracao)
+			((Coracao)alvo).receberDano(entity.getForca());
+		else if(alvo instanceof Torre)
+			((Torre)alvo).receberDano(entity.getForca());
+		
+		if(alvo.getVida() <= 0) {
+			Tabuleiro.getTabuleiroAtual().setCasa(alvo.getCasaAtual(), null);
+			atualizarCaminho(entity);
+		}
 	}
 	
 	private boolean chegouProx(InimigoMalaria entity) {
@@ -89,8 +98,30 @@ public class AIMalaria extends AIAction {
 		return false;
 	}
 	
-	private void checaCaminho(Entity entity) {
+	private void checarProx(Inimigo entity) {
 		if(Tabuleiro.getTabuleiroAtual().isTorre(proxCasa))
-			atualizaCaminho(entity);
+			atualizarCaminho(entity);
+	}
+	
+	private void verificarCaminho(Inimigo entity) {
+		if(caminho == null) {
+			estado = Estado.ATACANDO;
+			
+			encontrarAlvo();
+		} else {
+			if( caminho.size() == 0 ) {
+				estado = Estado.ATACANDO;
+				alvo = ((JogoCenario)entity.getScenario()).getCoracao();
+			} else {
+				estado = Estado.ANDANDO;
+				comecarAndar();
+			}
+		}
+	}
+	
+	private void encontrarAlvo() {
+		if(proxCasa != null) {
+			alvo = (Torre)Tabuleiro.getTabuleiroAtual().getCasa(proxCasa);
+		}
 	}
 }

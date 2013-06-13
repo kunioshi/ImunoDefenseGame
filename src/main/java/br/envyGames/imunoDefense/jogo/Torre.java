@@ -25,10 +25,11 @@ public abstract class Torre extends Entidade {
 	public int getForca() { return forca; }
 	public int getLevel() { return level; }
 	public int getVida() { return vida; }
+	public Point getCasaAtual() { return Tabuleiro.getTabuleiroAtual().converteCoord((int)getX(), (int)getY()); }
 	
 	public void setForca(int dano) { forca = dano; }
 	public void upgrade() { level++; forca++; }
-	public void recebeDano(int dano) {
+	public void receberDano(int dano) {
 		vida -= dano;
 		
 		isDead();
