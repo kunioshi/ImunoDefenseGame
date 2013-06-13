@@ -16,6 +16,7 @@ import br.envyGames.imunoDefense.motor.ResourceManager;
 public class JogoCenario extends Cenario implements ChegarHordaListener {
 
 	private HordaGerenciador hordaGerenciador = new HordaGerenciador();
+	//private Torre torreSelecionado;
 	
 	public JogoCenario(int largura, int altura) {
 		super("JogoCenario", "Jogo", largura, altura);	
@@ -51,11 +52,13 @@ public class JogoCenario extends Cenario implements ChegarHordaListener {
 	public void mouseClicked(MouseEvent e) {
 		System.out.println(e.getX() + "|" + e.getY());
 		if (isMiocardioTorreButton(e.getX(), e.getY())) {
-			TorreButtonClicked();
+			miocardioTorreButtonClicked();
+		}
+		else if (isMedulaTorreButton(e.getX(), e.getY())) {
+			medulaTorreButtonClicked();
 		}
 		else if (isGrid(e.getX(), e.getY())) {
-			Torre torre = new MiocardioTorre("teste", new Point(e.getX() - 20, e.getY() - 25), this);
-			GameSystem.getEntityCollection().addEntity(torre);
+			gridClicked(convertPixelToGrid(e.getX() - 20), convertPixelToGrid(e.getY() - 25));
 		}
 	}
 	
@@ -85,18 +88,23 @@ public class JogoCenario extends Cenario implements ChegarHordaListener {
 		Imagem botaoMedulaTorre = ResourceManager.getImagem("/imagens/torres/botaoMedulaITorre.jpg");
 		
 		background.adicionarItem(new CenarioItem("fundo", backgroundImagem, 0, 0));
+		
 		background.adicionarItem(new CenarioItem("botaoMiocardioITorre", botaoMiocardioTorre, 6, 420));
 		background.adicionarItem(new CenarioItem("botaoMedulaITorre", botaoMedulaTorre, 102, 420));
 		
 		adicionarLayer(background);
 	}
 	
-	private int convertGridPixel(int n) {
+	private int convertGridToPixel(int n) {
 		return n * 32;
 	}
 	
+	private int convertPixelToGrid(int pixel) {
+		return pixel / 32;
+	}
+	
 	private boolean isGrid(int x, int y) {
-		return (x >= 0 && x <= 384 && y >= 0 && y <= 420);
+		return (x >= 0 && x <= 736 && y >= 0 && y <= 420);
 	}
 	
 	private boolean isMiocardioTorreButton(int x, int y) {
@@ -104,10 +112,23 @@ public class JogoCenario extends Cenario implements ChegarHordaListener {
 	}
 	
 	private boolean isMedulaTorreButton(int x, int y) {
-		return x >= 6 && x <= 96 && y >= 420 && y <= 510;
+		return x >= 102 && x <= 192 && y >= 420 && y <= 510;
 	}
 	
-	private void TorreButtonClicked() {
+	private void miocardioTorreButtonClicked() {
+		///torreSelecionado = TorreFactory.criarMiocardio("teste", xy, this);
+	}
+	
+	private void medulaTorreButtonClicked() {
 		
-	}		
+	}
+	
+	private void gridClicked(int coluna, int linha) {
+		adicionarTorre(coluna, linha, TorreFactory.criarMiocardio("MiocardioTore_" + coluna + "_" + linha, new Point(convertGridToPixel(coluna), convertGridToPixel(linha)), this));
+	}
+	
+	private void adicionarTorre(int coluna, int linha, Torre torre) {
+		GameSystem.getEntityCollection().addEntity(torre);
+		Tabuleiro.getTabuleiroAtual().setCasa(new Point(coluna, linha), torre);
+	}
 }

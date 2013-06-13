@@ -2,11 +2,13 @@ package br.envyGames.imunoDefense.jogo;
 
 import java.awt.Point;
 
+import br.envyGames.imunoDefense.motor.Entidade;
+
 public class Tabuleiro {
 	private static Tabuleiro tabuleiro;
 	
 	private int tamanhoCasa = 32;
-	private Casa[][] casas = new Casa[13][23];
+	private Entidade[][] casas = new Entidade[13][23];
 	private Point casaFinal = new Point(2, 0);
 	
 	public static Tabuleiro getTabuleiroAtual() {
@@ -16,30 +18,35 @@ public class Tabuleiro {
 		return tabuleiro;
 	}
 	
-	private Tabuleiro() {
-		zeraTabuleiro();
-		
-		for(int i = 0; i < getHeight()-1; i++)
-			casas[i][1] = Casa.PAREDE;
-	}
-	
-	private void zeraTabuleiro() {
+	public void zerarTabuleiro() {
 		for(int i = 0; i < casas.length; i++)
 			for(int j = 0; j < casas[i].length; j++)
-				casas[i][j] = Casa.VAZIA;
+				casas[i][j] = null;
 	}
 	
 	public int getHeight() { return casas.length; }
 	public int getWidth() { return casas[0].length; }
 	public Point getFinal() { return casaFinal; }
 	public int getTamanhoCasa() { return tamanhoCasa; }
-	public Casa[][] getCasas() { return casas; }
+	public Entidade[][] getCasas() { return casas; }
+	
+	public boolean isCasaVazia(Point casa) {
+		return casas[casa.y][casa.x] == null;
+	}
+	
+	public boolean isInimigo(Point casa) {
+		return tabuleiro.getCasa(casa) != null && tabuleiro.getCasa(casa).getClass() == Inimigo.class;
+	}
+	
+	public boolean isTorre(Point casa) {
+		return tabuleiro.getCasa(casa) != null && tabuleiro.getCasa(casa).getClass() == Torre.class;
+	}
 	
 	/*
 	 * Verifica qual o estado/tipo da coordenada da <code>casa</code>.
 	 * @return Retorna o tipo da casa em <code>Casa</code>.
 	 */
-	public Casa checaCasa(Point casa) {
+	public Entidade getCasa(Point casa) {
 		return casas[casa.y][casa.x];
 	}
 	
@@ -48,8 +55,8 @@ public class Tabuleiro {
 	 * @param <code>casa</code> - Coordenadas (x, y) da casa no tabuleiro.
 	 * @param <code>tipo</code> - Novo estado/tipo da casa alterada.
 	 */
-	public void mudaTipo(Point casa, Casa tipo) {
-		casas[casa.y][casa.x] = tipo; 
+	public void setCasa(Point casa, Entidade entidade) {
+		casas[casa.y][casa.x] = entidade; 
 	}
 	
 	/*

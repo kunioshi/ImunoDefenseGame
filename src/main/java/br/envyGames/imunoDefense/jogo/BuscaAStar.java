@@ -4,10 +4,13 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import br.envyGames.imunoDefense.motor.Entidade;
+
 public class BuscaAStar {
 	private CasaBusca atual;
 	private ArrayList<CasaBusca> lista_aberta;
 	private ArrayList<CasaBusca> lista_fechada;
+	private Tabuleiro tabuleiro;
 	
 	/*
 	 * Realiza a Busca A* no <code>tabuleiro</code>, tendo seu inico a casa <code>inicio</code> e ponto final <code>fim</code>.
@@ -16,7 +19,8 @@ public class BuscaAStar {
 	 * @param <code>fim</code>       - Coordenadas da casa no <code>tabuleiro</code> na qual a busca buscará alcançar.
 	 * @return <code>ArrayList<Point></code> - Caminho composto de casa por casa de onde a Entidade deverá passar para alcançar a casa <code>fim</code>, não obtendo a casa <code>inicio</code> em seu corpo.
 	 */
-	public ArrayList<Point> busca(Casa[][] tabuleiro, Point inicio, Point fim) {
+	public ArrayList<Point> busca(Tabuleiro tabuleiro, Point inicio, Point fim) {
+		this.tabuleiro = tabuleiro;
 		atual = null;
 		lista_aberta = new ArrayList<CasaBusca>();
 		lista_fechada = new ArrayList<CasaBusca>();
@@ -66,13 +70,21 @@ public class BuscaAStar {
 		int x = atual.getCasa().x + soma.x;
 		int y = atual.getCasa().y + soma.y;
 		
-		if(x >= 0 && x < Tabuleiro.getTabuleiroAtual().getWidth()  &&  y >= 0 && y < Tabuleiro.getTabuleiroAtual().getHeight()) {
+		if(x >= 0 && x < tabuleiro.getWidth()  &&  y >= 0 && y < tabuleiro.getHeight()) {
 			Point casaAux = new Point(x, y);
 			
-			if(Tabuleiro.getTabuleiroAtual().checaCasa(casaAux) == Casa.VAZIA || Tabuleiro.getTabuleiroAtual().checaCasa(casaAux) == Casa.INIMIGO)
+			if(isCasaVazia(casaAux) || isInimigo(casaAux))
 				if(!existeNaListaFechada(casaAux))
 					adicionaCasa(casaAux, fim);
 		}
+	}
+	
+	private boolean isCasaVazia(Point casa) {
+		return tabuleiro.getCasa(casa) == null;
+	}
+	
+	private boolean isInimigo(Point casa) {
+		return tabuleiro.getCasa(casa) != null && tabuleiro.getCasa(casa).getClass() == Inimigo.class;
 	}
 	
 	private void adicionaCasa(Point casaAux, Point fim) {
