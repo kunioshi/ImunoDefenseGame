@@ -19,6 +19,11 @@ enum Direcao {
 	BAIXO, CIMA, DIREITA, ESQUERDA;
 }
 
+enum TipoLocomocao {
+	Terrestre,
+	Aerio
+}
+
 /*
  * Classe abstrata base dos inimigos
  */
@@ -28,6 +33,7 @@ public abstract class Inimigo extends Entidade {
 	private float velocidadeNatural = 32;
 	private float lentidao = 1;
 	private Direcao direcao = Direcao.DIREITA;
+	private TipoLocomocao tipoLocomocao;
 	
 	/*
 	 * Construtor<br/>
@@ -44,6 +50,7 @@ public abstract class Inimigo extends Entidade {
 	public int getForca() { return forca; }
 	public float getVelocidade() { return velocidadeNatural * lentidao; }
 	public Direcao getDirecao() { return direcao; }
+	public TipoLocomocao getTipoLocomocao() { return tipoLocomocao; }
 	
 	public void setForca(int dano) { forca = dano; }
 	public void setVelocidadeNormal(int vel) { velocidadeNatural = vel; }
@@ -76,7 +83,7 @@ public abstract class Inimigo extends Entidade {
 		GameSystem.getEntityCollection().getEntityByName(getName());
 	}
 	
-	public static AnimImage loadAnimation(String firstName, String extension, int endNumber, int period, int behavior) throws IOException {
+	public AnimImage loadAnimation(String firstName, String extension, int endNumber, int period, int behavior) throws IOException {
         AnimImage animImage = new AnimImage();
 
         for (int i = 0; i <= endNumber; i++) {

@@ -5,7 +5,7 @@ import java.awt.event.MouseMotionListener;
 
 import s3t.gameControl.system.GameSystem;
 
-public class JogoMotor implements AlterarCenarioListener {
+public class JogoMotor implements AlterarCenarioListener, AdicionarRemoverEntidadeListener {
 	
 	private CenarioGerenciador cenarioGerenciador;
 	private EntidadeGerenciador entidadeGerenciador;
@@ -33,6 +33,8 @@ public class JogoMotor implements AlterarCenarioListener {
 	
 	public void adicionarCenario(Cenario cenario) {
 		cenario.addAlterarCenarioListener(this);
+		cenario.addAdicionarRemoverEntidadeListener(this);
+		
 		cenarioGerenciador.adicionarCenario(cenario);		
 	}	
 	
@@ -91,5 +93,15 @@ public class JogoMotor implements AlterarCenarioListener {
 	@Override
 	public void handleAlterarCenario(Object sender, String novoCenarioID) {
 		loadCenario(novoCenarioID);		
+	}
+
+	@Override
+	public void handleAdicionarEntidade(Object sender, Entidade entidade) {
+		getEntidadeGerenciador().adicionarEntidade(entidade);
+	}
+
+	@Override
+	public void handleRemoverEntidade(Object sender, Entidade entidade) {
+		getEntidadeGerenciador().removerEntidade(entidade);		
 	}
 }

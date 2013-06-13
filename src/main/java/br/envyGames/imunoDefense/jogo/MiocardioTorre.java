@@ -12,16 +12,22 @@ import br.envyGames.imunoDefense.motor.ResourceManager;
 
 public class MiocardioTorre extends Torre {
 	
-	private static Imagem imagem = null;
+	private static Imagem imagemLevel1 = null;
+	
+	public static Imagem getImagemLevel1() {
+		   if (imagemLevel1 == null)
+			   imagemLevel1 = ResourceManager.getImagem("/imagens/entidades/torres/MiocardioI.png");
+		   
+		return imagemLevel1;
+	}	
 
 	public MiocardioTorre(String nomeInstancia, Point xy, Cenario cenario)  {
 		super(nomeInstancia, xy, cenario);
 		   
-		   if (imagem == null)
-				imagem = ResourceManager.getImagem("/imagens/torres/MiocardioI.png");
+
 			
 	        ImageCollection imgCollection = new ImageCollection();
-	        imgCollection.add("default", imagem);
+	        imgCollection.add("default", getImagemLevel1());
 	        imgCollection.setDefaultKey("default");
 	        
 	        setImageCollection(imgCollection);

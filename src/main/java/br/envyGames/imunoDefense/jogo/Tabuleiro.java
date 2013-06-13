@@ -30,12 +30,24 @@ public class Tabuleiro {
 	public int getTamanhoCasa() { return tamanhoCasa; }
 	public Entidade[][] getCasas() { return casas; }
 	
+	public boolean isCasaVazia(int x, int y) {
+		return isCasaVazia(new Point(x, y));
+	}
+	
 	public boolean isCasaVazia(Point casa) {
 		return casas[casa.y][casa.x] == null;
 	}
 	
+	public boolean isInimigo(int x, int y) {
+		return isInimigo(new Point(x, y));
+	}
+	
 	public boolean isInimigo(Point casa) {
 		return tabuleiro.getCasa(casa) != null && tabuleiro.getCasa(casa) instanceof Inimigo;
+	}
+	
+	public boolean isTorre(int x, int y) {
+		return isTorre(new Point(x, y));
 	}
 	
 	public boolean isTorre(Point casa) {

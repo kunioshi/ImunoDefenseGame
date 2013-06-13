@@ -5,18 +5,16 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 
-import s3t.gameControl.system.GameSystem;
-
 import br.envyGames.imunoDefense.motor.Cenario;
 import br.envyGames.imunoDefense.motor.CenarioItem;
 import br.envyGames.imunoDefense.motor.CenarioLayer;
+import br.envyGames.imunoDefense.motor.Entidade;
 import br.envyGames.imunoDefense.motor.Imagem;
 import br.envyGames.imunoDefense.motor.ResourceManager;
 
 public class JogoCenario extends Cenario implements ChegarHordaListener {
 	private Coracao coracao = new Coracao(this);
 	private HordaGerenciador hordaGerenciador = new HordaGerenciador();
-	//private Torre torreSelecionado;
 	
 	public JogoCenario(int largura, int altura) {
 		super("JogoCenario", "Jogo", largura, altura);	
@@ -42,7 +40,7 @@ public class JogoCenario extends Cenario implements ChegarHordaListener {
 		InimigoGripe gripe;
 		try {
 			gripe = new InimigoGripe("inimigo0", this);
-			GameSystem.getEntityCollection().addEntity(gripe);
+			adicionarEntidade(gripe);
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
@@ -51,6 +49,7 @@ public class JogoCenario extends Cenario implements ChegarHordaListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		System.out.println(e.getX() + "|" + e.getY());
+		
 		if (isMiocardioTorreButton(e.getX(), e.getY())) {
 			miocardioTorreButtonClicked();
 		}
@@ -58,25 +57,18 @@ public class JogoCenario extends Cenario implements ChegarHordaListener {
 			medulaTorreButtonClicked();
 		}
 		else if (isGrid(e.getX(), e.getY())) {
-			gridClicked(convertPixelToGrid(e.getX() - 20), convertPixelToGrid(e.getY() - 25));
+			gridClicked(convertPixelToGrid(e.getX() - 3), convertPixelToGrid(e.getY() - 25));
 		}
 	}
-	
-	private Torre torre;
+
 	@Override
-	public void mouseMoved(MouseEvent e) {	
+	public void mouseMoved(MouseEvent e) {		
 		if (isGrid(e.getX(), e.getY())) {
-			if (torre == null) {
-				torre = new MiocardioTorre("seguindo", new Point(e.getX() - 20, e.getY() - 25), this);
-				GameSystem.getEntityCollection().addEntity(torre);
-			}
-			else {
-				torre.setX(e.getX() - 20);
-				torre.setY(e.getY() - 25);
+			if (seguidorMouse != null) {
+				seguidorMouse.setX(e.getX() - 20);
+				seguidorMouse.setY(e.getY() - 25 - 10);
 			}			
 		}
-		//else
-		//	GameSystem.getEntityCollection().removeEntity(entidade);
 	}
 	
 	private void carregarBackground(int largura, int altura) throws IOException {		
@@ -84,13 +76,16 @@ public class JogoCenario extends Cenario implements ChegarHordaListener {
 		
 		//criando um HUD para teste
 		Imagem backgroundImagem = ResourceManager.getImagem("/imagens/BackgroundJogo.jpg");
-		Imagem botaoMiocardioTorre = ResourceManager.getImagem("/imagens/torres/botaoMiocardioITorre.jpg");
-		Imagem botaoMedulaTorre = ResourceManager.getImagem("/imagens/torres/botaoMedulaITorre.jpg");
+		Imagem botaoMiocardioTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoMiocardioTorre.png");
+		Imagem botaoMedulaTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoMedulaTorre.png");
+		
+		Imagem coracao = ResourceManager.getImagem("/imagens/entidades/CoracaoVivo.png");
 		
 		background.adicionarItem(new CenarioItem("fundo", backgroundImagem, 0, 0));
 		
 		background.adicionarItem(new CenarioItem("botaoMiocardioITorre", botaoMiocardioTorre, 6, 420));
 		background.adicionarItem(new CenarioItem("botaoMedulaITorre", botaoMedulaTorre, 102, 420));
+		background.adicionarItem(new CenarioItem("coracaoasdasd", coracao, 702, 0));
 		
 		adicionarLayer(background);
 	}
@@ -104,7 +99,7 @@ public class JogoCenario extends Cenario implements ChegarHordaListener {
 	}
 	
 	private boolean isGrid(int x, int y) {
-		return (x >= 0 && x <= 736 && y >= 0 && y <= 420);
+		return (x >= 32 && x <= 702 && y >= 0 && y <= 420);
 	}
 	
 	private boolean isMiocardioTorreButton(int x, int y) {
@@ -115,20 +110,67 @@ public class JogoCenario extends Cenario implements ChegarHordaListener {
 		return x >= 102 && x <= 192 && y >= 420 && y <= 510;
 	}
 	
+	private Entidade seguidorMouse;
+	private String novaConstrucaoSelecionada;
+	
 	private void miocardioTorreButtonClicked() {
-		///torreSelecionado = TorreFactory.criarMiocardio("teste", xy, this);
+		novaConstrucaoSelecionada = "Miocardio";
+		removerSeguidorMouse();
+		
+		adicionarSeguidorMouse(6, 420, MiocardioTorre.getImagemLevel1());
 	}
 	
 	private void medulaTorreButtonClicked() {
+		novaConstrucaoSelecionada = "Medula";
+		removerSeguidorMouse();
 		
+		adicionarSeguidorMouse(102, 420, MedulaTorre.getImagemLevel1());
+	}
+	
+	private void adicionarSeguidorMouse(int x, int y, Imagem imagem) {
+		seguidorMouse = new SeguidorMouse(x, y, imagem, this);
+		adicionarEntidade(seguidorMouse);
+	}
+
+	private void removerSeguidorMouse() {
+		if (seguidorMouse != null) {
+			removerEntidade(seguidorMouse);
+			seguidorMouse = null;
+		}
 	}
 	
 	private void gridClicked(int coluna, int linha) {
-		adicionarTorre(coluna, linha, TorreFactory.criarMiocardio("MiocardioTore_" + coluna + "_" + linha, new Point(convertGridToPixel(coluna), convertGridToPixel(linha)), this));
+		if (Tabuleiro.getTabuleiroAtual().isCasaVazia(coluna, linha)) {
+			if (isNovaConstrucaoSelecionada())
+				construirTorre(coluna, linha);
+		}
+		else if (Tabuleiro.getTabuleiroAtual().isTorre(coluna, linha)) {
+			
+		}
+
+	}
+	
+	private boolean isNovaConstrucaoSelecionada() {
+		return novaConstrucaoSelecionada != null && novaConstrucaoSelecionada != "";
+	}
+	
+	private void construirTorre(int coluna, int linha) {
+		switch(novaConstrucaoSelecionada) {
+			case "Miocardio":
+				adicionarTorre(coluna, linha, TorreFactory.criarMiocardio("MiocardioTorre_" + coluna + "_" + linha, new Point(convertGridToPixel(coluna), convertGridToPixel(linha)), this));
+				novaConstrucaoSelecionada = "";
+				break;
+			case "Medula":
+				adicionarTorre(coluna, linha, TorreFactory.criarMedula("MedulaTorre_" + coluna + "_" + linha, new Point(convertGridToPixel(coluna), convertGridToPixel(linha)), this));
+				novaConstrucaoSelecionada = "";
+				break;
+		}
+		
+		removerSeguidorMouse();	
 	}
 	
 	private void adicionarTorre(int coluna, int linha, Torre torre) {
-		GameSystem.getEntityCollection().addEntity(torre);
+		adicionarEntidade(torre);
 		Tabuleiro.getTabuleiroAtual().setCasa(new Point(coluna, linha), torre);
 	}
 	
