@@ -15,6 +15,11 @@ enum Estado {
 	ANDANDO, PARADO, ATACANDO;
 }
 
+enum TipoLocomocao {
+	Terrestre,
+	Aerio
+}
+
 /*
  * Classe abstrata base dos inimigos
  */
@@ -23,6 +28,7 @@ public abstract class Inimigo extends Entidade {
 	private int forca = 1;
 	private float velocidadeNatural = 32;
 	private float lentidao = 1;
+	private TipoLocomocao tipoLocomocao;
 	
 	/*
 	 * Construtor<br/>
@@ -38,6 +44,7 @@ public abstract class Inimigo extends Entidade {
 	public int getVida() { return vida; }
 	public int getForca() { return forca; }
 	public float getVelocidade() { return velocidadeNatural * lentidao; }
+	public TipoLocomocao getTipoLocomocao() { return tipoLocomocao; }
 	
 	public void setForca(int dano) { forca = dano; }
 	public void setVelocidadeNormal(int vel) { velocidadeNatural = vel; }

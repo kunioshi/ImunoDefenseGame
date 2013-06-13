@@ -68,7 +68,7 @@ public class JogoCenario extends Cenario implements ChegarHordaListener {
 		if (isGrid(e.getX(), e.getY())) {
 			if (seguidorMouse != null) {
 				seguidorMouse.setX(e.getX() - 20);
-				seguidorMouse.setY(e.getY() - 25);
+				seguidorMouse.setY(e.getY() - 25 - 10);
 			}			
 		}
 	}
