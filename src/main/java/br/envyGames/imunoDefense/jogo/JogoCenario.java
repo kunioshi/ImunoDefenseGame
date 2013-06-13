@@ -77,15 +77,12 @@ public class JogoCenario extends Cenario implements ChegarHordaListener {
 		//criando um HUD para teste
 		Imagem backgroundImagem = ResourceManager.getImagem("/imagens/BackgroundJogo.jpg");
 		Imagem botaoMiocardioTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoMiocardioTorre.png");
-		Imagem botaoMedulaTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoMedulaTorre.png");
+		Imagem botaoMedulaTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoMedulaTorre.png");	
 		
-		Imagem coracao = ResourceManager.getImagem("/imagens/entidades/CoracaoVivo.png");
 		
-		background.adicionarItem(new CenarioItem("fundo", backgroundImagem, 0, 0));
-		
+		background.adicionarItem(new CenarioItem("fundo", backgroundImagem, 0, 0));		
 		background.adicionarItem(new CenarioItem("botaoMiocardioITorre", botaoMiocardioTorre, 6, 420));
 		background.adicionarItem(new CenarioItem("botaoMedulaITorre", botaoMedulaTorre, 102, 420));
-		background.adicionarItem(new CenarioItem("coracaoasdasd", coracao, 702, 0));
 		
 		adicionarLayer(background);
 	}
