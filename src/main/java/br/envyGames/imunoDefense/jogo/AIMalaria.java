@@ -30,7 +30,7 @@ public class AIMalaria extends IAAcao {
 			comecarAndar(entity);
 			checarProx(entity);
 		} else if(estado == Estado.ANDANDO)
-			andar((InimigoMalaria)entity);
+			andar((Inimigo)entity);
 		else
 			atacar((Inimigo) entity);
 	}
@@ -52,23 +52,23 @@ public class AIMalaria extends IAAcao {
 		}
 	}
 	
-	private void andar(InimigoMalaria entity) {
+	private void andar(Inimigo entity) {
 		checarProx(entity);
 		
 		if(estado == Estado.ANDANDO) {
 			mudarCasa(entity);
 			
 			if(Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) entity.getX()) < proxCasa.getX()) {
-				entity.setImageKey("malariaDireita");
+				entity.setImageKey("direita");
 				entity.doMove(entity.getVelocidade(), 0);
 			} else if(Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) entity.getX()) > proxCasa.getX()) {
-				entity.setImageKey("malariaEsquerda");
+				entity.setImageKey("esquerda");
 				entity.doMove(-entity.getVelocidade(), 0);
 			} else if(Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) entity.getY()) < proxCasa.getY()) {
-				entity.setImageKey("malariaBaixo");
+				entity.setImageKey("baixo");
 				entity.doMove(0, entity.getVelocidade());
 			} else if(Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) entity.getY()) > proxCasa.getY()) {
-				entity.setImageKey("malariaCima");
+				entity.setImageKey("cima");
 				entity.doMove(0, -entity.getVelocidade());
 			}
 				
@@ -77,7 +77,7 @@ public class AIMalaria extends IAAcao {
 		}
 	}
 	
-	private void mudarCasa(InimigoMalaria entity) {
+	private void mudarCasa(Inimigo entity) {
 		if(Tabuleiro.getTabuleiroAtual().getCasa(entity.getCasaAtual()) == entity)
 			Tabuleiro.getTabuleiroAtual().setCasa(entity.getCasaAtual(), null);
 		Tabuleiro.getTabuleiroAtual().setCasa(proxCasa, entity);
@@ -96,7 +96,7 @@ public class AIMalaria extends IAAcao {
 		}
 	}
 	
-	private boolean chegouProx(InimigoMalaria entity) {
+	private boolean chegouProx(Inimigo entity) {
 		if( new Point((int)entity.getX(), (int)entity.getY()).equals(Tabuleiro.getTabuleiroAtual().converteCoord(proxCasa)) )
 			return true;
 		
