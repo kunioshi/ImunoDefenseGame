@@ -20,7 +20,7 @@ public class CasaBusca {
 		antecessor = deOnde;
 		
 		
-		if(deOnde == null) {
+		if(deOnde == null || alvo == null) {
 			heuristica = 0;
 			custoAcumulado = 0;
 		} else {
