@@ -21,7 +21,7 @@ public class AIMalaria extends IAAcao {
 			atualizarCaminho(entity);
 
 		try {
-			Thread.sleep(1300);
+			Thread.sleep(700);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

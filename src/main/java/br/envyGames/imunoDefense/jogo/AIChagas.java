@@ -16,7 +16,7 @@ public class AIChagas extends IAAcao {
 		Inimigo inimigo = (Inimigo)entidade;
 		
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(700);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
