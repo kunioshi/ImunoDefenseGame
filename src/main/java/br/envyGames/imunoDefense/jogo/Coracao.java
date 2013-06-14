@@ -36,9 +36,9 @@ public class Coracao extends FormaDeVida {
 		
 		if (getVida() <= TOTAL_VIDA * 0.5) {
 			if (getVida() <= TOTAL_VIDA * 0.2)
-				imagemColecao.definirImagemPadrao("20porcento");
+				setImageKey("20porcento");
 			else 
-				imagemColecao.definirImagemPadrao("50porcento");
+				setImageKey("50porcento");
 		}
 	}
 }
