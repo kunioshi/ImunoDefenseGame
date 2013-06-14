@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HordaGerenciador implements Runnable {
-	private long tempoEsperaProximaHorda = 10000;
-	private long tempoEsperaProximaInimigo = 2000;
+	private long tempoEsperaProximaHorda = 40000;
+	private long tempoEsperaProximaInimigo = 3000;
 	private boolean isRunning = false;
 	private Thread temporizador;
 	private List<ChegarHordaListener> chegarHordaListeners = new ArrayList<ChegarHordaListener>();
@@ -13,13 +13,28 @@ public class HordaGerenciador implements Runnable {
 	public class HordaCriador extends Thread {
 		public void run() {
 			while (isRunning) {
-				esperar(tempoEsperaProximaHorda);
 				
-				for (int i = 0; i < 10; i++) {
-					fireChegarHordaEvent(TipoInimigo.MALARIA);
+				//Wave 1
+				for (int i = 0; i < 3; i++) {
+					fireChegarHordaEvent(TipoInimigo.GRIPE);
 					
 					esperar(tempoEsperaProximaInimigo);
 				}
+				esperar(tempoEsperaProximaHorda);
+				//Wave 2
+				
+				for (int i = 0; i < 3; i++) {
+					fireChegarHordaEvent(TipoInimigo.GRIPE);
+					
+					esperar(tempoEsperaProximaInimigo);
+				}
+				
+				for (int i = 0; i < 2; i++) {
+					fireChegarHordaEvent(TipoInimigo.EBOLA);
+					
+					esperar(tempoEsperaProximaInimigo);
+				}
+				esperar(tempoEsperaProximaHorda);
 			}
 	    }
 
