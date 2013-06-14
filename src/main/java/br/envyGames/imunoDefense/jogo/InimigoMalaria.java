@@ -10,8 +10,8 @@ import s3t.graphicsElements.ImageCollection;
 import br.envyGames.imunoDefense.motor.Cenario;
 
 public class InimigoMalaria extends Inimigo {
-	public InimigoMalaria(String name, int y, Cenario cenario) throws IOException {
-		super(name, new Point( 0, y ), cenario);
+	public InimigoMalaria(String name, Point xy, Cenario cenario) throws IOException {
+		super(name, xy, cenario);
 		
 		ImageCollection imgCollection = new ImageCollection();
 

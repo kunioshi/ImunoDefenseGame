@@ -10,8 +10,8 @@ import s3t.graphicsElements.AnimImage;
 import s3t.graphicsElements.ImageCollection;
 
 public class InimigoGripe extends Inimigo {
-	public InimigoGripe(String name, int y, Cenario cenario) throws IOException {
-		super(name, new Point(0, y), cenario);
+	public InimigoGripe(String name, Point xy, Cenario cenario) throws IOException {
+		super(name, xy, cenario);
 		
 		ImageCollection imgCollection = new ImageCollection();
 		
