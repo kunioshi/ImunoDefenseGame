@@ -16,6 +16,7 @@ public abstract class Torre extends FormaDeVida {
 	 */
 	public Torre(String nomeInstancia, Point xy, Cenario cenario) {
 		super(nomeInstancia, xy, cenario);
+		this.vida = 1000;
 	}
 	
 	// Getters & Setters
@@ -31,5 +32,15 @@ public abstract class Torre extends FormaDeVida {
 	
 	public boolean isUpgradable() {
 		return level <= 2;
+	}
+	
+	@Override
+	public void receberDano(int dano) {
+		super.receberDano(dano);
+		
+		if(getImageKey() == "dano")
+			setImageKey("default");
+		else
+			setImageKey("dano");
 	}
 }
