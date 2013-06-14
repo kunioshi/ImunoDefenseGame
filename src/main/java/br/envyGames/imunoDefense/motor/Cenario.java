@@ -36,6 +36,10 @@ public abstract class Cenario extends Scenario implements MouseListener, MouseMo
 		adicionarRemoverEntidadeListenerListeners.remove(listener);
 	}
 
+	public void stop() {
+		//Metodo que é chamado qdo um cenario para de executar, é para ser sobrecarregado pelos filhos
+	}
+	
 	protected void adicionarLayer(CenarioLayer layer) {
 		this.addScenarioLayer(layer);
 	}

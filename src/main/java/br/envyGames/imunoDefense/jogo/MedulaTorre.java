@@ -2,6 +2,8 @@ package br.envyGames.imunoDefense.jogo;
 
 import java.awt.Point;
 
+import s3t.gameControl.system.GameSystem;
+
 import br.envyGames.imunoDefense.motor.Cenario;
 import br.envyGames.imunoDefense.motor.Imagem;
 import br.envyGames.imunoDefense.motor.ImagemColecao;
@@ -27,6 +29,8 @@ public class MedulaTorre extends Torre {
 		
 		definirImagemColecao(imagemColecao);
         setDoNotStop(true);
+        
+        GameSystem.setAIforEntity(this, new IAMedula());
 	}
 
 	@Override

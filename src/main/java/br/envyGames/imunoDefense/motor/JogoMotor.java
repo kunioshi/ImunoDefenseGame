@@ -50,11 +50,24 @@ public class JogoMotor implements AlterarCenarioListener, AdicionarRemoverEntida
 	}
 	
 	public void loadCenario(String cenarioID) {
-		removerListenerCenarioAntorior();
+		pararCenarioAnterior();		
 		
+		executarNovoCenario(cenarioID);
+	}
+	
+	private void pararCenarioAnterior() {
+		Cenario cenarioAnterior = cenarioGerenciador.getCenarioAtual(); 
+		cenarioAnterior.stop();
+		
+		removerListenerCenarioAntorior();
+	}
+	
+	private void executarNovoCenario(String cenarioID) {
 		cenarioGerenciador.setCenarioAtual(cenarioID);
+		
 		Cenario atual = cenarioGerenciador.getCenarioAtual();
 		atual.run();
+		
 		registrarMouseListenerFromCenario(atual);
 	}
 

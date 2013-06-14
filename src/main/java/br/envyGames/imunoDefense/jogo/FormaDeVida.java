@@ -1,15 +1,21 @@
 package br.envyGames.imunoDefense.jogo;
 
 import java.awt.Point;
+import java.util.ArrayList;
+import java.util.List;
 
+import br.envyGames.imunoDefense.motor.AdicionarRemoverEntidadeListener;
 import br.envyGames.imunoDefense.motor.Cenario;
 import br.envyGames.imunoDefense.motor.Entidade;
 
 public abstract class FormaDeVida extends Entidade {
+	private List<MorteListener> morteListeners;	
 	protected int vida;
 
 	public FormaDeVida(String nome, Point xy, Cenario cenario) {
 		super(nome, xy.x, xy.y, cenario);
+		
+		morteListeners = new ArrayList<MorteListener>();
 	}	
 
 	public int getVida() { return vida; }
@@ -19,7 +25,7 @@ public abstract class FormaDeVida extends Entidade {
 		vida -= dano;
 		
 		if (isDead())
-			morrer();
+			matarFormaDeVida();
 	}
 	
 	public void receberCura(int heal) {
@@ -34,5 +40,26 @@ public abstract class FormaDeVida extends Entidade {
 		return Tabuleiro.getTabuleiroAtual().converteCoord((int)getX(), (int)getY());
 	}
 	
-	public abstract void morrer();
+	public void addMorteListener(MorteListener listener) {
+		morteListeners.add(listener);
+	}
+	
+	public void removeMorteListener(MorteListener listener) {
+		morteListeners.remove(listener);
+	}
+	
+	public void morrer() {
+		//Para ser sobrescrito no filho
+	}
+	
+	private void matarFormaDeVida() {
+		morrer();
+		
+		fireMorteFormaDeVidaEvent();
+	}
+	
+	private void fireMorteFormaDeVidaEvent() {
+		for (MorteListener listener : morteListeners)
+			listener.handleMorteFormaDeVida(this);
+	}
 }

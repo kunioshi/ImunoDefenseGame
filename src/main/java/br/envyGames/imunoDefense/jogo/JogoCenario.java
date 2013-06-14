@@ -1,6 +1,5 @@
 package br.envyGames.imunoDefense.jogo;
 
-import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
@@ -12,7 +11,7 @@ import br.envyGames.imunoDefense.motor.Entidade;
 import br.envyGames.imunoDefense.motor.Imagem;
 import br.envyGames.imunoDefense.motor.ResourceManager;
 
-public class JogoCenario extends Cenario implements ChegarHordaListener {
+public class JogoCenario extends Cenario implements ChegarHordaListener, MorteListener {
 	private int waveSpot = 5;
 	private Coracao coracao;
 	private HordaGerenciador hordaGerenciador = new HordaGerenciador();
@@ -21,29 +20,43 @@ public class JogoCenario extends Cenario implements ChegarHordaListener {
 	public JogoCenario(int largura, int altura) {
 		super("JogoCenario", "Jogo", largura, altura);	
 		
-		hordaGerenciador.addChegarHordaListener(this);	
+		hordaGerenciador.addChegarHordaListener(this);
 	}	
 
 	@Override
 	public void run() {
 		jogador.inicializarValores();
-		hordaGerenciador.run();		
-		coracao = new Coracao(new Point(702, 0), this);
-		adicionarEntidade(coracao);
-		carregarBackground();		
+		hordaGerenciador.run();			
+		
+		carregarBackground();
+		adicionarCoracao();					
 	}
+
+	private void adicionarCoracao() {
+		coracao = new Coracao(new Point(702, 0), this);
+		adicionarFormaDeVida(coracao);
+	}
+	
+	@Override
+	public void stop() {
+		hordaGerenciador.stop();
+	}
+	
+	private int inimigoNumero = 1;
 	
 	@Override
 	public void handleChegarHorda() {
 		InimigoMalaria gripe;
 		try {
-			gripe = new InimigoMalaria("inimigo0", waveSpot, this);
-			adicionarEntidade(gripe);
+			gripe = new InimigoMalaria("inimigo" + inimigoNumero, waveSpot, this);
+			adicionarFormaDeVida(gripe);
+			inimigoNumero++;
 			
 			waveSpot++;
 			if(waveSpot > 7)
 				waveSpot = 5;
-		} catch (IOException e1) {
+		} 
+		catch (IOException e1) {
 			e1.printStackTrace();
 		}
 	}
@@ -169,9 +182,37 @@ public class JogoCenario extends Cenario implements ChegarHordaListener {
 	}
 	
 	private void adicionarTorre(int coluna, int linha, Torre torre) {
-		adicionarEntidade(torre);
+		adicionarFormaDeVida(torre);
 		Tabuleiro.getTabuleiroAtual().setCasa(new Point(coluna, linha), torre);
 	}
 	
+	private void adicionarFormaDeVida(FormaDeVida formaDeVida) {
+		formaDeVida.addMorteListener(this);
+		
+		adicionarEntidade(formaDeVida);
+	}	
+	
 	public Coracao getCoracao() { return coracao; }
+
+	@Override
+	public void handleMorteFormaDeVida(FormaDeVida morto) {
+		if (morto instanceof Inimigo)
+			destruirInimigo((Inimigo)morto);
+		else if (morto instanceof Torre)
+			destruirTorre((Torre)morto);
+		else if (morto instanceof Coracao) 
+			gameOver();
+	}
+	
+	private void destruirInimigo(Inimigo inimigo) {
+		removerEntidade(inimigo);
+	}
+	
+	private void destruirTorre(Torre torre) {
+		removerEntidade(torre);
+	}
+
+	private void gameOver() {
+		carregarNovoCenario("GameOverCenario");
+	}
 }
