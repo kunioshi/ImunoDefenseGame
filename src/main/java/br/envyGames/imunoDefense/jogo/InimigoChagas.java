@@ -24,6 +24,6 @@ public class InimigoChagas extends Inimigo {
 		setImageKey("direita");
         setDoNotStop(true);
 		
-		GameSystem.setAIforEntity(this, new AIMalaria());
+		GameSystem.setAIforEntity(this, new AIChagas());
 	}
 }
