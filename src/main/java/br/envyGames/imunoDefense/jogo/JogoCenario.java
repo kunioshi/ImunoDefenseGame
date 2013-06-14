@@ -92,12 +92,22 @@ public class JogoCenario extends Cenario implements ChegarHordaListener, MorteLi
 		//criando um HUD para teste
 		Imagem backgroundImagem = ResourceManager.getImagem("/imagens/BackgroundJogo.jpg");
 		Imagem botaoMiocardioTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoMiocardioTorre.png");
-		Imagem botaoMedulaTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoMedulaTorre.png");	
+		Imagem botaoMedulaTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoMedulaTorre.png");
+		
+		Imagem botaoTimoTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoTimoSemDinheiro.png");
+		Imagem botaoLinfoideTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoLinfoideSemDinheiro.png");
+		Imagem botaoLeucogenTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoLeucogenSemDinheiro.png");
+		Imagem botaoRochaganTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoRochaganSemDinheiro.png");
 		
 		
 		background.adicionarItem(new CenarioItem("fundo", backgroundImagem, 0, 0));		
-		background.adicionarItem(new CenarioItem("botaoMiocardioITorre", botaoMiocardioTorre, 6, 420));
-		background.adicionarItem(new CenarioItem("botaoMedulaITorre", botaoMedulaTorre, 102, 420));
+		background.adicionarItem(new CenarioItem("botaoMiocardioTorre", botaoMiocardioTorre, 6, 420));
+		background.adicionarItem(new CenarioItem("botaoMedulaTorre", botaoMedulaTorre, 102, 420));
+		
+		background.adicionarItem(new CenarioItem("botaoTimoTorre", botaoTimoTorre, 198, 420));
+		background.adicionarItem(new CenarioItem("botaoLinfoideTorre", botaoLinfoideTorre, 294, 420));
+		background.adicionarItem(new CenarioItem("botaoLeucogenTorre", botaoLeucogenTorre, 390, 420));
+		background.adicionarItem(new CenarioItem("botaoRochaganTorre", botaoRochaganTorre, 486, 420));
 		
 		adicionarLayer(background);
 	}
