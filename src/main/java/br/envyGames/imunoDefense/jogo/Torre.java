@@ -22,12 +22,13 @@ public abstract class Torre extends FormaDeVida {
 	public int getLevel() { return level; }
 	
 	public void setForca(int dano) { forca = dano; }
-	public void upgrade() { level++; forca++; }
+	public void upgrade() { 
+		level++; 
+		forca++;
+		vida *= 2;
+	}
 	
-	public abstract boolean isUpgradable();
-	
-	@Override
-	public void morrer() {
-
+	public boolean isUpgradable() {
+		return level <= 2;
 	}
 }
