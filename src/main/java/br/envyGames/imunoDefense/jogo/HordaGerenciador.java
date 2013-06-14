@@ -17,7 +17,7 @@ public class HordaGerenciador implements Runnable {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				fireAlterarCenarioEvent();
+				fireChegarHordaEvent();
 			}
 	    }
 	}
@@ -39,11 +39,11 @@ public class HordaGerenciador implements Runnable {
 		chegarHordaListeners.add(listener);
 	}
 	
-	public void removeAlterarCenarioListener(ChegarHordaListener listener) {
+	public void removeChegarHordaListener(ChegarHordaListener listener) {
 		chegarHordaListeners.remove(listener);
 	}
 	
-	private void fireAlterarCenarioEvent() {
+	private void fireChegarHordaEvent() {
 		for (ChegarHordaListener listener : chegarHordaListeners)
 			listener.handleChegarHorda();
 	}
