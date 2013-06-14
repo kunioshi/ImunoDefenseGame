@@ -1,16 +1,12 @@
 package br.envyGames.imunoDefense.jogo.entidade.inimigo;
 
 import java.awt.Point;
-import java.awt.Rectangle;
-import java.io.IOException;
 
 import br.envyGames.imunoDefense.jogo.Tabuleiro;
 import br.envyGames.imunoDefense.jogo.entidade.FormaDeVida;
 import br.envyGames.imunoDefense.motor.Cenario;
 
 import s3t.gameControl.system.GameSystem;
-import s3t.graphicsElements.AnimImage;
-import s3t.graphicsElements.SimpleImage;
 
 
 enum Direcao {
@@ -68,18 +64,4 @@ public abstract class Inimigo extends FormaDeVida {
 	public void morrer() {
 		GameSystem.getEntityCollection().getEntityByName(getName());
 	}
-	
-	public AnimImage loadAnimation(String firstName, String extension, int endNumber, int period, int behavior) throws IOException {
-        AnimImage animImage = new AnimImage();
-
-        for (int i = 0; i <= endNumber; i++) {
-            SimpleImage img = new SimpleImage(firstName + i + extension);
-            img.setCollisionRectangle(new Rectangle(0, 0, Tabuleiro.getTabuleiroAtual().getTamanhoCasa(), Tabuleiro.getTabuleiroAtual().getTamanhoCasa()));
-            animImage.addImage(img);
-        }
-        
-        animImage.setPeriod(period);
-        animImage.setBehavior(behavior);
-        return animImage;
-    }
 }
