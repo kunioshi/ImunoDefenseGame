@@ -35,7 +35,34 @@ public class HordaGerenciador implements Runnable {
 					esperar(tempoEsperaProximaInimigo);
 				}
 				esperar(tempoEsperaProximaHorda);
-			}
+				
+				
+				//Wave 3
+				
+				for (int i = 0; i < 1; i++) {
+					fireChegarHordaEvent(TipoInimigo.GRIPE);
+					
+					esperar(tempoEsperaProximaInimigo);
+				}
+				
+				for (int i = 0; i < 2; i++) {
+					fireChegarHordaEvent(TipoInimigo.EBOLA);
+					
+					esperar(tempoEsperaProximaInimigo);
+				}
+				
+				for (int i = 0; i < 3; i++) {
+					fireChegarHordaEvent(TipoInimigo.MALARIA);
+					
+					esperar(tempoEsperaProximaInimigo);
+				}
+				
+				for (int i = 0; i < 1; i++) {
+					fireChegarHordaEvent(TipoInimigo.CHAGAS);
+					
+					esperar(tempoEsperaProximaInimigo);
+				}
+			}				
 	    }
 
 		private void esperar(long tempo) {
