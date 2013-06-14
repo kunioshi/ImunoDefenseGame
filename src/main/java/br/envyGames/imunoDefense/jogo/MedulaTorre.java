@@ -6,6 +6,7 @@ import s3t.graphicsElements.ImageCollection;
 
 import br.envyGames.imunoDefense.motor.Cenario;
 import br.envyGames.imunoDefense.motor.Imagem;
+import br.envyGames.imunoDefense.motor.ImagemColecao;
 import br.envyGames.imunoDefense.motor.ResourceManager;
 
 public class MedulaTorre extends Torre {	
@@ -22,11 +23,11 @@ public class MedulaTorre extends Torre {
 	public MedulaTorre(String nomeInstancia, Point xy, Cenario cenario) {
 		super(nomeInstancia, xy, cenario);
 		
-        ImageCollection imgCollection = new ImageCollection();
-        imgCollection.add("default", getImagemLevel1());
-        imgCollection.setDefaultKey("default");
-        
-        setImageCollection(imgCollection);
+		ImagemColecao imagemColecao = new ImagemColecao();
+		imagemColecao.add("default", getImagemLevel1());
+		imagemColecao.definirImagemPadrao("default");
+		
+		definirImagemColecao(imagemColecao);
         setDoNotStop(true);
 	}
 

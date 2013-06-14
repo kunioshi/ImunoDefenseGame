@@ -7,5 +7,9 @@ public class Entidade extends Entity {
 	public Entidade(String nome, double x, double y, Cenario cenario) {
 		super(nome, x, y, cenario);
 	}
+	
+	public void definirImagemColecao(ImagemColecao imagem) {
+		setImageCollection(imagem);
+	}
 
 }

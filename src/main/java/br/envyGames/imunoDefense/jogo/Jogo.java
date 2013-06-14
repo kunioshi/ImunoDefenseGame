@@ -23,18 +23,9 @@ public class Jogo implements Runnable
 		motor.inicializar();
 
 		
-		motor.loadCenario("JogoCenario");
+//		motor.loadCenario("JogoCenario");
 		
-//		motor.loadCenario("LogoCenario");
-//		
-//		try {
-//			Thread.sleep(3000);
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		motor.loadCenario("MenuCenario");
+		motor.loadCenario("LogoCenario");
 	}
 
 	private void criarCenarios() {

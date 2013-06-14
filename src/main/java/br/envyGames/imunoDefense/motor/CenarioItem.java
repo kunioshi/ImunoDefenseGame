@@ -11,4 +11,8 @@ public class CenarioItem extends ScenarioItem {
 	public CenarioItem(String nome, ImageCollection imagem, int xPosicao, int yPosicao) {
 		super(nome, imagem, xPosicao, yPosicao);
 	}
+	
+	public void definirImagemColecao(ImagemColecao imagem) {
+		setImageCollection(imagem);
+	}
 }

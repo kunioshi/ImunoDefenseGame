@@ -14,26 +14,23 @@ import br.envyGames.imunoDefense.motor.ResourceManager;
 
 public class JogoCenario extends Cenario implements ChegarHordaListener {
 	private int waveSpot = 5;
-	private Coracao coracao = new Coracao(this);
+	private Coracao coracao;
 	private HordaGerenciador hordaGerenciador = new HordaGerenciador();
+	private Jogador jogador = new Jogador();
 	
 	public JogoCenario(int largura, int altura) {
 		super("JogoCenario", "Jogo", largura, altura);	
 		
-		setBackgroundColor(Color.WHITE);
-		
-		hordaGerenciador.addChegarHordaListener(this);
-		
-		try {
-			carregarBackground(largura, altura);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		hordaGerenciador.addChegarHordaListener(this);	
 	}	
 
 	@Override
 	public void run() {
-		hordaGerenciador.run();			
+		jogador.inicializarValores();
+		hordaGerenciador.run();		
+		coracao = new Coracao(new Point(702, 0), this);
+		adicionarEntidade(coracao);
+		carregarBackground();		
 	}
 	
 	@Override
@@ -76,7 +73,7 @@ public class JogoCenario extends Cenario implements ChegarHordaListener {
 		}
 	}
 	
-	private void carregarBackground(int largura, int altura) throws IOException {		
+	private void carregarBackground() {		
 		CenarioLayer background = CenarioLayer.criarPassLayer("BackGround");
 		
 		//criando um HUD para teste

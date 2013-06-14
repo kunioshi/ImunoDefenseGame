@@ -5,6 +5,11 @@ public class Jogador {
 	private int dinheiro;
 	private int pontos;
 	
+	public void inicializarValores() {
+		dinheiro = 40;
+		pontos = 0;
+	}
+	
 	public int getDinheiro() {
 		return dinheiro;
 	}
