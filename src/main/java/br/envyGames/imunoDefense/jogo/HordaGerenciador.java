@@ -10,31 +10,22 @@ public class HordaGerenciador implements Runnable {
 	private Thread temporizador;
 	private List<ChegarHordaListener> chegarHordaListeners = new ArrayList<ChegarHordaListener>();
 	
-	public class Temporizador extends Thread {
+	public class HordaCriador extends Thread {
 		public void run() {
 			while (isRunning) {
-				esperaProximaHorda();
+				esperar(tempoEsperaProximaHorda);
 				
 				for (int i = 0; i < 10; i++) {
 					fireChegarHordaEvent(TipoInimigo.MALARIA);
 					
-					esperaProximoInimigo();
+					esperar(tempoEsperaProximaInimigo);
 				}
 			}
 	    }
 
-		private void esperaProximoInimigo() {
+		private void esperar(long tempo) {
 			try {
-				Thread.sleep(tempoEsperaProximaInimigo);
-			} 
-			catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-
-		private void esperaProximaHorda() {
-			try {
-				Thread.sleep(tempoEsperaProximaHorda);
+				Thread.sleep(tempo);
 			} 
 			catch (InterruptedException e) {
 				e.printStackTrace();
@@ -45,7 +36,7 @@ public class HordaGerenciador implements Runnable {
 	@Override
 	public void run() {
 		if (temporizador == null)
-			temporizador = new Thread(new Temporizador());
+			temporizador = new Thread(new HordaCriador());
 		
 		isRunning = true;
 		temporizador.start();
