@@ -3,10 +3,10 @@ package br.envyGames.imunoDefense.jogo;
 import java.awt.Point;
 import java.io.IOException;
 
-import br.envyGames.imunoDefense.jogo.entidade.inimigo.Inimigo;
 import br.envyGames.imunoDefense.jogo.entidade.inimigo.ChagasInimigo;
 import br.envyGames.imunoDefense.jogo.entidade.inimigo.EbolaInimigo;
 import br.envyGames.imunoDefense.jogo.entidade.inimigo.GripeInimigo;
+import br.envyGames.imunoDefense.jogo.entidade.inimigo.Inimigo;
 import br.envyGames.imunoDefense.jogo.entidade.inimigo.MalariaInimigo;
 import br.envyGames.imunoDefense.jogo.entidade.inimigo.TipoInimigo;
 import br.envyGames.imunoDefense.motor.Cenario;
