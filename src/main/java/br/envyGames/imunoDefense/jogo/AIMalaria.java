@@ -3,19 +3,18 @@ package br.envyGames.imunoDefense.jogo;
 import java.awt.Point;
 import java.util.ArrayList;
 
-import s3t.gameEntities.AIAction;
-import s3t.gameEntities.Entity;
-import s3t.gameEntities.IAMessage;
+import br.envyGames.imunoDefense.motor.Entidade;
+import br.envyGames.imunoDefense.motor.IAAcao;
+import br.envyGames.imunoDefense.motor.IAMensagem;
 
-public class AIMalaria extends AIAction {
+public class AIMalaria extends IAAcao {
 	private ArrayList<Point> caminho = null;
 	private Estado estado = Estado.PARADO;
 	private Point proxCasa = null;
 	private FormaDeVida alvo = null;
 	private BuscaAStar busca = new BuscaAStar();
 	
-	@Override
-	public void doAction(Entity entidade) {
+	public void doAction(Entidade entidade) {
 		Inimigo entity = (Inimigo)entidade;
 		
 		if(caminho == null)
@@ -36,8 +35,7 @@ public class AIMalaria extends AIAction {
 			atacar((Inimigo) entity);
 	}
 
-	@Override
-	public void receiveMessage(IAMessage msg) {}
+	public void receiveMessage(IAMensagem msg) {}
 	
 	private void atualizarCaminho(Inimigo entity) {
 		caminho = busca.busca(Tabuleiro.getTabuleiroAtual().getCasas(), new Point( Tabuleiro.getTabuleiroAtual().converteCoord((int)entity.getX(), (int)entity.getY()) ), Tabuleiro.getTabuleiroAtual().getFinal());

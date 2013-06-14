@@ -2,17 +2,17 @@ package br.envyGames.imunoDefense.jogo;
 
 import java.awt.Point;
 
-import s3t.gameEntities.AIAction;
-import s3t.gameEntities.Entity;
-import s3t.gameEntities.IAMessage;
+import br.envyGames.imunoDefense.motor.Entidade;
+import br.envyGames.imunoDefense.motor.IAAcao;
+import br.envyGames.imunoDefense.motor.IAMensagem;
 
-public class AIGripe extends AIAction {
+public class AIGripe extends IAAcao {
 	private Estado estado = Estado.PARADO;
 	private Point proxCasa = null;
 	private FormaDeVida alvo;
 	
 	@Override
-	public void doAction(Entity entidade) {
+	public void doAction(Entidade entidade) {
 		Inimigo inimigo = (Inimigo)entidade;
 		
 		try {
@@ -70,5 +70,5 @@ public class AIGripe extends AIAction {
 	}
 
 	@Override
-	public void receiveMessage(IAMessage msg) {}
+	public void receiveMessage(IAMensagem msg) {}
 }
