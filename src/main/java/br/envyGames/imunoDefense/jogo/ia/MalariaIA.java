@@ -3,7 +3,6 @@ package br.envyGames.imunoDefense.jogo.ia;
 import java.awt.Point;
 import java.util.ArrayList;
 
-import br.envyGames.imunoDefense.jogo.BuscaAStar;
 import br.envyGames.imunoDefense.jogo.Tabuleiro;
 import br.envyGames.imunoDefense.jogo.cenario.JogoCenario;
 import br.envyGames.imunoDefense.jogo.entidade.Coracao;

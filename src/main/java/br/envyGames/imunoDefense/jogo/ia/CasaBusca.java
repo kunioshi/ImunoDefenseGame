@@ -1,4 +1,4 @@
-package br.envyGames.imunoDefense.jogo;
+package br.envyGames.imunoDefense.jogo.ia;
 
 import java.awt.Point;
 
