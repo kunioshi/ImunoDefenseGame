@@ -11,9 +11,11 @@ public class InimigoFactory {
 		try {
 			switch (tipoInimigo) {
 			case CHAGAS:
+				inimigo = new InimigoChagas(ID, xy, cenario);
 				break;
 				
 			case EBOLA:
+				inimigo = new InimigoEbola(ID, xy, cenario);
 				break;
 				
 			case GRIPE:
