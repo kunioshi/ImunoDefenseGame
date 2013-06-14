@@ -15,7 +15,7 @@ public class MedulaTorre extends Torre {
 	
 	public static Imagem getImagemLevel1() {
 		   if (imagemLevel1 == null)
-			   imagemLevel1 = ResourceManager.getImagem("/imagens/entidades/torres/MedulaI.png");
+			   imagemLevel1 = ResourceManager.getImagem("/imagens/entidades/torres/MedulaI0.png");
 		   
 		return imagemLevel1;
 	}	

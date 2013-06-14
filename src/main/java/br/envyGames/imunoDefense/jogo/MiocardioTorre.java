@@ -13,7 +13,7 @@ public class MiocardioTorre extends Torre {
 	
 	public static Imagem getImagemLevel1() {
 		   if (imagemLevel1 == null)
-			   imagemLevel1 = ResourceManager.getImagem("/imagens/entidades/torres/MiocardioI.png");
+			   imagemLevel1 = ResourceManager.getImagem("/imagens/entidades/torres/MiocardioI0.png");
 		   
 		return imagemLevel1;
 	}	
