@@ -86,10 +86,10 @@ public class JogoCenario extends Cenario implements ChegarHordaListener, MorteLi
 		Imagem botaoMiocardioTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoMiocardioTorre.png");
 		Imagem botaoMedulaTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoMedulaTorre.png");
 		
-		Imagem botaoTimoTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoTimoSemDinheiro.png");
-		Imagem botaoLinfoideTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoLinfoideSemDinheiro.png");
-		Imagem botaoLeucogenTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoLeucogenSemDinheiro.png");
-		Imagem botaoRochaganTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoRochaganSemDinheiro.png");
+		Imagem botaoTimoTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoTimoTrancado.png");
+		Imagem botaoLinfoideTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoLinfoideTravado.png");
+		Imagem botaoLeucogenTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoLeucogenTravado.png");
+		Imagem botaoRochaganTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoRochaganTravado.png");
 		
 		
 		background.adicionarItem(new CenarioItem("fundo", backgroundImagem, 0, 0));		

@@ -18,14 +18,18 @@ public class AIEbola extends AIAction {
 	public void doAction(Entity entity) {
 		Inimigo inimigo = (Inimigo)entity;
 		
-		if(caminho == null)
-			atualizarCaminho(inimigo);
-
+		
 		try {
-			Thread.sleep(700);
+			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		
+		
+		if(caminho == null)
+			atualizarCaminho(inimigo);
+
+		
 		
 		if(estado ==  Estado.PARADO) {
 			comecarAndar(inimigo);
