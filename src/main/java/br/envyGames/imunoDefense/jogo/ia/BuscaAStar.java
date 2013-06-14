@@ -54,7 +54,7 @@ public class BuscaAStar {
 			atual = lista_aberta.remove(0);
 			lista_fechada.add(atual);
 			
-			if(atual.getCasa().equals(fim)) {
+			if(atual.getCasa().x == fim.x) {
 				return true;
 			} else {
 				verificaCasa(new Point(-1, 0), fim);

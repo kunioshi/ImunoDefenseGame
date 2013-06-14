@@ -37,9 +37,9 @@ public class MalariaIA extends IAAcao {
 			comecarAndar(entity);
 			checarProx(entity);
 		} else if(estado == EstadoInimigo.ANDANDO)
-			andar((Inimigo)entity);
+			andar(entity);
 		else
-			atacar((Inimigo) entity);
+			atacar(entity);
 	}
 
 	public void receiveMessage(IAMensagem msg) {}
