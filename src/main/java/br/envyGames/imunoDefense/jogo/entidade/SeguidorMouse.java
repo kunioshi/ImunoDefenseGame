@@ -1,4 +1,4 @@
-package br.envyGames.imunoDefense.jogo;
+package br.envyGames.imunoDefense.jogo.entidade;
 
 import br.envyGames.imunoDefense.motor.Cenario;
 import br.envyGames.imunoDefense.motor.Entidade;

@@ -3,6 +3,12 @@ package br.envyGames.imunoDefense.jogo;
 import java.awt.Point;
 import java.io.IOException;
 
+import br.envyGames.imunoDefense.jogo.entidade.inimigo.Inimigo;
+import br.envyGames.imunoDefense.jogo.entidade.inimigo.ChagasInimigo;
+import br.envyGames.imunoDefense.jogo.entidade.inimigo.EbolaInimigo;
+import br.envyGames.imunoDefense.jogo.entidade.inimigo.GripeInimigo;
+import br.envyGames.imunoDefense.jogo.entidade.inimigo.MalariaInimigo;
+import br.envyGames.imunoDefense.jogo.entidade.inimigo.TipoInimigo;
 import br.envyGames.imunoDefense.motor.Cenario;
 
 public class InimigoFactory {
@@ -11,19 +17,19 @@ public class InimigoFactory {
 		try {
 			switch (tipoInimigo) {
 			case CHAGAS:
-				inimigo = new InimigoChagas(ID, xy, cenario);
+				inimigo = new ChagasInimigo(ID, xy, cenario);
 				break;
 				
 			case EBOLA:
-				inimigo = new InimigoEbola(ID, xy, cenario);
+				inimigo = new EbolaInimigo(ID, xy, cenario);
 				break;
 				
 			case GRIPE:
-				inimigo = new InimigoGripe(ID, xy, cenario);
+				inimigo = new GripeInimigo(ID, xy, cenario);
 				break;
 				
 			case MALARIA:
-				inimigo = new InimigoMalaria(ID, xy, cenario);
+				inimigo = new MalariaInimigo(ID, xy, cenario);
 				break;
 			}
 			

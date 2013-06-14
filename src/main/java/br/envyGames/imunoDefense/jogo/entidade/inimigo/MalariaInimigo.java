@@ -1,4 +1,4 @@
-package br.envyGames.imunoDefense.jogo;
+package br.envyGames.imunoDefense.jogo.entidade.inimigo;
 
 import java.awt.Point;
 import java.io.IOException;
@@ -7,10 +7,11 @@ import s3t.gameControl.system.GameSystem;
 import s3t.graphicsElements.AnimImage;
 import s3t.graphicsElements.ImageCollection;
 
+import br.envyGames.imunoDefense.jogo.ia.MalariaIA;
 import br.envyGames.imunoDefense.motor.Cenario;
 
-public class InimigoMalaria extends Inimigo {
-	public InimigoMalaria(String name, Point xy, Cenario cenario) throws IOException {
+public class MalariaInimigo extends Inimigo {
+	public MalariaInimigo(String name, Point xy, Cenario cenario) throws IOException {
 		super(name, xy, cenario);
 		
 		ImageCollection imgCollection = new ImageCollection();
@@ -24,6 +25,6 @@ public class InimigoMalaria extends Inimigo {
 		setImageKey("direita");
         setDoNotStop(true);
 		
-		GameSystem.setAIforEntity(this, new AIMalaria());
+		GameSystem.setAIforEntity(this, new MalariaIA());
 	}
 }

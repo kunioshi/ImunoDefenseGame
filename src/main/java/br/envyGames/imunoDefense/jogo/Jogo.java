@@ -1,6 +1,12 @@
 package br.envyGames.imunoDefense.jogo;
 
 
+import br.envyGames.imunoDefense.jogo.cenario.CreditosCenario;
+import br.envyGames.imunoDefense.jogo.cenario.GameOverCenario;
+import br.envyGames.imunoDefense.jogo.cenario.InstrucoesCenario;
+import br.envyGames.imunoDefense.jogo.cenario.JogoCenario;
+import br.envyGames.imunoDefense.jogo.cenario.LogoCenario;
+import br.envyGames.imunoDefense.jogo.cenario.MenuCenario;
 import br.envyGames.imunoDefense.motor.JogoMotor;
 
 public class Jogo implements Runnable

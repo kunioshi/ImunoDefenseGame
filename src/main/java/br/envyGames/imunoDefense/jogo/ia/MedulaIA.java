@@ -1,4 +1,4 @@
-package br.envyGames.imunoDefense.jogo;
+package br.envyGames.imunoDefense.jogo.ia;
 
 import java.awt.Point;
 
@@ -6,7 +6,7 @@ import br.envyGames.imunoDefense.motor.Entidade;
 import br.envyGames.imunoDefense.motor.IAAcao;
 import br.envyGames.imunoDefense.motor.IAMensagem;
 
-public class IAMedula extends IAAcao {
+public class MedulaIA extends IAAcao {
 
 	@Override
 	public void doAction(Entidade entidade) {

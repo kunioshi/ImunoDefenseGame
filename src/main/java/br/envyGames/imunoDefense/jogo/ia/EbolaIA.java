@@ -1,15 +1,24 @@
-package br.envyGames.imunoDefense.jogo;
+package br.envyGames.imunoDefense.jogo.ia;
 
 import java.awt.Point;
 import java.util.ArrayList;
+
+import br.envyGames.imunoDefense.jogo.BuscaTorre;
+import br.envyGames.imunoDefense.jogo.Tabuleiro;
+import br.envyGames.imunoDefense.jogo.cenario.JogoCenario;
+import br.envyGames.imunoDefense.jogo.entidade.Coracao;
+import br.envyGames.imunoDefense.jogo.entidade.FormaDeVida;
+import br.envyGames.imunoDefense.jogo.entidade.inimigo.EstadoInimigo;
+import br.envyGames.imunoDefense.jogo.entidade.inimigo.Inimigo;
+import br.envyGames.imunoDefense.jogo.entidade.torre.Torre;
 
 import s3t.gameEntities.AIAction;
 import s3t.gameEntities.Entity;
 import s3t.gameEntities.IAMessage;
 
-public class AIEbola extends AIAction {
+public class EbolaIA extends AIAction {
 	private ArrayList<Point> caminho = null;
-	private Estado estado = Estado.PARADO;
+	private EstadoInimigo estado = EstadoInimigo.PARADO;
 	private Point proxCasa = null;
 	private FormaDeVida alvo = null;
 	private BuscaTorre busca = new BuscaTorre();
@@ -31,10 +40,10 @@ public class AIEbola extends AIAction {
 
 		
 		
-		if(estado ==  Estado.PARADO) {
+		if(estado ==  EstadoInimigo.PARADO) {
 			comecarAndar(inimigo);
 			checarProx(inimigo);
-		} else if(estado == Estado.ANDANDO)
+		} else if(estado == EstadoInimigo.ANDANDO)
 			andar(inimigo);
 		else
 			atacar(inimigo);
@@ -51,15 +60,15 @@ public class AIEbola extends AIAction {
 	
 	private void verificarCaminho(Inimigo entity) {
 		if(caminho == null) {
-			estado = Estado.ATACANDO;
+			estado = EstadoInimigo.ATACANDO;
 			
 			encontrarAlvo();
 		} else {
 			if( caminho.size() == 0 ) {
-				estado = Estado.ATACANDO;
+				estado = EstadoInimigo.ATACANDO;
 				alvo = ((JogoCenario)entity.getScenario()).getCoracao();
 			} else {
-				estado = Estado.ANDANDO;
+				estado = EstadoInimigo.ANDANDO;
 				comecarAndar(entity);
 			}
 		}
@@ -76,7 +85,7 @@ public class AIEbola extends AIAction {
 			proxCasa = caminho.remove(0);
 		else {
 			alvo = ((JogoCenario)entity.getScenario()).getCoracao();
-			estado = Estado.ATACANDO;
+			estado = EstadoInimigo.ATACANDO;
 		}
 	}
 	
@@ -102,7 +111,7 @@ public class AIEbola extends AIAction {
 		checarProx(entity);
 		
 		System.out.println(estado.toString());
-		if(estado == Estado.ANDANDO) {
+		if(estado == EstadoInimigo.ANDANDO) {
 			mudarCasa(entity);
 			
 			if(Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) entity.getX()) < proxCasa.getX()) {

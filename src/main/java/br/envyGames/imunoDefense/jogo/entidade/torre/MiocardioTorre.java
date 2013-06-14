@@ -1,4 +1,4 @@
-package br.envyGames.imunoDefense.jogo;
+package br.envyGames.imunoDefense.jogo.entidade.torre;
 
 import java.awt.Point;
 

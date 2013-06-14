@@ -1,15 +1,23 @@
-package br.envyGames.imunoDefense.jogo;
+package br.envyGames.imunoDefense.jogo.ia;
 
 import java.awt.Point;
 import java.util.ArrayList;
 
+import br.envyGames.imunoDefense.jogo.BuscaAStar;
+import br.envyGames.imunoDefense.jogo.Tabuleiro;
+import br.envyGames.imunoDefense.jogo.cenario.JogoCenario;
+import br.envyGames.imunoDefense.jogo.entidade.Coracao;
+import br.envyGames.imunoDefense.jogo.entidade.FormaDeVida;
+import br.envyGames.imunoDefense.jogo.entidade.inimigo.EstadoInimigo;
+import br.envyGames.imunoDefense.jogo.entidade.inimigo.Inimigo;
+import br.envyGames.imunoDefense.jogo.entidade.torre.Torre;
 import br.envyGames.imunoDefense.motor.Entidade;
 import br.envyGames.imunoDefense.motor.IAAcao;
 import br.envyGames.imunoDefense.motor.IAMensagem;
 
-public class AIMalaria extends IAAcao {
+public class MalariaIA extends IAAcao {
 	private ArrayList<Point> caminho = null;
-	private Estado estado = Estado.PARADO;
+	private EstadoInimigo estado = EstadoInimigo.PARADO;
 	private Point proxCasa = null;
 	private FormaDeVida alvo = null;
 	private BuscaAStar busca = new BuscaAStar();
@@ -26,10 +34,10 @@ public class AIMalaria extends IAAcao {
 			e.printStackTrace();
 		}
 
-		if(estado ==  Estado.PARADO) {
+		if(estado ==  EstadoInimigo.PARADO) {
 			comecarAndar(entity);
 			checarProx(entity);
-		} else if(estado == Estado.ANDANDO)
+		} else if(estado == EstadoInimigo.ANDANDO)
 			andar((Inimigo)entity);
 		else
 			atacar((Inimigo) entity);
@@ -48,14 +56,14 @@ public class AIMalaria extends IAAcao {
 			proxCasa = caminho.remove(0);
 		else {
 			alvo = ((JogoCenario)entity.getScenario()).getCoracao();
-			estado = Estado.ATACANDO;
+			estado = EstadoInimigo.ATACANDO;
 		}
 	}
 
 	private void andar(Inimigo entity) {
 		checarProx(entity);
 
-		if(estado == Estado.ANDANDO) {
+		if(estado == EstadoInimigo.ANDANDO) {
 			mudarCasa(entity);
 
 			if(Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) entity.getX()) < proxCasa.getX()) {
@@ -110,15 +118,15 @@ public class AIMalaria extends IAAcao {
 
 	private void verificarCaminho(Inimigo entity) {
 		if(caminho == null) {
-			estado = Estado.ATACANDO;
+			estado = EstadoInimigo.ATACANDO;
 
 			encontrarAlvo();
 		} else {
 			if( caminho.size() == 0 ) {
-				estado = Estado.ATACANDO;
+				estado = EstadoInimigo.ATACANDO;
 				alvo = ((JogoCenario)entity.getScenario()).getCoracao();
 			} else {
-				estado = Estado.ANDANDO;
+				estado = EstadoInimigo.ANDANDO;
 				comecarAndar(entity);
 			}
 		}

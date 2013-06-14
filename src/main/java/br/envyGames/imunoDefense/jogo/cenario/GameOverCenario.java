@@ -1,4 +1,4 @@
-package br.envyGames.imunoDefense.jogo;
+package br.envyGames.imunoDefense.jogo.cenario;
 
 import java.awt.event.MouseEvent;
 import br.envyGames.imunoDefense.motor.Cenario;

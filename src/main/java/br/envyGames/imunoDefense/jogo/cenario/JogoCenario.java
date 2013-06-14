@@ -1,8 +1,23 @@
-package br.envyGames.imunoDefense.jogo;
+package br.envyGames.imunoDefense.jogo.cenario;
 
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 
+import br.envyGames.imunoDefense.jogo.ChegarHordaListener;
+import br.envyGames.imunoDefense.jogo.HordaGerenciador;
+import br.envyGames.imunoDefense.jogo.InimigoFactory;
+import br.envyGames.imunoDefense.jogo.Jogador;
+import br.envyGames.imunoDefense.jogo.MorteListener;
+import br.envyGames.imunoDefense.jogo.Tabuleiro;
+import br.envyGames.imunoDefense.jogo.TorreFactory;
+import br.envyGames.imunoDefense.jogo.entidade.Coracao;
+import br.envyGames.imunoDefense.jogo.entidade.FormaDeVida;
+import br.envyGames.imunoDefense.jogo.entidade.SeguidorMouse;
+import br.envyGames.imunoDefense.jogo.entidade.inimigo.Inimigo;
+import br.envyGames.imunoDefense.jogo.entidade.inimigo.TipoInimigo;
+import br.envyGames.imunoDefense.jogo.entidade.torre.MedulaTorre;
+import br.envyGames.imunoDefense.jogo.entidade.torre.MiocardioTorre;
+import br.envyGames.imunoDefense.jogo.entidade.torre.Torre;
 import br.envyGames.imunoDefense.motor.Cenario;
 import br.envyGames.imunoDefense.motor.CenarioItem;
 import br.envyGames.imunoDefense.motor.CenarioLayer;

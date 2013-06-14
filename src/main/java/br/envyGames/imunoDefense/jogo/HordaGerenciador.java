@@ -3,6 +3,8 @@ package br.envyGames.imunoDefense.jogo;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.envyGames.imunoDefense.jogo.entidade.inimigo.TipoInimigo;
+
 public class HordaGerenciador implements Runnable {
 	private long tempoEsperaProximaHorda = 10000;
 	private long tempoEsperaProximaInimigo = 3000;

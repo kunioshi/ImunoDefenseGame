@@ -1,13 +1,18 @@
-package br.envyGames.imunoDefense.jogo;
+package br.envyGames.imunoDefense.jogo.ia;
 
 import java.awt.Point;
 
+import br.envyGames.imunoDefense.jogo.Tabuleiro;
+import br.envyGames.imunoDefense.jogo.cenario.JogoCenario;
+import br.envyGames.imunoDefense.jogo.entidade.FormaDeVida;
+import br.envyGames.imunoDefense.jogo.entidade.inimigo.EstadoInimigo;
+import br.envyGames.imunoDefense.jogo.entidade.inimigo.Inimigo;
 import br.envyGames.imunoDefense.motor.Entidade;
 import br.envyGames.imunoDefense.motor.IAAcao;
 import br.envyGames.imunoDefense.motor.IAMensagem;
 
-public class AIGripe extends IAAcao {
-	private Estado estado = Estado.PARADO;
+public class ChagasIA extends IAAcao {
+	private EstadoInimigo estado = EstadoInimigo.PARADO;
 	private Point proxCasa = null;
 	private FormaDeVida alvo;
 	
@@ -21,11 +26,11 @@ public class AIGripe extends IAAcao {
 			e.printStackTrace();
 		}
 		
-		if(estado == Estado.PARADO) {
+		if(estado == EstadoInimigo.PARADO) {
 			comecarAndar(inimigo);
-		} else if(estado == Estado.ANDANDO) {
+		} else if(estado == EstadoInimigo.ANDANDO) {
 			verificarCaminho(inimigo);
-			if(estado == Estado.ANDANDO)
+			if(estado == EstadoInimigo.ANDANDO)
 				andar(inimigo);
 		} else {
 			atacar(inimigo);
@@ -37,7 +42,7 @@ public class AIGripe extends IAAcao {
 
 		if(alvo.getVida() <= 0) {
 			Tabuleiro.getTabuleiroAtual().setCasa(alvo.getCasaAtual(), null);
-			estado = Estado.ANDANDO;
+			estado = EstadoInimigo.ANDANDO;
 		}
 	}
 
@@ -60,12 +65,9 @@ public class AIGripe extends IAAcao {
 	private void verificarCaminho(Inimigo inimigo) {
 		if(proxCasa.x == Tabuleiro.getTabuleiroAtual().getWidth() - 1) {
 			alvo = ((JogoCenario)inimigo.getScenario()).getCoracao();
-			estado = Estado.ATACANDO;
-		} else if(Tabuleiro.getTabuleiroAtual().isTorre(proxCasa)) {
-			alvo = (Torre)Tabuleiro.getTabuleiroAtual().getCasa(proxCasa);
-			estado = Estado.ATACANDO;
+			estado = EstadoInimigo.ATACANDO;
 		} else {
-			estado = Estado.ANDANDO;
+			estado = EstadoInimigo.ANDANDO;
 		}
 	}
 

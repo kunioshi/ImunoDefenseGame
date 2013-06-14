@@ -2,6 +2,8 @@ package br.envyGames.imunoDefense.jogo;
 
 import java.awt.Point;
 
+import br.envyGames.imunoDefense.jogo.entidade.inimigo.Inimigo;
+import br.envyGames.imunoDefense.jogo.entidade.torre.Torre;
 import br.envyGames.imunoDefense.motor.Entidade;
 
 public class Tabuleiro {
