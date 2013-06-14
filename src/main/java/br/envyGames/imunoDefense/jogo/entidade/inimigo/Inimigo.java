@@ -7,11 +7,9 @@ import java.io.IOException;
 import br.envyGames.imunoDefense.jogo.Tabuleiro;
 import br.envyGames.imunoDefense.jogo.entidade.FormaDeVida;
 import br.envyGames.imunoDefense.motor.Cenario;
-
-import s3t.gameControl.system.GameSystem;
-import s3t.graphicsElements.AnimImage;
-import s3t.graphicsElements.SimpleImage;
-
+import br.envyGames.imunoDefense.motor.Imagem;
+import br.envyGames.imunoDefense.motor.ImagemAnimada;
+import br.envyGames.imunoDefense.motor.ResourceManager;
 
 enum Direcao {
 	BAIXO, CIMA, DIREITA, ESQUERDA;
@@ -64,22 +62,18 @@ public abstract class Inimigo extends FormaDeVida {
 		lentidao = 1;
 	}
 	
-	@Override
-	public void morrer() {
-		GameSystem.getEntityCollection().getEntityByName(getName());
-	}
-	
-	public AnimImage loadAnimation(String firstName, String extension, int endNumber, int period, int behavior) throws IOException {
-        AnimImage animImage = new AnimImage();
+	public ImagemAnimada loadAnimation(String firstName, String extension, int endNumber, int period, int behavior) throws IOException {
+		ImagemAnimada animImage = new ImagemAnimada();
 
         for (int i = 0; i <= endNumber; i++) {
-            SimpleImage img = new SimpleImage(firstName + i + extension);
-            img.setCollisionRectangle(new Rectangle(0, 0, Tabuleiro.getTabuleiroAtual().getTamanhoCasa(), Tabuleiro.getTabuleiroAtual().getTamanhoCasa()));
-            animImage.addImage(img);
+            Imagem img = ResourceManager.getImagem(firstName + i + extension);
+            //img.setCollisionRectangle(new Rectangle(0, 0, Tabuleiro.getTabuleiroAtual().getTamanhoCasa(), Tabuleiro.getTabuleiroAtual().getTamanhoCasa()));
+            animImage.adicionarImagem(img);
         }
         
         animImage.setPeriod(period);
         animImage.setBehavior(behavior);
+        
         return animImage;
     }
 }
