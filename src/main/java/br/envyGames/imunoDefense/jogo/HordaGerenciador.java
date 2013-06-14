@@ -4,63 +4,78 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HordaGerenciador implements Runnable {
-	private long tempoEsperaProximaHorda = 40000;
+	private long tempoEsperaProximaHorda = 10000;
 	private long tempoEsperaProximaInimigo = 3000;
 	private boolean isRunning = false;
 	private Thread temporizador;
 	private List<ChegarHordaListener> chegarHordaListeners = new ArrayList<ChegarHordaListener>();
+	private int condicao = 1;
 	
 	public class HordaCriador extends Thread {
 		public void run() {
 			while (isRunning) {
 				
+				switch(condicao)
+				{
 				//Wave 1
-				for (int i = 0; i < 3; i++) {
-					fireChegarHordaEvent(TipoInimigo.GRIPE);
+				case 1:
+					for (int i = 0; i < 3; i++) {
+						fireChegarHordaEvent(TipoInimigo.GRIPE);
+						
+						esperar(tempoEsperaProximaInimigo);
+					}
+					esperar(tempoEsperaProximaHorda);
+					condicao = 2;
+					break;
 					
-					esperar(tempoEsperaProximaInimigo);
-				}
-				esperar(tempoEsperaProximaHorda);
 				//Wave 2
-				
-				for (int i = 0; i < 3; i++) {
-					fireChegarHordaEvent(TipoInimigo.GRIPE);
+				case 2:
+					for (int i = 0; i < 3; i++) {
+						fireChegarHordaEvent(TipoInimigo.GRIPE);
+						
+						esperar(tempoEsperaProximaInimigo);
+					}
 					
-					esperar(tempoEsperaProximaInimigo);
-				}
-				
-				for (int i = 0; i < 2; i++) {
-					fireChegarHordaEvent(TipoInimigo.EBOLA);
+					for (int i = 0; i < 2; i++) {
+						fireChegarHordaEvent(TipoInimigo.EBOLA);
+						
+						esperar(tempoEsperaProximaInimigo);
+					}
+					esperar(tempoEsperaProximaHorda);
+					condicao = 3;					
+					break;
 					
-					esperar(tempoEsperaProximaInimigo);
-				}
-				esperar(tempoEsperaProximaHorda);
-				
-				
-				//Wave 3
-				
-				for (int i = 0; i < 1; i++) {
-					fireChegarHordaEvent(TipoInimigo.GRIPE);
+				//Wave 3					
+				case 3:
+					for (int i = 0; i < 1; i++) {
+						fireChegarHordaEvent(TipoInimigo.GRIPE);
+						
+						esperar(tempoEsperaProximaInimigo);
+					}
 					
-					esperar(tempoEsperaProximaInimigo);
-				}
-				
-				for (int i = 0; i < 2; i++) {
-					fireChegarHordaEvent(TipoInimigo.EBOLA);
+					for (int i = 0; i < 2; i++) {
+						fireChegarHordaEvent(TipoInimigo.EBOLA);
+						
+						esperar(tempoEsperaProximaInimigo);
+					}
 					
-					esperar(tempoEsperaProximaInimigo);
-				}
-				
-				for (int i = 0; i < 3; i++) {
-					fireChegarHordaEvent(TipoInimigo.MALARIA);
+					for (int i = 0; i < 3; i++) {
+						fireChegarHordaEvent(TipoInimigo.MALARIA);
+						
+						esperar(tempoEsperaProximaInimigo);
+					}
 					
-					esperar(tempoEsperaProximaInimigo);
-				}
+					for (int i = 0; i < 1; i++) {
+						fireChegarHordaEvent(TipoInimigo.CHAGAS);
+						
+						esperar(tempoEsperaProximaInimigo);
+					}
+					esperar(tempoEsperaProximaHorda);
+					condicao = 4;
 				
-				for (int i = 0; i < 1; i++) {
-					fireChegarHordaEvent(TipoInimigo.CHAGAS);
-					
-					esperar(tempoEsperaProximaInimigo);
+				//Wave 4
+				case 4:
+					break;
 				}
 			}				
 	    }
