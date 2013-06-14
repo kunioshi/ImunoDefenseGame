@@ -1,20 +1,20 @@
 package br.envyGames.imunoDefense.jogo;
 
-import s3t.graphicsElements.ImageCollection;
 import br.envyGames.imunoDefense.motor.Cenario;
 import br.envyGames.imunoDefense.motor.Entidade;
 import br.envyGames.imunoDefense.motor.Imagem;
+import br.envyGames.imunoDefense.motor.ImagemColecao;
 
 public class SeguidorMouse extends Entidade {
 
 	public SeguidorMouse(double x, double y, Imagem imagem, Cenario cenario) {
 		super("SeguidorMouse", x, y, cenario);
-		
-        ImageCollection imgCollection = new ImageCollection();
-        imgCollection.add("default", imagem);
-        imgCollection.setDefaultKey("default");
         
-        setImageCollection(imgCollection);
+        ImagemColecao imagemColecao = new ImagemColecao();
+		imagemColecao.add("default", imagem);
+		imagemColecao.definirImagemPadrao("default");
+		
+		definirImagemColecao(imagemColecao);
         setDoNotStop(true);
 	}
 

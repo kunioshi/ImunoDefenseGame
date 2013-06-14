@@ -1,11 +1,7 @@
 package br.envyGames.imunoDefense.jogo;
 
 import java.awt.Point;
-import java.io.IOException;
 
-import s3t.graphicsElements.ImageCollection;
-
-import br.envyGames.imunoDefense.motor.ArquivoImagem;
 import br.envyGames.imunoDefense.motor.Cenario;
 import br.envyGames.imunoDefense.motor.Imagem;
 import br.envyGames.imunoDefense.motor.ImagemColecao;

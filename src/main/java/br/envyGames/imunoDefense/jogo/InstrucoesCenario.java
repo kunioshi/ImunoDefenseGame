@@ -1,9 +1,7 @@
 package br.envyGames.imunoDefense.jogo;
 
 import java.awt.event.MouseEvent;
-import java.io.IOException;
 
-import br.envyGames.imunoDefense.motor.ArquivoImagem;
 import br.envyGames.imunoDefense.motor.Cenario;
 import br.envyGames.imunoDefense.motor.CenarioItem;
 import br.envyGames.imunoDefense.motor.CenarioLayer;

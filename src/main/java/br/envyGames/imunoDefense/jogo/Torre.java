@@ -3,9 +3,6 @@ package br.envyGames.imunoDefense.jogo;
 import java.awt.Point;
 
 import br.envyGames.imunoDefense.motor.Cenario;
-import br.envyGames.imunoDefense.motor.Entidade;
-
-import s3t.gameControl.system.GameSystem;
 
 public abstract class Torre extends FormaDeVida {
 	private int forca = 0;
@@ -31,6 +28,6 @@ public abstract class Torre extends FormaDeVida {
 	
 	@Override
 	public void morrer() {
-		GameSystem.getEntityCollection().getEntityByName(getName());
+
 	}
 }
