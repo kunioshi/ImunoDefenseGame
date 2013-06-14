@@ -29,10 +29,4 @@ public class MiocardioTorre extends Torre {
 		   
         setDoNotStop(true);
 	}
-
-	@Override
-	public boolean isUpgradable() {
-		return false;
-	}
-
 }

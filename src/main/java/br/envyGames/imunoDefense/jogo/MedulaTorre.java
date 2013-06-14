@@ -32,10 +32,4 @@ public class MedulaTorre extends Torre {
         
         GameSystem.setAIforEntity(this, new IAMedula());
 	}
-
-	@Override
-	public boolean isUpgradable() {
-		return true;
-	}
-
 }

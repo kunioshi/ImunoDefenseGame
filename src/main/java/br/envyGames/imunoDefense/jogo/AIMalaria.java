@@ -14,30 +14,52 @@ public class AIMalaria extends IAAcao {
 	private FormaDeVida alvo = null;
 	private BuscaAStar busca = new BuscaAStar();
 	
+	private boolean isRunning = true;
+	private boolean isTime = false;
+	private Thread temporizador;
+	
+	public class Temporizador extends Thread {
+		public void run() {
+			while (isRunning) {
+				isTime = true;
+				try {
+					Thread.sleep(1500);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				
+			}
+	    }
+	}
+	
 	public void doAction(Entidade entidade) {
-		Inimigo entity = (Inimigo)entidade;
-		
-		if(caminho == null)
-			atualizarCaminho(entity);
-
-		try {
-			Thread.sleep(700);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		if (temporizador == null) {
+			temporizador = new Thread(new Temporizador());
+			temporizador.start();
 		}
 		
-		if(estado ==  Estado.PARADO) {
-			comecarAndar(entity);
-			checarProx(entity);
-		} else if(estado == Estado.ANDANDO)
-			andar((InimigoMalaria)entity);
-		else
-			atacar((Inimigo) entity);
+		if (isTime) {
+			Inimigo entity = (Inimigo)entidade;
+			
+			if(caminho == null)
+				atualizarCaminho(entity);
+			
+			if(estado ==  Estado.PARADO) {
+				comecarAndar(entity);
+				checarProx(entity);
+			} else if(estado == Estado.ANDANDO)
+				andar((InimigoMalaria)entity);
+			else
+				atacar((Inimigo) entity);
+			
+			isTime = false;
+		}
 	}
 
 	public void receiveMessage(IAMensagem msg) {}
 	
 	private void atualizarCaminho(Inimigo entity) {
+		
 		caminho = busca.busca(Tabuleiro.getTabuleiroAtual().getCasas(), new Point( Tabuleiro.getTabuleiroAtual().converteCoord((int)entity.getX(), (int)entity.getY()) ), Tabuleiro.getTabuleiroAtual().getFinal());
 		
 		verificarCaminho(entity);

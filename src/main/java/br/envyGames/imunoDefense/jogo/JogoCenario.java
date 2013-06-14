@@ -2,7 +2,6 @@ package br.envyGames.imunoDefense.jogo;
 
 import java.awt.Point;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
 
 import br.envyGames.imunoDefense.motor.Cenario;
 import br.envyGames.imunoDefense.motor.CenarioItem;
@@ -64,6 +63,9 @@ public class JogoCenario extends Cenario implements ChegarHordaListener, MorteLi
 		else if (isMedulaTorreButton(e.getX(), e.getY())) {
 			medulaTorreButtonClicked();
 		}
+		else if (isUpgradeButton(e.getX(), e.getY())) {
+			upgradeButtonClicked();
+		}
 		else if (isGrid(e.getX(), e.getY())) {
 			gridClicked(convertPixelToGrid(e.getX() - 3), convertPixelToGrid(e.getY() - 25));
 		}
@@ -91,6 +93,7 @@ public class JogoCenario extends Cenario implements ChegarHordaListener, MorteLi
 		Imagem botaoLinfoideTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoLinfoideSemDinheiro.png");
 		Imagem botaoLeucogenTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoLeucogenSemDinheiro.png");
 		Imagem botaoRochaganTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoRochaganSemDinheiro.png");
+		Imagem botaoUpgrade = ResourceManager.getImagem("/imagens/entidades/torres/upgrade.jpg");
 		
 		
 		background.adicionarItem(new CenarioItem("fundo", backgroundImagem, 0, 0));		
@@ -101,6 +104,7 @@ public class JogoCenario extends Cenario implements ChegarHordaListener, MorteLi
 		background.adicionarItem(new CenarioItem("botaoLinfoideTorre", botaoLinfoideTorre, 294, 420));
 		background.adicionarItem(new CenarioItem("botaoLeucogenTorre", botaoLeucogenTorre, 390, 420));
 		background.adicionarItem(new CenarioItem("botaoRochaganTorre", botaoRochaganTorre, 486, 420));
+		background.adicionarItem(new CenarioItem("botaoUpgrade", botaoUpgrade, 600, 470));
 		
 		adicionarLayer(background);
 	}
@@ -125,6 +129,10 @@ public class JogoCenario extends Cenario implements ChegarHordaListener, MorteLi
 		return x >= 102 && x <= 192 && y >= 420 && y <= 510;
 	}
 	
+	private boolean isUpgradeButton(int x, int y) {
+		return x >= 600 && x <= 692 && y >= 470 && y <= 497;
+	}
+	
 	private Entidade seguidorMouse;
 	private String novaConstrucaoSelecionada;
 	
@@ -140,6 +148,10 @@ public class JogoCenario extends Cenario implements ChegarHordaListener, MorteLi
 		removerSeguidorMouse();
 		
 		adicionarSeguidorMouse(102, 420, MedulaTorre.getImagemLevel1());
+	}
+	
+	private void upgradeButtonClicked() {
+		
 	}
 	
 	private void adicionarSeguidorMouse(int x, int y, Imagem imagem) {
