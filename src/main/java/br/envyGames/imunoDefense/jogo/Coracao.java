@@ -21,10 +21,10 @@ public class Coracao extends FormaDeVida {
 		vida = TOTAL_VIDA;
 		
 		imagemColecao = new ImagemColecao();
-		imagemColecao.add("vivo", coracao);
+		imagemColecao.add("100porcento", coracao);
 		imagemColecao.add("50porcento", coracao50porcento);
 		imagemColecao.add("20porcento", coracao20porcento);
-		imagemColecao.definirImagemPadrao("vivo");
+		imagemColecao.definirImagemPadrao("100porcento");
         
         definirImagemColecao(imagemColecao);
         setDoNotStop(true);
@@ -35,11 +35,10 @@ public class Coracao extends FormaDeVida {
 		super.receberDano(dano);
 		
 		if (getVida() <= TOTAL_VIDA * 0.5) {
-			
 			if (getVida() <= TOTAL_VIDA * 0.2)
-				imagemColecao.definirImagemPadrao("50porcento");
-			else 
 				imagemColecao.definirImagemPadrao("20porcento");
+			else 
+				imagemColecao.definirImagemPadrao("50porcento");
 		}
 	}
 }
