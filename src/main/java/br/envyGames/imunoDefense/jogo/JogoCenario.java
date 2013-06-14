@@ -46,9 +46,9 @@ public class JogoCenario extends Cenario implements ChegarHordaListener, MorteLi
 	
 	@Override
 	public void handleChegarHorda() {
-		InimigoMalaria gripe;
+		InimigoEbola gripe;
 		try {
-			gripe = new InimigoMalaria("inimigo" + inimigoNumero, waveSpot, this);
+			gripe = new InimigoEbola("inimigo" + inimigoNumero, waveSpot, this);
 			adicionarFormaDeVida(gripe);
 			inimigoNumero++;
 			
