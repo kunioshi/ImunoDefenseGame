@@ -1,5 +1,7 @@
 package br.envyGames.imunoDefense.jogo;
 
+import java.awt.Point;
+
 import br.envyGames.imunoDefense.motor.Entidade;
 import br.envyGames.imunoDefense.motor.IAAcao;
 import br.envyGames.imunoDefense.motor.IAMensagem;
