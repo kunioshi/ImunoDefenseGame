@@ -36,8 +36,10 @@ public class TiroIA extends AIAction {
 	}
 
 	private void chegouProx(Tiro tiro) {
-		if( tiro.getCasaAtual().equals(Tabuleiro.getTabuleiroAtual().converteCoord((int)tiro.getAlvo().getX(), (int)tiro.getAlvo().getY())) )
+		if( tiro.getCasaAtual().equals(Tabuleiro.getTabuleiroAtual().converteCoord((int)tiro.getAlvo().getX(), (int)tiro.getAlvo().getY())) ) {
 			darDano(tiro);
+			tiro.destruir();
+		}
 	}
 
 	private void darDano(Tiro tiro) {
