@@ -15,6 +15,8 @@ public class GripeInimigo extends Inimigo {
 		super(name, xy, cenario);
 		
 		this.tipoLocomocao = TipoLocomocao.Terrestre;
+		bonusDinheiroToKill = 100;
+		bonusScoreToKill = 10;
 		
 		ImageCollection imgCollection = new ImageCollection();
 		

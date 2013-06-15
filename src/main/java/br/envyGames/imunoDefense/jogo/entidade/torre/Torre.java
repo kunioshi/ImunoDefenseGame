@@ -23,6 +23,7 @@ public abstract class Torre extends FormaDeVida {
 	protected int velocidade = 0;
 	protected int alcance = 0;
 	protected TipoAtaque tipoAtaque;
+	protected int custo;
 	private int level = 1;
 	
 	private List<AtirarListener> atirarListeners;
@@ -45,6 +46,7 @@ public abstract class Torre extends FormaDeVida {
 	public int getVelocidade() { return velocidade; }
 	public int getAlcance() { return alcance; }
 	public TipoAtaque getTipoAtaque() { return tipoAtaque; }
+	public int getCusto() { return custo; }
 	
 	public void setForca(int dano) { forca = dano; }
 	public void upgrade() { 

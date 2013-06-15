@@ -25,6 +25,8 @@ public class MiocardioTorre extends Torre {
 		this.vida *= 2;
 		this.tipoAtaque = TipoAtaque.Nenhum;
 		
+		custo = 5;
+		
 		imagemLevel1 = getImagemMiniatura();
 		animacaoLevel1 = loadAnimation("/imagens/entidades/torres/MiocardioI", ".png", 6, 20, AnimImage.STOP_AT_END);
 		//tiroImagem = ResourceManager.getImagem("/imagens/entidades/torres/tiroMiocardioI.png");

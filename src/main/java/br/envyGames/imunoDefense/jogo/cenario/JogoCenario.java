@@ -297,6 +297,7 @@ public class JogoCenario extends Cenario implements ChegarHordaListener, MorteLi
 		torre.addAtirarListener(this);
 		adicionarFormaDeVida(torre);		
 		Tabuleiro.getTabuleiroAtual().adicionarFormaDeVida(new Point(coluna, linha), torre);
+		jogador.removerDinheiro(torre.getCusto());
 	}
 	
 	private void adicionarFormaDeVida(FormaDeVida formaDeVida) {
@@ -319,6 +320,8 @@ public class JogoCenario extends Cenario implements ChegarHordaListener, MorteLi
 	
 	private void destruirInimigo(Inimigo inimigo) {
 		Tabuleiro.getTabuleiroAtual().getCasa(inimigo.getCasaAtual()).remover(inimigo);
+		jogador.adicionarDinheiro(inimigo.getBonusDinheiroToKill());
+		jogador.adicionarPontos(inimigo.getBonusScoreToKill());
 	}
 	
 	private void destruirTorre(Torre torre) {
