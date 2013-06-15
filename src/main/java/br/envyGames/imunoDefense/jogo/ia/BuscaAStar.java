@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import br.envyGames.imunoDefense.jogo.entidade.FormaDeVidaColecao;
 import br.envyGames.imunoDefense.jogo.entidade.inimigo.Inimigo;
 import br.envyGames.imunoDefense.motor.Entidade;
 
@@ -11,7 +12,7 @@ public class BuscaAStar {
 	private CasaBusca atual;
 	private ArrayList<CasaBusca> lista_aberta;
 	private ArrayList<CasaBusca> lista_fechada;
-	private Entidade[][] source;
+	private FormaDeVidaColecao[][] source;
 	
 	/*
 	 * Realiza a Busca A* no <code>tabuleiro</code>, tendo seu inico a casa <code>inicio</code> e ponto final <code>fim</code>.
@@ -20,7 +21,7 @@ public class BuscaAStar {
 	 * @param <code>fim</code>       - Coordenadas da casa no <code>tabuleiro</code> na qual a busca buscará alcançar.
 	 * @return <code>ArrayList<Point></code> - Caminho composto de casa por casa de onde a Entidade deverá passar para alcançar a casa <code>fim</code>, não obtendo a casa <code>inicio</code> em seu corpo.
 	 */
-	public ArrayList<Point> busca(Entidade[][] source, Point inicio, Point fim) {
+	public ArrayList<Point> busca(FormaDeVidaColecao[][] source, Point inicio, Point fim) {
 		this.source = source;
 		atual = null;
 		lista_aberta = new ArrayList<CasaBusca>();
@@ -74,18 +75,18 @@ public class BuscaAStar {
 		if(x >= 0 && x < source[0].length &&  y >= 0 && y < source.length) {
 			Point casaAux = new Point(x, y);
 			
-		if (isCasaVazia(casaAux) || isInimigo(casaAux))
+		if (isCasaVazia(casaAux) || hasInimigo(casaAux))
 				if(!existeNaListaFechada(casaAux))
 					adicionaCasa(casaAux, fim);
 		}
 	}
 	
 	private boolean isCasaVazia(Point casa) {
-		return source[casa.y][casa.x] == null;
+		return source[casa.y][casa.x].isVazia();
 	}
 	
-	private boolean isInimigo(Point casa) {
-		return source[casa.y][casa.x] != null && source[casa.y][casa.x] instanceof Inimigo;
+	private boolean hasInimigo(Point casa) {
+		return source[casa.y][casa.x].hasInimigo();
 	}
 	
 	private void adicionaCasa(Point casaAux, Point fim) {

@@ -231,7 +231,7 @@ public class JogoCenario extends Cenario implements ChegarHordaListener, MorteLi
 			if (isNovaConstrucaoSelecionada())
 				construirTorre(coluna, linha);
 		}
-		else if (Tabuleiro.getTabuleiroAtual().isTorre(coluna, linha)) {
+		else if (Tabuleiro.getTabuleiroAtual().hasTorre(coluna, linha)) {
 			
 		}
 
@@ -253,7 +253,7 @@ public class JogoCenario extends Cenario implements ChegarHordaListener, MorteLi
 	
 	private void adicionarTorre(int coluna, int linha, Torre torre) {
 		adicionarFormaDeVida(torre);
-		Tabuleiro.getTabuleiroAtual().setCasa(new Point(coluna, linha), torre);
+		Tabuleiro.getTabuleiroAtual().adicionarFormaDeVida(new Point(coluna, linha), torre);
 	}
 	
 	private void adicionarFormaDeVida(FormaDeVida formaDeVida) {
@@ -275,10 +275,12 @@ public class JogoCenario extends Cenario implements ChegarHordaListener, MorteLi
 	}
 	
 	private void destruirInimigo(Inimigo inimigo) {
-		removerEntidade(inimigo);
+		Tabuleiro.getTabuleiroAtual().getCasa(inimigo.getCasaAtual()).remover(inimigo);
+		removerEntidade(inimigo);		
 	}
 	
 	private void destruirTorre(Torre torre) {
+		Tabuleiro.getTabuleiroAtual().getCasa(torre.getCasaAtual()).remover(torre);
 		removerEntidade(torre);
 	}
 

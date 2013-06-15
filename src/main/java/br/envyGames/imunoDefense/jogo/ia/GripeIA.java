@@ -42,7 +42,7 @@ public class GripeIA extends IAAcao {
 		alvo.receberDano(inimigo.getForca());
 
 		if(alvo.isDead()) {
-			Tabuleiro.getTabuleiroAtual().setCasa(alvo.getCasaAtual(), null);
+			//Tabuleiro.getTabuleiroAtual().setCasa(alvo.getCasaAtual(), null);
 			estado = EstadoInimigo.ANDANDO;
 		}
 	}
@@ -53,10 +53,9 @@ public class GripeIA extends IAAcao {
 		comecarAndar(inimigo);
 	}
 	
-	private void mudarCasa(Inimigo entity) {
-		if(Tabuleiro.getTabuleiroAtual().getCasa(entity.getCasaAtual()) == entity)
-			Tabuleiro.getTabuleiroAtual().setCasa(entity.getCasaAtual(), null);
-		Tabuleiro.getTabuleiroAtual().setCasa(proxCasa, entity);
+	private void mudarCasa(Inimigo inimigo) {
+		Tabuleiro.getTabuleiroAtual().removerFormaDeVida(inimigo.getCasaAtual(), inimigo);
+		Tabuleiro.getTabuleiroAtual().adicionarFormaDeVida(proxCasa, inimigo);
 	}
 
 	private void comecarAndar(Inimigo inimigo) {
@@ -74,8 +73,13 @@ public class GripeIA extends IAAcao {
 		if(proxCasa.x == Tabuleiro.getTabuleiroAtual().getWidth()) {
 			alvo = ((JogoCenario)inimigo.getScenario()).getCoracao();
 			estado = EstadoInimigo.ATACANDO;
-		} else if(Tabuleiro.getTabuleiroAtual().isTorre(proxCasa)) {
-			alvo = (Torre)Tabuleiro.getTabuleiroAtual().getCasa(proxCasa);
+		} else if(Tabuleiro.getTabuleiroAtual().hasTorre(proxCasa)) {
+			for (FormaDeVida item : Tabuleiro.getTabuleiroAtual().getCasa(proxCasa).getList())
+				if (item instanceof Torre) {
+					alvo = (Torre)item;
+					break;
+				}
+					
 			estado = EstadoInimigo.ATACANDO;
 		} else {
 			estado = EstadoInimigo.ANDANDO;

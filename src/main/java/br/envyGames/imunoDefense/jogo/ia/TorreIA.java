@@ -21,7 +21,7 @@ public class TorreIA extends IAAcao {
 			for (int x = torre.getAlcance() * -1; x <= torre.getAlcance(); x++)
 				for (int y = torre.getAlcance() * -1; y <= torre.getAlcance(); y++) {
 					System.out.println(((int)xy.getX() + x) + "|" + ((int)xy.getY() + y));
-					if (Tabuleiro.getTabuleiroAtual().isInimigo((int)xy.getX() + x, (int)xy.getY() + y))
+					if (Tabuleiro.getTabuleiroAtual().hasInimigo((int)xy.getX() + x, (int)xy.getY() + y))
 				 		System.out.println("inimigo");
 				}
 				 	
