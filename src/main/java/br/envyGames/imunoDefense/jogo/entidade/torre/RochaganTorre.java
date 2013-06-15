@@ -32,6 +32,7 @@ public class RochaganTorre extends Torre {
 		
 		imagemLevel1 = getImagemMiniatura();
 		animacaoLevel1 = loadAnimation("/imagens/entidades/torres/RochaganI", ".png", 6, 20, AnimImage.STOP_AT_END);
+		tiroImagem = ResourceManager.getImagem("/imagens/entidades/torres/tiroRochaganI.png");
 		carregarSequenciaImagem();
 		
         setDoNotStop(true);

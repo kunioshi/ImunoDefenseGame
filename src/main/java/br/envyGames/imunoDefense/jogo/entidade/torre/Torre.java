@@ -18,7 +18,7 @@ import br.envyGames.imunoDefense.motor.ImagemColecao;
 public abstract class Torre extends FormaDeVida {
 	protected Imagem imagemLevel1 = null;
 	protected ImagemAnimada animacaoLevel1 = null;
-	protected Imagem TiroImagem = null;
+	protected Imagem tiroImagem = null;
 	protected int forca = 0;
 	protected int velocidade = 0;
 	protected int alcance = 0;
@@ -76,7 +76,11 @@ public abstract class Torre extends FormaDeVida {
 	}
 	
 	public void atirar(Inimigo alvo) {
-		
+		fireRemoverAtirarEvent(criarTiro(alvo));
+	}
+
+	private Tiro criarTiro(Inimigo alvo) {
+		return new Tiro(this.getX(), this.getY(), tiroImagem, alvo, this.getCenario());
 	}
 	
 	protected void carregarSequenciaImagem() {

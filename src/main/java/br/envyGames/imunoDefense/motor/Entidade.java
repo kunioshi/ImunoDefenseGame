@@ -11,5 +11,9 @@ public class Entidade extends Entity {
 	public void definirImagemColecao(ImagemColecao imagem) {
 		setImageCollection(imagem);
 	}
+	
+	public Cenario getCenario() {
+		return (Cenario) this.getScenario();
+	}
 
 }

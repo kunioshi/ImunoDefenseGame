@@ -31,6 +31,7 @@ public class MedulaTorre extends Torre {
 		
 		imagemLevel1 = getImagemMiniatura();
 		animacaoLevel1 = loadAnimation("/imagens/entidades/torres/MedulaI", ".png", 6, 20, AnimImage.STOP_AT_END);
+		tiroImagem = ResourceManager.getImagem("/imagens/entidades/torres/tiroMedulaI.png");
 		carregarSequenciaImagem();
 		
         setDoNotStop(true);

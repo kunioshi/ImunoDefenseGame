@@ -27,6 +27,7 @@ public class MiocardioTorre extends Torre {
 		
 		imagemLevel1 = getImagemMiniatura();
 		animacaoLevel1 = loadAnimation("/imagens/entidades/torres/MiocardioI", ".png", 6, 20, AnimImage.STOP_AT_END);
+		tiroImagem = ResourceManager.getImagem("/imagens/entidades/torres/tiroMiocardioI.png");
 		carregarSequenciaImagem();
 		   
         setDoNotStop(true);

@@ -9,16 +9,26 @@ import br.envyGames.imunoDefense.jogo.ia.TiroIA;
 import br.envyGames.imunoDefense.motor.Cenario;
 import br.envyGames.imunoDefense.motor.Entidade;
 import br.envyGames.imunoDefense.motor.Imagem;
+import br.envyGames.imunoDefense.motor.ImagemColecao;
 
 public class Tiro extends Entidade {
+	private static int id = 0;
 	private int forca;
-	private Imagem imagem;
 	private Inimigo alvo;
 
-	public Tiro(String nome, double x, double y, Cenario cenario) {
-		super(nome, x, y, cenario);
+	public Tiro(double x, double y, Imagem imagem, Inimigo alvo, Cenario cenario) {
+		super("tiro"+id, x, y, cenario);
         
+		this.alvo = alvo;
+		
+		ImagemColecao imagemColecao = new ImagemColecao();
+		imagemColecao.add("default", imagem);
+		imagemColecao.definirImagemPadrao("default");
+        
+        definirImagemColecao(imagemColecao);
+		
         GameSystem.setAIforEntity(this, new TiroIA());
+        Tiro.id++;
 	}
 	
 	public Inimigo getAlvo() { return alvo; }

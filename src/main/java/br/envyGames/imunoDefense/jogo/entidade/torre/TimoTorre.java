@@ -31,6 +31,7 @@ public class TimoTorre extends Torre {
 		
 		imagemLevel1 = getImagemMiniatura();
 		animacaoLevel1 = loadAnimation("/imagens/entidades/torres/TimoI", ".png", 6, 20, AnimImage.STOP_AT_END);
+		tiroImagem = ResourceManager.getImagem("/imagens/entidades/torres/tiroTimoI.png");
 		carregarSequenciaImagem();
 		
         setDoNotStop(true);
