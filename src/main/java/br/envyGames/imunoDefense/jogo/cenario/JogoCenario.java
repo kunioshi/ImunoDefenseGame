@@ -89,8 +89,6 @@ public class JogoCenario extends Cenario implements ChegarHordaListener, MorteLi
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		System.out.println(e.getX() + "|" + e.getY());
-		
 		if (isMiocardioTorreButton(e.getX(), e.getY())) {
 			miocardioTorreButtonClicked();
 		}

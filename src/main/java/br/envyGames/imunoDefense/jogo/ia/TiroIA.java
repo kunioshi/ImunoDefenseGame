@@ -2,24 +2,28 @@ package br.envyGames.imunoDefense.jogo.ia;
 
 import br.envyGames.imunoDefense.jogo.Tabuleiro;
 import br.envyGames.imunoDefense.jogo.entidade.Tiro;
+import br.envyGames.imunoDefense.motor.Entidade;
+import br.envyGames.imunoDefense.motor.IAAcao;
+import br.envyGames.imunoDefense.motor.IAMensagem;
 import s3t.gameEntities.AIAction;
 import s3t.gameEntities.Entity;
 import s3t.gameEntities.IAMessage;
 
-public class TiroIA extends AIAction {
+public class TiroIA extends IAAcao {
 	@Override
-	public void doAction(Entity entity) {
-		try {
-			Thread.sleep(300);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		
-		andar((Tiro)entity);
+	public void doAction(Entidade entity) {
+		if (entity instanceof Tiro)
+			andar((Tiro)entity);
 	}
 
 	@Override
-	public void receiveMessage(IAMessage arg0) {}
+	public void receiveMessage(IAMensagem arg0) {}
+	
+
+	@Override
+	public int timeToWait() {
+		return 300;
+	}
 
 	private void andar(Tiro tiro) {
 		if(Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) tiro.getX()) < Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) tiro.getAlvo().getX())) {
