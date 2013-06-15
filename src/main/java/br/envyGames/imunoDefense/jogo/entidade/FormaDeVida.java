@@ -4,7 +4,6 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.envyGames.imunoDefense.jogo.MorteListener;
 import br.envyGames.imunoDefense.jogo.Tabuleiro;
 import br.envyGames.imunoDefense.motor.Cenario;
 import br.envyGames.imunoDefense.motor.Entidade;
@@ -60,6 +59,7 @@ public abstract class FormaDeVida extends Entidade {
 		morrer();
 		
 		fireMorteFormaDeVidaEvent();
+		destruir();
 	}
 	
 	private void fireMorteFormaDeVidaEvent() {

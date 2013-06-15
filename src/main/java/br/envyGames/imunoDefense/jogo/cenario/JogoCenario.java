@@ -7,11 +7,11 @@ import br.envyGames.imunoDefense.jogo.ChegarHordaListener;
 import br.envyGames.imunoDefense.jogo.HordaGerenciador;
 import br.envyGames.imunoDefense.jogo.InimigoFactory;
 import br.envyGames.imunoDefense.jogo.Jogador;
-import br.envyGames.imunoDefense.jogo.MorteListener;
 import br.envyGames.imunoDefense.jogo.Tabuleiro;
 import br.envyGames.imunoDefense.jogo.TorreFactory;
 import br.envyGames.imunoDefense.jogo.entidade.Coracao;
 import br.envyGames.imunoDefense.jogo.entidade.FormaDeVida;
+import br.envyGames.imunoDefense.jogo.entidade.MorteListener;
 import br.envyGames.imunoDefense.jogo.entidade.SeguidorMouse;
 import br.envyGames.imunoDefense.jogo.entidade.Tiro;
 import br.envyGames.imunoDefense.jogo.entidade.inimigo.Inimigo;
@@ -132,7 +132,7 @@ public class JogoCenario extends Cenario implements ChegarHordaListener, MorteLi
 		Imagem botaoRochaganTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoRochaganSemDinheiro.png");
 		Imagem botaoLinfoideTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoLinfoideTravado.png");
 		
-		Imagem botaoUpgrade = ResourceManager.getImagem("/imagens/entidades/torres/upgrade.jpg");
+		Imagem botaoUpgrade = ResourceManager.getImagem("/imagens/entidades/torres/upgradeLocked.PNG");
 		
 		
 		background.adicionarItem(new CenarioItem("fundo", backgroundImagem, 0, 0));		
@@ -279,18 +279,11 @@ public class JogoCenario extends Cenario implements ChegarHordaListener, MorteLi
 	
 	private void destruirInimigo(Inimigo inimigo) {
 		Tabuleiro.getTabuleiroAtual().getCasa(inimigo.getCasaAtual()).remover(inimigo);
-		destruirFormaDeVida(inimigo);
 	}
 	
 	private void destruirTorre(Torre torre) {
 		Tabuleiro.getTabuleiroAtual().getCasa(torre.getCasaAtual()).remover(torre);
 		torre.removeAtirarListener(this);
-		destruirFormaDeVida(torre);
-	}
-	
-	private void destruirFormaDeVida(FormaDeVida formaDeVida) {
-		formaDeVida.removeMorteListener(this);
-		removerEntidade(formaDeVida);
 	}
 
 	private void gameOver() {

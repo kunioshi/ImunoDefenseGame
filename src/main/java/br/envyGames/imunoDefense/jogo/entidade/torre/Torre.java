@@ -35,7 +35,7 @@ public abstract class Torre extends FormaDeVida {
 	public Torre(String nomeInstancia, Point xy, Cenario cenario) {
 		super(nomeInstancia, xy, cenario);
 		
-		this.vida = 100;
+		this.vida = 10;
 		atirarListeners = new ArrayList<AtirarListener>();
 	}
 	

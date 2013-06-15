@@ -8,7 +8,7 @@ import java.util.List;
 
 import s3t.gameEntities.Scenario;
 
-public abstract class Cenario extends Scenario implements MouseListener, MouseMotionListener, Runnable {
+public abstract class Cenario extends Scenario implements MouseListener, MouseMotionListener, DestruirEntidadeListener, Runnable {
 	
 	private List<AlterarCenarioListener> alterarCenarioListeners;
 	private List<AdicionarRemoverEntidadeListener> adicionarRemoverEntidadeListenerListeners;	
@@ -39,6 +39,10 @@ public abstract class Cenario extends Scenario implements MouseListener, MouseMo
 	public void stop() {
 		//Metodo que é chamado qdo um cenario para de executar, é para ser sobrecarregado pelos filhos
 	}
+	public void handleDestruirEntidade(Entidade entidade)
+	{
+		removerEntidade(entidade);
+	}
 	
 	protected void adicionarLayer(CenarioLayer layer) {
 		this.addScenarioLayer(layer);
@@ -50,6 +54,7 @@ public abstract class Cenario extends Scenario implements MouseListener, MouseMo
 	
 	protected void adicionarEntidade(Entidade entidade) {
 		fireAdicionarEntidadeEvent(entidade);
+		entidade.addDestruirEntidadeListener(this);
 	}
 	
 	protected void removerEntidade(Entidade entidade) {
