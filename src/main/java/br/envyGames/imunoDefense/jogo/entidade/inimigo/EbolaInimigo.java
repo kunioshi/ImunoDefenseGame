@@ -15,6 +15,8 @@ public class EbolaInimigo extends Inimigo {
 		super(name, xy, cenario);
 		
 		this.tipoLocomocao = TipoLocomocao.Terrestre;
+		bonusDinheiroToKill = 150;
+		bonusScoreToKill = 25;
 		
 		ImageCollection imgCollection = new ImageCollection();
 		

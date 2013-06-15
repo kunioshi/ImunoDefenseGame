@@ -15,6 +15,8 @@ public class ChagasInimigo extends Inimigo {
 		super(name, xy, cenario);
 		
 		this.tipoLocomocao = TipoLocomocao.Aerio;
+		bonusDinheiroToKill = 250;
+		bonusScoreToKill = 100;
 		
 		ImageCollection imgCollection = new ImageCollection();
 
