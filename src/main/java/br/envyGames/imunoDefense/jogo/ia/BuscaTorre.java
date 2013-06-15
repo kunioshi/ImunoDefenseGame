@@ -22,7 +22,7 @@ public class BuscaTorre {
 			atual = fila.remove(0);
 			visitados.add(atual);
 			
-			if(Tabuleiro.getTabuleiroAtual().isTorre(atual.getCasa())) {
+			if(Tabuleiro.getTabuleiroAtual().hasTorre(atual.getCasa())) {
 				caminhoEncontrado = true;
 				break;
 			} else {

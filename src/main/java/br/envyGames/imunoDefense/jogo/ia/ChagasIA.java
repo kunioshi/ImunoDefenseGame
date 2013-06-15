@@ -40,8 +40,8 @@ public class ChagasIA extends IAAcao {
 	private void atacar(Inimigo inimigo) {
 		alvo.receberDano(inimigo.getForca());
 
-		if(alvo.getVida() <= 0) {
-			Tabuleiro.getTabuleiroAtual().setCasa(alvo.getCasaAtual(), null);
+		if(alvo.isDead()) {
+			//Tabuleiro.getTabuleiroAtual().setCasa(alvo.getCasaAtual(), null);
 			estado = EstadoInimigo.ANDANDO;
 		}
 	}
@@ -52,11 +52,9 @@ public class ChagasIA extends IAAcao {
 		comecarAndar(inimigo);
 	}
 	
-	private void mudarCasa(Inimigo entity) {
-		if(Tabuleiro.getTabuleiroAtual().getCasa(entity.getCasaAtual()) == entity)
-			Tabuleiro.getTabuleiroAtual().setCasa(entity.getCasaAtual(), null);
-		if(Tabuleiro.getTabuleiroAtual().getCasa(proxCasa) == null)
-			Tabuleiro.getTabuleiroAtual().setCasa(proxCasa, entity);
+	private void mudarCasa(Inimigo inimigo) {
+		Tabuleiro.getTabuleiroAtual().removerFormaDeVida(inimigo.getCasaAtual(), inimigo);
+		Tabuleiro.getTabuleiroAtual().adicionarFormaDeVida(proxCasa, inimigo);
 	}
 
 	private void comecarAndar(Inimigo inimigo) {

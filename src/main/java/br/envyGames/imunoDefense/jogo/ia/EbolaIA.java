@@ -75,7 +75,11 @@ public class EbolaIA extends AIAction {
 	
 	private void encontrarAlvo() {
 		if(proxCasa != null) {
-			alvo = (Torre)Tabuleiro.getTabuleiroAtual().getCasa(proxCasa);
+			for (FormaDeVida item : Tabuleiro.getTabuleiroAtual().getCasa(proxCasa).getList())
+				if (item instanceof Torre) {
+					alvo = (Torre)item;
+					break;
+				}
 		}
 	}
 	
@@ -89,7 +93,7 @@ public class EbolaIA extends AIAction {
 	}
 	
 	private void checarProx(Inimigo entity) {
-		if(Tabuleiro.getTabuleiroAtual().isTorre(proxCasa))
+		if(Tabuleiro.getTabuleiroAtual().hasTorre(proxCasa))
 			atualizarCaminho(entity);
 	}
 	
@@ -101,7 +105,7 @@ public class EbolaIA extends AIAction {
 		alvo.receberDano(inimigo.getForca());
 		
 		if(alvo.getVida() <= 0) {
-			Tabuleiro.getTabuleiroAtual().setCasa(alvo.getCasaAtual(), null);
+			//Tabuleiro.getTabuleiroAtual().setCasa(alvo.getCasaAtual(), null);
 			atualizarCaminho(inimigo);
 		}
 	}
@@ -132,10 +136,9 @@ public class EbolaIA extends AIAction {
 		}
 	}
 	
-	private void mudarCasa(Inimigo entity) {
-		if(Tabuleiro.getTabuleiroAtual().getCasa(entity.getCasaAtual()) == entity)
-			Tabuleiro.getTabuleiroAtual().setCasa(entity.getCasaAtual(), null);
-		Tabuleiro.getTabuleiroAtual().setCasa(proxCasa, entity);
+	private void mudarCasa(Inimigo inimigo) {
+		Tabuleiro.getTabuleiroAtual().removerFormaDeVida(inimigo.getCasaAtual(), inimigo);
+		Tabuleiro.getTabuleiroAtual().adicionarFormaDeVida(proxCasa, inimigo);
 	}
 	
 	private boolean chegouProx(Inimigo entity) {

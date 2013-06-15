@@ -2,15 +2,14 @@ package br.envyGames.imunoDefense.jogo;
 
 import java.awt.Point;
 
-import br.envyGames.imunoDefense.jogo.entidade.inimigo.Inimigo;
-import br.envyGames.imunoDefense.jogo.entidade.torre.Torre;
-import br.envyGames.imunoDefense.motor.Entidade;
+import br.envyGames.imunoDefense.jogo.entidade.FormaDeVida;
+import br.envyGames.imunoDefense.jogo.entidade.FormaDeVidaColecao;
 
 public class Tabuleiro {
 	private static Tabuleiro tabuleiro;
 	
 	private int tamanhoCasa = 32;
-	private Entidade[][] casas = new Entidade[13][23];
+	private FormaDeVidaColecao[][] casas = new FormaDeVidaColecao[13][23];
 	private Point casaFinal = new Point(22, 6);
 	
 	public static Tabuleiro getTabuleiroAtual() {
@@ -20,47 +19,51 @@ public class Tabuleiro {
 		return tabuleiro;
 	}
 	
+	private Tabuleiro() {
+		zerarTabuleiro();
+	}
+	
 	public void zerarTabuleiro() {
 		for(int i = 0; i < casas.length; i++)
 			for(int j = 0; j < casas[i].length; j++)
-				casas[i][j] = null;
+				casas[i][j] = new FormaDeVidaColecao();
 	}
 	
 	public int getHeight() { return casas.length; }
 	public int getWidth() { return casas[0].length; }
 	public Point getFinal() { return casaFinal; }
 	public int getTamanhoCasa() { return tamanhoCasa; }
-	public Entidade[][] getCasas() { return casas; }
+	public FormaDeVidaColecao[][] getCasas() { return casas; }
 	
 	public boolean isCasaVazia(int x, int y) {
 		return isCasaVazia(new Point(x, y));
 	}
 	
 	public boolean isCasaVazia(Point casa) {
-		return casas[casa.y][casa.x] == null;
+		return casas[casa.y][casa.x].isVazia();
 	}
 	
-	public boolean isInimigo(int x, int y) {
-		return isInimigo(new Point(x, y));
+	public boolean hasInimigo(int x, int y) {
+		return hasInimigo(new Point(x, y));
 	}
 	
-	public boolean isInimigo(Point casa) {
-		return tabuleiro.getCasa(casa) != null && tabuleiro.getCasa(casa) instanceof Inimigo;
+	public boolean hasInimigo(Point casa) {
+		return tabuleiro.getCasa(casa).hasInimigo();
 	}
 	
-	public boolean isTorre(int x, int y) {
-		return isTorre(new Point(x, y));
+	public boolean hasTorre(int x, int y) {
+		return hasTorre(new Point(x, y));
 	}
 	
-	public boolean isTorre(Point casa) {
-		return tabuleiro.getCasa(casa) != null && tabuleiro.getCasa(casa) instanceof Torre;
+	public boolean hasTorre(Point casa) {
+		return tabuleiro.getCasa(casa).hasTorre();
 	}
 	
 	/*
 	 * Verifica qual o estado/tipo da coordenada da <code>casa</code>.
 	 * @return Retorna o tipo da casa em <code>Casa</code>.
 	 */
-	public Entidade getCasa(Point casa) {
+	public FormaDeVidaColecao getCasa(Point casa) {
 		return casas[casa.y][casa.x];
 	}
 	
@@ -69,8 +72,12 @@ public class Tabuleiro {
 	 * @param <code>casa</code> - Coordenadas (x, y) da casa no tabuleiro.
 	 * @param <code>tipo</code> - Novo estado/tipo da casa alterada.
 	 */
-	public void setCasa(Point casa, Entidade entidade) {
-		casas[casa.y][casa.x] = entidade; 
+	public void adicionarFormaDeVida(Point casa, FormaDeVida formaDeVida) {
+		casas[casa.y][casa.x].adicionar(formaDeVida); 
+	}
+	
+	public void removerFormaDeVida(Point casa, FormaDeVida formaDeVida) {
+		casas[casa.y][casa.x].remover(formaDeVida); 
 	}
 	
 	/*
