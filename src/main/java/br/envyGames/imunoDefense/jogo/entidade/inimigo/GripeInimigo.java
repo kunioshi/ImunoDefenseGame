@@ -25,6 +25,7 @@ public class GripeInimigo extends Inimigo {
 		setImageCollection(imgCollection);
         setDoNotStop(true);
 		
+        setVida(5);
 		GameSystem.setAIforEntity(this, new GripeIA());
 	}
 }

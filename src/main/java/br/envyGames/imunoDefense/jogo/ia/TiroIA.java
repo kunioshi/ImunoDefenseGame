@@ -15,6 +15,12 @@ public class TiroIA extends AIAction {
 			e.printStackTrace();
 		}
 		
+		System.out.println(((Tiro)entity).getAlvo().getVida());
+		if( ((Tiro)entity).getAlvo().getVida() <= 0 ) {
+			((Tiro)entity).getAlvo().destruir();
+			((Tiro)entity).destruir();
+		}
+		
 		andar((Tiro)entity);
 	}
 
@@ -22,17 +28,15 @@ public class TiroIA extends AIAction {
 	public void receiveMessage(IAMessage arg0) {}
 
 	private void andar(Tiro tiro) {
-		if(Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) tiro.getX()) < Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) tiro.getAlvo().getX())) {
+		if(tiro.getX() < tiro.getAlvo().getX()) {
 			tiro.doMove(4, 0);
-		}
-		if(Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) tiro.getX()) > Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) tiro.getAlvo().getX())) {
+		} else if(tiro.getX() > tiro.getAlvo().getX()) {
 			tiro.doMove(-4, 0);
 		}
 		
-		if(Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) tiro.getY()) < Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) tiro.getAlvo().getY())) {
+		if(tiro.getY() < tiro.getAlvo().getY()) {
 			tiro.doMove(0, 4);
-		}
-		if(Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) tiro.getY()) > Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) tiro.getAlvo().getY())) {
+		} else if(tiro.getY() > tiro.getAlvo().getY()) {
 			tiro.doMove(0, -4);
 		}
 		
@@ -40,7 +44,7 @@ public class TiroIA extends AIAction {
 	}
 
 	private void chegouAlvo(Tiro tiro) {
-		if( tiro.getCasaAtual().equals(Tabuleiro.getTabuleiroAtual().converteCoord((int)tiro.getAlvo().getX(), (int)tiro.getAlvo().getY())) ) {
+		if( tiro.getX() == tiro.getAlvo().getX() && tiro.getY() == tiro.getAlvo().getY() ) {
 			darDano(tiro);
 			tiro.destruir();
 			
@@ -51,5 +55,10 @@ public class TiroIA extends AIAction {
 
 	private void darDano(Tiro tiro) {
 		tiro.getAlvo().receberDano(tiro.getForca());
+		
+		if(tiro.getAlvo().getVida() <= 0)
+			tiro.getAlvo().destruir();
+		
+		tiro.destruir();
 	}
 }

@@ -72,16 +72,16 @@ public class MalariaIA extends IAAcao {
 		if(estado == EstadoInimigo.ANDANDO || estado == EstadoInimigo.ATACANDOTORRE) {
 			mudarCasa(entity);
 
-			if(Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) entity.getX()) < proxCasa.getX()) {
+			if(entity.getX() < Tabuleiro.getTabuleiroAtual().converteCoordToTab(proxCasa.x)) {
 				entity.setImageKey("direita");
 				entity.doMove(entity.getVelocidade(), 0);
-			} else if(Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) entity.getX()) > proxCasa.getX()) {
+			} else if(entity.getX() > Tabuleiro.getTabuleiroAtual().converteCoordToTab(proxCasa.x)) {
 				entity.setImageKey("esquerda");
 				entity.doMove(-entity.getVelocidade(), 0);
-			} else if(Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) entity.getY()) < proxCasa.getY()) {
+			} else if(entity.getY() < Tabuleiro.getTabuleiroAtual().converteCoordToTab(proxCasa.y)) {
 				entity.setImageKey("baixo");
 				entity.doMove(0, entity.getVelocidade());
-			} else if(Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) entity.getY()) > proxCasa.getY()) {
+			} else if(entity.getY() > Tabuleiro.getTabuleiroAtual().converteCoordToTab(proxCasa.y)) {
 				entity.setImageKey("cima");
 				entity.doMove(0, -entity.getVelocidade());
 			}

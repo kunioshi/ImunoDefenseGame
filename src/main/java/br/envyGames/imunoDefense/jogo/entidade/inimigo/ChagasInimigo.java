@@ -28,7 +28,8 @@ public class ChagasInimigo extends Inimigo {
 		setImageCollection(imgCollection);
 		setImageKey("direita");
         setDoNotStop(true);
-		
+
+        setVida(30);
 		GameSystem.setAIforEntity(this, new ChagasIA());
 	}
 }

@@ -28,7 +28,8 @@ public class MalariaInimigo extends Inimigo {
 		setImageCollection(imgCollection);
 		setImageKey("direita");
         setDoNotStop(true);
-		
+
+        setVida(20);
         setVelocidadeNormal(2);
 		GameSystem.setAIforEntity(this, new MalariaIA());
 	}

@@ -28,7 +28,8 @@ public class EbolaInimigo extends Inimigo {
 		setImageCollection(imgCollection);
 		setImageKey("direita");
         setDoNotStop(true);
-		
+
+        setVida(10);
         setVelocidadeNormal(2);
 		GameSystem.setAIforEntity(this, new MalariaIA());
 	}
