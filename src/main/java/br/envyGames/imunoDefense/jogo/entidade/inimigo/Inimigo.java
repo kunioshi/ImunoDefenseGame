@@ -10,11 +10,6 @@ enum Direcao {
 	BAIXO, CIMA, DIREITA, ESQUERDA;
 }
 
-enum TipoLocomocao {
-	Terrestre,
-	Aerio
-}
-
 /*
  * Classe abstrata base dos inimigos
  */

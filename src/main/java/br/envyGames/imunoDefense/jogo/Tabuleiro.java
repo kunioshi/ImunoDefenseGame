@@ -108,4 +108,12 @@ public class Tabuleiro {
 	public Point converteCoord(Point xy) {
 		return new Point( xy.x * tamanhoCasa, xy.y * tamanhoCasa );
 	}
+	
+	public boolean isXValid(int x) {
+		return x >= 0 && x < 23;
+	}
+	
+	public boolean isYValid(int y) {
+		return y >= 0 && y < 13;
+	}
 }

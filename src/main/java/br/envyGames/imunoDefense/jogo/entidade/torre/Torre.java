@@ -32,6 +32,7 @@ public abstract class Torre extends FormaDeVida {
 	public int getLevel() { return level; }
 	public int getVelocidade() { return velocidade; }
 	public int getAlcance() { return alcance; }
+	public TipoAtaque getTipoAtaque() { return tipoAtaque; }
 	
 	public void setForca(int dano) { forca = dano; }
 	public void upgrade() { 
