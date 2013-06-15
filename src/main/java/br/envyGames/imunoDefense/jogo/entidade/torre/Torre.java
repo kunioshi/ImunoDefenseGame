@@ -7,10 +7,7 @@ import java.util.List;
 import br.envyGames.imunoDefense.jogo.entidade.FormaDeVida;
 import br.envyGames.imunoDefense.jogo.entidade.Tiro;
 import br.envyGames.imunoDefense.jogo.entidade.inimigo.Inimigo;
-import br.envyGames.imunoDefense.motor.AdicionarRemoverEntidadeListener;
-import br.envyGames.imunoDefense.motor.AlterarCenarioListener;
 import br.envyGames.imunoDefense.motor.Cenario;
-import br.envyGames.imunoDefense.motor.Entidade;
 import br.envyGames.imunoDefense.motor.Imagem;
 import br.envyGames.imunoDefense.motor.ImagemAnimada;
 import br.envyGames.imunoDefense.motor.ImagemColecao;
@@ -82,7 +79,9 @@ public abstract class Torre extends FormaDeVida {
 	}
 
 	private Tiro criarTiro(Inimigo alvo) {
-		return new Tiro(this.getX(), this.getY(), tiroImagem, alvo, forca, this.getCenario());
+		if(!(alvo.getVida() <= 0))
+			return new Tiro(this.getX(), this.getY(), tiroImagem, alvo, forca, this.getCenario());
+		return null;
 	}
 	
 	protected void carregarSequenciaImagem() {
@@ -95,7 +94,8 @@ public abstract class Torre extends FormaDeVida {
 	}
 	
 	private void fireRemoverAtirarEvent(Tiro tiro) {
-		for (AtirarListener listener : atirarListeners)
-			listener.handleAtirarEvent(tiro);
+		if(tiro != null)
+			for (AtirarListener listener : atirarListeners)
+				listener.handleAtirarEvent(tiro);
 	}
 }

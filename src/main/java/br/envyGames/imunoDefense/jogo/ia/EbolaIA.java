@@ -21,23 +21,25 @@ public class EbolaIA extends AIAction {
 	private Point proxCasa = null;
 	private FormaDeVida alvo = null;
 	private BuscaTorre busca = new BuscaTorre();
+	private int cooldown = 2000;
 	
 	@Override
 	public void doAction(Entity entity) {
 		Inimigo inimigo = (Inimigo)entity;
 		
+		if(estado == EstadoInimigo.ANDANDO || estado == EstadoInimigo.ATACANDOTORRE)
+			cooldown = 125;
+		else
+			cooldown = 2000;
 		
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(cooldown);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		
-		
 		if(caminho == null)
 			atualizarCaminho(inimigo);
-
-		
 		
 		if(estado ==  EstadoInimigo.PARADO) {
 			comecarAndar(inimigo);

@@ -30,6 +30,7 @@ public class ChagasInimigo extends Inimigo {
         setDoNotStop(true);
 
         setVida(30);
+        setVelocidadeNormal(2);
 		GameSystem.setAIforEntity(this, new ChagasIA());
 	}
 }

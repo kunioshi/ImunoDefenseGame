@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import br.envyGames.imunoDefense.jogo.entidade.FormaDeVidaColecao;
-import br.envyGames.imunoDefense.jogo.entidade.inimigo.Inimigo;
-import br.envyGames.imunoDefense.motor.Entidade;
 
 public class BuscaAStar {
 	private CasaBusca atual;

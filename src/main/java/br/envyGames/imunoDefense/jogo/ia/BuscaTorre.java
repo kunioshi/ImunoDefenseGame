@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import br.envyGames.imunoDefense.jogo.Tabuleiro;
-import br.envyGames.imunoDefense.jogo.entidade.inimigo.Inimigo;
 
 public class BuscaTorre {
 	private CasaFila atual;

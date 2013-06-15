@@ -15,13 +15,19 @@ public class ChagasIA extends IAAcao {
 	private EstadoInimigo estado = EstadoInimigo.PARADO;
 	private Point proxCasa = null;
 	private FormaDeVida alvo;
+	private int cooldown = 700;
 	
 	@Override
 	public void doAction(Entidade entidade) {
 		Inimigo inimigo = (Inimigo)entidade;
 		
+		if(estado == EstadoInimigo.ANDANDO || estado == EstadoInimigo.ATACANDOTORRE)
+			cooldown = 43;
+		else
+			cooldown = 700;
+		
 		try {
-			Thread.sleep(700);
+			Thread.sleep(cooldown);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -49,7 +55,16 @@ public class ChagasIA extends IAAcao {
 	private void andar(Inimigo inimigo) {
 		mudarCasa(inimigo);
 		inimigo.doMove(inimigo.getVelocidade(), 0);
-		comecarAndar(inimigo);
+
+		if(chegouProx(inimigo))
+			comecarAndar(inimigo);
+	}
+
+	private boolean chegouProx(Inimigo entity) {
+		if( new Point((int)entity.getX(), (int)entity.getY()).equals(Tabuleiro.getTabuleiroAtual().converteCoord(proxCasa)) )
+			return true;
+
+		return false;
 	}
 	
 	private void mudarCasa(Inimigo inimigo) {

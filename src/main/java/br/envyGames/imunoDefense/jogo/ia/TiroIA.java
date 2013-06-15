@@ -1,6 +1,5 @@
 package br.envyGames.imunoDefense.jogo.ia;
 
-import br.envyGames.imunoDefense.jogo.Tabuleiro;
 import br.envyGames.imunoDefense.jogo.entidade.Tiro;
 import s3t.gameEntities.AIAction;
 import s3t.gameEntities.Entity;
@@ -15,9 +14,7 @@ public class TiroIA extends AIAction {
 			e.printStackTrace();
 		}
 		
-		System.out.println(((Tiro)entity).getAlvo().getVida());
 		if( ((Tiro)entity).getAlvo().getVida() <= 0 ) {
-			((Tiro)entity).getAlvo().destruir();
 			((Tiro)entity).destruir();
 		}
 		
@@ -55,9 +52,6 @@ public class TiroIA extends AIAction {
 
 	private void darDano(Tiro tiro) {
 		tiro.getAlvo().receberDano(tiro.getForca());
-		
-		if(tiro.getAlvo().getVida() <= 0)
-			tiro.getAlvo().destruir();
 		
 		tiro.destruir();
 	}

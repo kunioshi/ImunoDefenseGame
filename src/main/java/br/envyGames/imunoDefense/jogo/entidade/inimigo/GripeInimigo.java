@@ -26,6 +26,7 @@ public class GripeInimigo extends Inimigo {
         setDoNotStop(true);
 		
         setVida(5);
+        setVelocidadeNormal(2);
 		GameSystem.setAIforEntity(this, new GripeIA());
 	}
 }

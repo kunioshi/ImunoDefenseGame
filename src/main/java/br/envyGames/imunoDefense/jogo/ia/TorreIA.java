@@ -17,16 +17,20 @@ public class TorreIA extends IAAcao {
 
 	@Override
 	public void doAction(Entidade entidade) {
-		
 		if (entidade instanceof Torre) {
 			Torre torre = (Torre)entidade;
+			
+			try {
+				Thread.sleep(3500 / torre.getVelocidade());
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			
 			if (torre.getTipoAtaque() != TipoAtaque.Nenhum) {
 				Inimigo alvo = localizarAlvo(torre);
 				if (alvo != null)
 					atacar(torre, alvo);
 			}
-			
 		}
 	}
 	
