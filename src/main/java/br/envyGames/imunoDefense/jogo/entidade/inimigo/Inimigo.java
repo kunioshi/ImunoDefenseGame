@@ -15,10 +15,13 @@ enum Direcao {
  */
 public abstract class Inimigo extends FormaDeVida {
 	protected TipoLocomocao tipoLocomocao;
+	protected int bonusDinheiroToKill;
+	protected int bonusScoreToKill;
 	private int forca = 1;
 	private float velocidadeNatural = 32;
 	private float lentidao = 1;
 	private Direcao direcao = Direcao.DIREITA;
+	
 	
 	/*
 	 * Construtor<br/>
@@ -35,6 +38,8 @@ public abstract class Inimigo extends FormaDeVida {
 	public float getVelocidade() { return velocidadeNatural * lentidao; }
 	public Direcao getDirecao() { return direcao; }
 	public TipoLocomocao getTipoLocomocao() { return tipoLocomocao; }
+	public int getBonusDinheiroToKill()  { return bonusDinheiroToKill; }
+	public int getBonusScoreToKill() { return bonusScoreToKill; }
 	
 	public void setForca(int dano) { forca = dano; }
 	public void setVelocidadeNormal(int vel) { velocidadeNatural = vel; }

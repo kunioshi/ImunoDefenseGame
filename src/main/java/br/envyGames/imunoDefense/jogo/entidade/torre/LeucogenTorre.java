@@ -27,6 +27,7 @@ public class LeucogenTorre extends Torre {
 		forca = 5;
 		velocidade = 1;
 		alcance = 3;
+		custo = 175;
 		
 		this.tipoAtaque = TipoAtaque.Terrestre;
 		
