@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.3" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+  realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
+  <class id="1" language="java" name="br.envyGames.imunoDefense.jogo.entidade.FormaDeVidaColecao" 
+    project="ImunoDefenseGame" 
+    file="/ImunoDefenseGame/src/main/java/br/envyGames/imunoDefense/jogo/entidade/FormaDeVidaColecao.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="195" x="25" y="34"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="br.envyGames.imunoDefense.jogo.entidade.Tiro" project="ImunoDefenseGame" 
+    file="/ImunoDefenseGame/src/main/java/br/envyGames/imunoDefense/jogo/entidade/Tiro.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="189" width="247" x="260" y="34"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="br.envyGames.imunoDefense.jogo.entidade.SeguidorMouse" project="ImunoDefenseGame" 
+    file="/ImunoDefenseGame/src/main/java/br/envyGames/imunoDefense/jogo/entidade/SeguidorMouse.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="81" width="255" x="547" y="34"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="4" language="java" name="br.envyGames.imunoDefense.jogo.entidade.MorteListener" 
+    project="ImunoDefenseGame" 
+    file="/ImunoDefenseGame/src/main/java/br/envyGames/imunoDefense/jogo/entidade/MorteListener.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="81" width="246" x="25" y="618"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="5" language="java" name="br.envyGames.imunoDefense.jogo.entidade.Coracao" project="ImunoDefenseGame" 
+    file="/ImunoDefenseGame/src/main/java/br/envyGames/imunoDefense/jogo/entidade/Coracao.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="189" width="195" x="311" y="618"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="br.envyGames.imunoDefense.jogo.entidade.FormaDeVida" project="ImunoDefenseGame" 
+    file="/ImunoDefenseGame/src/main/java/br/envyGames/imunoDefense/jogo/entidade/FormaDeVida.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="315" width="283" x="25" y="263"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="7">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="8" name="morteListeners"/>      
+      <multiplicity id="9" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="10">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="6"/>  
+  </generalization>  
+  <association id="11">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="12" name="lista"/>      
+      <multiplicity id="13" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

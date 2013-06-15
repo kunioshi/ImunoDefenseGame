@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.3" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+  realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
+  <class id="1" language="java" name="br.envyGames.imunoDefense.jogo.TorreFactory" project="ImunoDefenseGame" 
+    file="/ImunoDefenseGame/src/main/java/br/envyGames/imunoDefense/jogo/TorreFactory.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="117" width="251" x="34" y="-194"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="br.envyGames.imunoDefense.jogo.HordaGerenciador.HordaCriador" 
+    project="ImunoDefenseGame" 
+    file="/ImunoDefenseGame/src/main/java/br/envyGames/imunoDefense/jogo/HordaGerenciador.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="117" width="157" x="846" y="387"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="br.envyGames.imunoDefense.jogo.Tabuleiro" project="ImunoDefenseGame" 
+    file="/ImunoDefenseGame/src/main/java/br/envyGames/imunoDefense/jogo/Tabuleiro.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="531" width="257" x="325" y="-194"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="br.envyGames.imunoDefense.jogo.InimigoFactory" project="ImunoDefenseGame" 
+    file="/ImunoDefenseGame/src/main/java/br/envyGames/imunoDefense/jogo/InimigoFactory.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="99" width="272" x="632" y="-194"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="br.envyGames.imunoDefense.jogo.Jogador" project="ImunoDefenseGame" 
+    file="/ImunoDefenseGame/src/main/java/br/envyGames/imunoDefense/jogo/Jogador.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="225" width="157" x="1283" y="-194"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="6" language="java" name="br.envyGames.imunoDefense.jogo.ChegarHordaListener" project="ImunoDefenseGame" 
+    file="/ImunoDefenseGame/src/main/java/br/envyGames/imunoDefense/jogo/ChegarHordaListener.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="81" width="205" x="1043" y="387"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="7" language="java" name="br.envyGames.imunoDefense.jogo.Jogo" project="ImunoDefenseGame" 
+    file="/ImunoDefenseGame/src/main/java/br/envyGames/imunoDefense/jogo/Jogo.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="157" x="1480" y="-194"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="br.envyGames.imunoDefense.jogo.HordaGerenciador" project="ImunoDefenseGame" 
+    file="/ImunoDefenseGame/src/main/java/br/envyGames/imunoDefense/jogo/HordaGerenciador.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="279" width="299" x="944" y="-194"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <nesting id="9">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="2"/>  
+  </nesting>  
+  <association id="10">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="11" name="chegarHordaListeners"/>      
+      <multiplicity id="12" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="13">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="14" name="tabuleiro"/>      
+      <multiplicity id="15" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
