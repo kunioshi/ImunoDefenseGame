@@ -17,6 +17,7 @@ public class MalariaInimigo extends Inimigo {
 		this.tipoLocomocao = TipoLocomocao.Terrestre;
 		bonusDinheiroToKill = 200;
 		bonusScoreToKill = 50;
+		vida = 20;
 		
 		ImageCollection imgCollection = new ImageCollection();
 
