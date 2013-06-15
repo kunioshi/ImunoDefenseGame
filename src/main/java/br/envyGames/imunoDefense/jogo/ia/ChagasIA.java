@@ -63,7 +63,7 @@ public class ChagasIA extends IAAcao {
 	}
 
 	private void verificarCaminho(Inimigo inimigo) {
-		if(proxCasa.x == Tabuleiro.getTabuleiroAtual().getWidth() - 1) {
+		if(proxCasa.x == Tabuleiro.getTabuleiroAtual().getWidth()) {
 			alvo = ((JogoCenario)inimigo.getScenario()).getCoracao();
 			estado = EstadoInimigo.ATACANDO;
 		} else {

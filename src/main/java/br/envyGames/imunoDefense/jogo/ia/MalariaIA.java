@@ -20,6 +20,7 @@ public class MalariaIA extends IAAcao {
 	private Point proxCasa = null;
 	private FormaDeVida alvo = null;
 	private BuscaAStar busca = new BuscaAStar();
+	private BuscaTorre buscaTorre = new BuscaTorre();
 
 	public void doAction(Entidade entidade) {
 		Inimigo entity = (Inimigo)entidade;
@@ -32,14 +33,14 @@ public class MalariaIA extends IAAcao {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-
+		
 		if(estado ==  EstadoInimigo.PARADO) {
 			comecarAndar(entity);
 			checarProx(entity);
-		} else if(estado == EstadoInimigo.ANDANDO)
-			andar((Inimigo)entity);
+		} else if(estado == EstadoInimigo.ANDANDO || estado == EstadoInimigo.ATACANDOTORRE)
+			andar(entity);
 		else
-			atacar((Inimigo) entity);
+			atacar(entity);
 	}
 
 	public void receiveMessage(IAMensagem msg) {}
@@ -62,7 +63,7 @@ public class MalariaIA extends IAAcao {
 	private void andar(Inimigo entity) {
 		checarProx(entity);
 
-		if(estado == EstadoInimigo.ANDANDO) {
+		if(estado == EstadoInimigo.ANDANDO || estado == EstadoInimigo.ATACANDOTORRE) {
 			mudarCasa(entity);
 
 			if(Tabuleiro.getTabuleiroAtual().converteCoordToGrid((int) entity.getX()) < proxCasa.getX()) {
@@ -95,6 +96,7 @@ public class MalariaIA extends IAAcao {
 			((Coracao)alvo).receberDano(inimigo.getForca());
 		else if(alvo instanceof Torre)
 			((Torre)alvo).receberDano(inimigo.getForca());
+			
 		alvo.receberDano(inimigo.getForca());
 
 		if(alvo.getVida() <= 0) {
@@ -111,15 +113,20 @@ public class MalariaIA extends IAAcao {
 	}
 
 	private void checarProx(Inimigo entity) {
-		if(Tabuleiro.getTabuleiroAtual().isTorre(proxCasa))
-			atualizarCaminho(entity);
+		if(Tabuleiro.getTabuleiroAtual().isTorre(proxCasa)) {
+			if(estado == EstadoInimigo.ATACANDOTORRE) {
+				estado = EstadoInimigo.ATACANDO;
+				alvo = (Torre)Tabuleiro.getTabuleiroAtual().getCasa(proxCasa);
+			} else
+				atualizarCaminho(entity);
+		}
 	}
 
 	private void verificarCaminho(Inimigo entity) {
 		if(caminho == null) {
 			estado = EstadoInimigo.ATACANDO;
 
-			encontrarAlvo();
+			encontrarAlvo(entity);
 		} else {
 			if( caminho.size() == 0 ) {
 				estado = EstadoInimigo.ATACANDO;
@@ -131,9 +138,13 @@ public class MalariaIA extends IAAcao {
 		}
 	}
 
-	private void encontrarAlvo() {
+	private void encontrarAlvo(Inimigo inimigo) {
 		if(proxCasa != null) {
 			alvo = (Torre)Tabuleiro.getTabuleiroAtual().getCasa(proxCasa);
+		} else {
+			caminho = buscaTorre.buscar(inimigo.getCasaAtual());
+			estado = EstadoInimigo.ATACANDOTORRE;
+			comecarAndar(inimigo);
 		}
 	}
 }

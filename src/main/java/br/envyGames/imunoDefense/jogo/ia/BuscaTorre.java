@@ -12,23 +12,24 @@ public class BuscaTorre {
 	private ArrayList<CasaFila> fila;
 	private ArrayList<CasaFila> visitados;
 	
-	public ArrayList<Point> buscar(Inimigo entity) {
+	public ArrayList<Point> buscar(Point casa) {
 		zerarBusca();
 		
-		fila.add(new CasaFila(entity.getCasaAtual(), null));
+		fila.add(new CasaFila(casa, null));
 		
 		boolean caminhoEncontrado = false;
 		while(!fila.isEmpty()) {
 			atual = fila.remove(0);
+			visitados.add(atual);
 			
 			if(Tabuleiro.getTabuleiroAtual().isTorre(atual.getCasa())) {
 				caminhoEncontrado = true;
 				break;
 			} else {
-				verificaCasa(new Point(-1, 0));
-				verificaCasa(new Point(0, -1));
 				verificaCasa(new Point(1, 0));
+				verificaCasa(new Point(0, -1));
 				verificaCasa(new Point(0, 1));
+				verificaCasa(new Point(-1, 0));
 			}
 		}
 		
@@ -58,9 +59,8 @@ public class BuscaTorre {
 		if(x >= 0 && x < Tabuleiro.getTabuleiroAtual().getWidth() &&  y >= 0 && y < Tabuleiro.getTabuleiroAtual().getHeight()) {
 			Point casaAux = new Point(x, y);
 
-			if (Tabuleiro.getTabuleiroAtual().isCasaVazia(casaAux) || Tabuleiro.getTabuleiroAtual().isInimigo(casaAux))
-				if(!existeNosVisitados(casaAux))
-					adicionarCasa(casaAux);
+			if(!existeNosVisitados(casaAux))
+				adicionarCasa(casaAux);
 		}
 	}
 	
