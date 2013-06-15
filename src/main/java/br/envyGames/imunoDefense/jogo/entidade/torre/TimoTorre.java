@@ -5,7 +5,7 @@ import java.awt.Point;
 import s3t.gameControl.system.GameSystem;
 import s3t.graphicsElements.AnimImage;
 
-import br.envyGames.imunoDefense.jogo.ia.MedulaIA;
+import br.envyGames.imunoDefense.jogo.ia.TorreIA;
 import br.envyGames.imunoDefense.motor.Cenario;
 import br.envyGames.imunoDefense.motor.Imagem;
 import br.envyGames.imunoDefense.motor.ResourceManager;
@@ -35,7 +35,7 @@ public class TimoTorre extends Torre {
 		
         setDoNotStop(true);
         
-        GameSystem.setAIforEntity(this, new MedulaIA());
+        GameSystem.setAIforEntity(this, new TorreIA());
 	}
 
 }

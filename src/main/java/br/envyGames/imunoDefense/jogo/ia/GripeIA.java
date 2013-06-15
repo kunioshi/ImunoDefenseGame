@@ -41,7 +41,7 @@ public class GripeIA extends IAAcao {
 	private void atacar(Inimigo inimigo) {
 		alvo.receberDano(inimigo.getForca());
 
-		if(alvo.getVida() <= 0) {
+		if(alvo.isDead()) {
 			Tabuleiro.getTabuleiroAtual().setCasa(alvo.getCasaAtual(), null);
 			estado = EstadoInimigo.ANDANDO;
 		}
