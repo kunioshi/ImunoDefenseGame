@@ -20,12 +20,6 @@ public class ChagasIA extends IAAcao {
 	public void doAction(Entidade entidade) {
 		Inimigo inimigo = (Inimigo)entidade;
 		
-		try {
-			Thread.sleep(700);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		
 		if(estado == EstadoInimigo.PARADO) {
 			comecarAndar(inimigo);
 		} else if(estado == EstadoInimigo.ANDANDO) {
@@ -35,6 +29,14 @@ public class ChagasIA extends IAAcao {
 		} else {
 			atacar(inimigo);
 		}
+	}
+	
+	@Override
+	public void receiveMessage(IAMensagem msg) {}
+
+	@Override
+	public int timeToWait() {
+		return 700;
 	}
 	
 	private void atacar(Inimigo inimigo) {
@@ -76,7 +78,4 @@ public class ChagasIA extends IAAcao {
 			estado = EstadoInimigo.ANDANDO;
 		}
 	}
-
-	@Override
-	public void receiveMessage(IAMensagem msg) {}
 }
