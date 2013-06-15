@@ -9,6 +9,9 @@ import br.envyGames.imunoDefense.motor.ResourceManager;
 
 public class GameOverCenario extends Cenario {
 	
+	private final int xInicialBotao = 350;
+	private final int yInicialBotao = 300;
+	
 	public GameOverCenario(int largura, int altura) {
 		super("GameOverCenario", "GameOver", largura, altura);
 		
@@ -21,80 +24,37 @@ public class GameOverCenario extends Cenario {
 	}
 	
 	public void mouseClicked(MouseEvent e) {
-		int gridX = (int) (e.getX() / 32);
-		int gridY = (int) (e.getY() / 32);
-		
-		System.out.println(gridX + "|" + gridY);
-		
-		if (isSimButton(gridX, gridY)){
-			SimButtonClicked();
-		}
-		if (isNaoButton(gridX, gridY)){
-			NaoButtonClicked();
-		}
+
+		if (isSairButton(e.getX(), e.getY()))
+			sairButtonClicked();
 	}
-	
-	public void mouseMoved(MouseEvent e) {
-		int gridX = (int) (e.getX() / 32);
-		int gridY = (int) (e.getY() / 32);
 		
-		if (isSimButton(gridX, gridY)) {			
-			this.getLayerPorID("gameover").getItemPorNome("telaGameOver").setVisible(false);	
-			this.getLayerPorID("gameover").getItemPorNome("telaGameOverSim").setVisible(true);	
-			this.getLayerPorID("gameover").getItemPorNome("telaGameOverNao").setVisible(false);
-		}
-		else if (isNaoButton(gridX, gridY)) {				
-				this.getLayerPorID("gameover").getItemPorNome("telaGameOverSim").setVisible(false);
-				this.getLayerPorID("gameover").getItemPorNome("telaGameOver").setVisible(false);
-				this.getLayerPorID("gameover").getItemPorNome("telaGameOverNao").setVisible(true);
-			}
-		else{
-			this.getLayerPorID("gameover").getItemPorNome("telaGameOverSim").setVisible(false);
-			this.getLayerPorID("gameover").getItemPorNome("telaGameOver").setVisible(true);
-			this.getLayerPorID("gameover").getItemPorNome("telaGameOverNao").setVisible(false);
-		}
+	private void sairButtonClicked() {
+		System.exit(0);		
 	}
-	
+
+	private boolean isSairButton(int x, int y) {
+		return x >= xInicialBotao && x <= xInicialBotao + 120  && y >= yInicialBotao && y <= yInicialBotao + 60;
+	}
+
 	private void configurarCenario() {
 		int x = 0;
 		int y = 0;
 		
 		CenarioLayer gameover = CenarioLayer.criarSolidLayer("gameover");
 		
-		Imagem telaGameOver = ResourceManager.getImagem("/imagens/gameOver.jpg");
-		Imagem telaGameOverSim = ResourceManager.getImagem("/imagens/gameOverSim.jpg");
-		Imagem telaGameOverNao = ResourceManager.getImagem("/imagens/gameOverNao.jpg");
-		
+		Imagem telaGameOver = ResourceManager.getImagem("/imagens/GameOverSair.jpg");
+		Imagem sairBotao = ResourceManager.getImagem("/imagens/SairBtn.png");
 		
 		CenarioItem itemGameOver = new CenarioItem("telaGameOver", telaGameOver, x, y);
-		CenarioItem itemGameOverSim = new CenarioItem("telaGameOverSim", telaGameOverSim, x, y);
-		CenarioItem itemGameOverNao = new CenarioItem("telaGameOverNao", telaGameOverNao, x, y);
-		
+		CenarioItem itemSairBotao = new CenarioItem("telaGameOverSim", sairBotao, xInicialBotao, yInicialBotao);
 		
 		gameover.adicionarItem(itemGameOver);
-		gameover.getItemPorNome("telaGameOver").setVisible(true);
-		gameover.adicionarItem(itemGameOverSim);
-		gameover.getItemPorNome("telaGameOverSim").setVisible(false);
-		gameover.adicionarItem(itemGameOverNao);
-		gameover.getItemPorNome("telaGameOverNao").setVisible(false);
+		gameover.adicionarItem(itemSairBotao);
 		
 		
 		adicionarLayer(gameover);
 	}
-	
-	private boolean isSimButton(int x, int y) {
-		return x >= 6 && x <= 8 && (y == 13 || y == 14);
-	}
-	private boolean isNaoButton(int x, int y) {
-		return x >= 16 && x <= 19 && (y == 13 || y == 14);
-	}
-	
-	private void SimButtonClicked() {
-		carregarNovoCenario("JogoCenario");
-	}
-	
-	private void NaoButtonClicked() {		
-		carregarNovoCenario("MenuCenario");
-	}
+
 
 }

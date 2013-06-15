@@ -73,6 +73,7 @@ public class JogoCenario extends Cenario implements ChegarHordaListener, MorteLi
 	@Override
 	public void stop() {
 		hordaGerenciador.stop();
+		GameSystem.getEntityCollection().clear();
 	}
 	
 	private int inimigoNumero = 1;
