@@ -129,6 +129,8 @@ public class JogoCenario extends Cenario implements ChegarHordaListener, MorteLi
 		
 		int score = jogador.getPontos();
 		String nome = "Score:";
+		int dinheiro = jogador.getDinheiro();
+		String nomeDinheiro = "$";
 		
 		//criando um HUD para teste
 		Imagem backgroundImagem = ResourceManager.getImagem("/imagens/BackgroundJogo.jpg");
@@ -152,6 +154,8 @@ public class JogoCenario extends Cenario implements ChegarHordaListener, MorteLi
 		background.adicionarItem(new CenarioItem("botaoRochaganTorre", botaoRochaganTorre, xRochaganBotao, yInicioBotao));
 		background.adicionarItem(new CenarioItem("botaoLinfoideTorre", botaoLinfoideTorre, 486, yInicioBotao));		
 		
+		
+		//Score
 		GameSystem.getMessageCollection().addMessage(new Message("Score", "" + score, null, 0 , 0));
 		GameSystem.getMessageCollection().addMessage(new Message("Nome", nome, new Font("verdana", Font.BOLD, 16), 708 , 490));
 		Message msgScore = GameSystem.getMessageCollection().getMessageByName("score");
@@ -163,6 +167,21 @@ public class JogoCenario extends Cenario implements ChegarHordaListener, MorteLi
         nomeScore.setForegroundColor(Color.WHITE);
         msgScore.setMessage(String.valueOf(score));
         nomeScore.setMessage(String.valueOf(nome));
+        
+        
+        
+        //Dinheiro        
+        GameSystem.getMessageCollection().addMessage(new Message("Dinheiro", "" + score, null, 0 , 0));
+		GameSystem.getMessageCollection().addMessage(new Message("nomeDinheiro", nome, new Font("verdana", Font.BOLD, 16), 720 , 470));
+		Message msgDinheiro = GameSystem.getMessageCollection().getMessageByName("dinheiro");
+		Message msgCash = GameSystem.getMessageCollection().getMessageByName("nomeDinheiro");
+        if (msgDinheiro == null){
+            GameSystem.getMessageCollection().addMessage(msgDinheiro = new Message("dinheiro", "", new Font("verdana", Font.BOLD, 16), 740, 470));
+        }
+        msgDinheiro.setForegroundColor(Color.WHITE);
+        msgCash.setForegroundColor(Color.WHITE);
+        msgDinheiro.setMessage(String.valueOf(dinheiro));
+        msgCash.setMessage(String.valueOf(nomeDinheiro));
 		
 		
 		background.adicionarItem(new CenarioItem("botaoUpgrade", botaoUpgrade, 600, 470));
