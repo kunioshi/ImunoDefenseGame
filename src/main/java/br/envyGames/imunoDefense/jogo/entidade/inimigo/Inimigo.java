@@ -17,7 +17,7 @@ public abstract class Inimigo extends FormaDeVida {
 	protected TipoLocomocao tipoLocomocao;
 	protected int bonusDinheiroToKill;
 	protected int bonusScoreToKill;
-	private int forca = 1;
+	protected int forca = 1;
 	private float velocidadeNatural = 32;
 	private float lentidao = 1;
 	private Direcao direcao = Direcao.DIREITA;

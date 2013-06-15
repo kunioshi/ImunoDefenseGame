@@ -18,6 +18,7 @@ public class GripeInimigo extends Inimigo {
 		bonusDinheiroToKill = 100;
 		bonusScoreToKill = 10;
 		vida = 10;
+		forca = 1;
 		
 		ImageCollection imgCollection = new ImageCollection();
 		

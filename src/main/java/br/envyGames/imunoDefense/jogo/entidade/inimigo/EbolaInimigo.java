@@ -18,6 +18,7 @@ public class EbolaInimigo extends Inimigo {
 		bonusDinheiroToKill = 150;
 		bonusScoreToKill = 25;
 		vida = 25;
+		forca = 2;
 		
 		ImageCollection imgCollection = new ImageCollection();
 		

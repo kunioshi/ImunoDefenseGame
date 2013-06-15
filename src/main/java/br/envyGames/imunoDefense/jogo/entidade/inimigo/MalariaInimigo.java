@@ -18,6 +18,7 @@ public class MalariaInimigo extends Inimigo {
 		bonusDinheiroToKill = 200;
 		bonusScoreToKill = 50;
 		vida = 20;
+		forca = 3;
 		
 		ImageCollection imgCollection = new ImageCollection();
 

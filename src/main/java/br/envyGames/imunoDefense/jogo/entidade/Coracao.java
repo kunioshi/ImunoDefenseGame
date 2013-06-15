@@ -13,7 +13,7 @@ public class Coracao extends FormaDeVida {
 	private static Imagem coracao50porcento = ResourceManager.getImagem("/imagens/entidades/Coracao50porcento.png");
 	private static Imagem coracao20porcento = ResourceManager.getImagem("/imagens/entidades/Coracao20porcento.png");
 	private ImagemColecao imagemColecao;
-	private final int TOTAL_VIDA = 100000;
+	private final int TOTAL_VIDA = 100;
 	
 	public Coracao(Point xy, Cenario cenario) {
 		super("Coracao", xy, cenario);

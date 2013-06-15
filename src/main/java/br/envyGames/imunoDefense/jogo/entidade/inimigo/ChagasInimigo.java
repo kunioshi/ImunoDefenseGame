@@ -18,6 +18,7 @@ public class ChagasInimigo extends Inimigo {
 		bonusDinheiroToKill = 250;
 		bonusScoreToKill = 100;
 		vida = 100;
+		forca = 5;
 		
 		ImageCollection imgCollection = new ImageCollection();
 
