@@ -13,8 +13,10 @@ import br.envyGames.imunoDefense.jogo.TorreFactory;
 import br.envyGames.imunoDefense.jogo.entidade.Coracao;
 import br.envyGames.imunoDefense.jogo.entidade.FormaDeVida;
 import br.envyGames.imunoDefense.jogo.entidade.SeguidorMouse;
+import br.envyGames.imunoDefense.jogo.entidade.Tiro;
 import br.envyGames.imunoDefense.jogo.entidade.inimigo.Inimigo;
 import br.envyGames.imunoDefense.jogo.entidade.inimigo.TipoInimigo;
+import br.envyGames.imunoDefense.jogo.entidade.torre.AtirarListener;
 import br.envyGames.imunoDefense.jogo.entidade.torre.MedulaTorre;
 import br.envyGames.imunoDefense.jogo.entidade.torre.MiocardioTorre;
 import br.envyGames.imunoDefense.jogo.entidade.torre.TipoTorre;
@@ -26,7 +28,7 @@ import br.envyGames.imunoDefense.motor.Entidade;
 import br.envyGames.imunoDefense.motor.Imagem;
 import br.envyGames.imunoDefense.motor.ResourceManager;
 
-public class JogoCenario extends Cenario implements ChegarHordaListener, MorteListener {
+public class JogoCenario extends Cenario implements ChegarHordaListener, MorteListener, AtirarListener {
 	private int waveSpot = 5;
 	private Coracao coracao;
 	private HordaGerenciador hordaGerenciador = new HordaGerenciador();
@@ -252,14 +254,15 @@ public class JogoCenario extends Cenario implements ChegarHordaListener, MorteLi
 	}
 	
 	private void adicionarTorre(int coluna, int linha, Torre torre) {
-		adicionarFormaDeVida(torre);
+		torre.addAtirarListener(this);
+		adicionarFormaDeVida(torre);		
 		Tabuleiro.getTabuleiroAtual().adicionarFormaDeVida(new Point(coluna, linha), torre);
 	}
 	
 	private void adicionarFormaDeVida(FormaDeVida formaDeVida) {
-		formaDeVida.addMorteListener(this);
+		formaDeVida.addMorteListener(this);				
 		
-		adicionarEntidade(formaDeVida);
+		adicionarEntidade(formaDeVida);		
 	}	
 	
 	public Coracao getCoracao() { return coracao; }
@@ -276,15 +279,26 @@ public class JogoCenario extends Cenario implements ChegarHordaListener, MorteLi
 	
 	private void destruirInimigo(Inimigo inimigo) {
 		Tabuleiro.getTabuleiroAtual().getCasa(inimigo.getCasaAtual()).remover(inimigo);
-		removerEntidade(inimigo);		
+		destruirFormaDeVida(inimigo);
 	}
 	
 	private void destruirTorre(Torre torre) {
 		Tabuleiro.getTabuleiroAtual().getCasa(torre.getCasaAtual()).remover(torre);
-		removerEntidade(torre);
+		torre.removeAtirarListener(this);
+		destruirFormaDeVida(torre);
+	}
+	
+	private void destruirFormaDeVida(FormaDeVida formaDeVida) {
+		formaDeVida.removeMorteListener(this);
+		removerEntidade(formaDeVida);
 	}
 
 	private void gameOver() {
 		carregarNovoCenario("GameOverCenario");
+	}
+
+	@Override
+	public void handleAtirarEvent(Tiro tiro) {
+		adicionarEntidade(tiro);		
 	}
 }

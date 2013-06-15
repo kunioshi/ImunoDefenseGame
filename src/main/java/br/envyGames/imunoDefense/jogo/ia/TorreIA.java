@@ -24,16 +24,17 @@ public class TorreIA extends IAAcao {
 			if (torre.getTipoAtaque() != TipoAtaque.Nenhum) {
 				Inimigo alvo = localizarAlvo(torre);
 				if (alvo != null)
-					atacar(alvo);
+					atacar(torre, alvo);
 			}
 			
 		}
 	}
 	
-	private void atacar(Inimigo inimigo) {
-		System.out.println(inimigo.getName());		
+	private void atacar(Torre torre, Inimigo alvo) {
+		torre.atirar(alvo);
 	}
 
+	//TODO: refatorar isso qdo tiver com tanto sono
 	private Inimigo localizarAlvo(Torre torre) {
 		Point xy = torre.getCasaAtual();
 		

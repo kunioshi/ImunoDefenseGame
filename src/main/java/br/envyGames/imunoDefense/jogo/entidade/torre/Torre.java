@@ -1,9 +1,16 @@
 package br.envyGames.imunoDefense.jogo.entidade.torre;
 
 import java.awt.Point;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.envyGames.imunoDefense.jogo.entidade.FormaDeVida;
+import br.envyGames.imunoDefense.jogo.entidade.Tiro;
+import br.envyGames.imunoDefense.jogo.entidade.inimigo.Inimigo;
+import br.envyGames.imunoDefense.motor.AdicionarRemoverEntidadeListener;
+import br.envyGames.imunoDefense.motor.AlterarCenarioListener;
 import br.envyGames.imunoDefense.motor.Cenario;
+import br.envyGames.imunoDefense.motor.Entidade;
 import br.envyGames.imunoDefense.motor.Imagem;
 import br.envyGames.imunoDefense.motor.ImagemAnimada;
 import br.envyGames.imunoDefense.motor.ImagemColecao;
@@ -11,11 +18,14 @@ import br.envyGames.imunoDefense.motor.ImagemColecao;
 public abstract class Torre extends FormaDeVida {
 	protected Imagem imagemLevel1 = null;
 	protected ImagemAnimada animacaoLevel1 = null;
+	protected Imagem TiroImagem = null;
 	protected int forca = 0;
 	protected int velocidade = 0;
 	protected int alcance = 0;
 	protected TipoAtaque tipoAtaque;
 	private int level = 1;
+	
+	private List<AtirarListener> atirarListeners;
 
 	/*
 	 * Construtor
@@ -24,7 +34,9 @@ public abstract class Torre extends FormaDeVida {
 	 */
 	public Torre(String nomeInstancia, Point xy, Cenario cenario) {
 		super(nomeInstancia, xy, cenario);
+		
 		this.vida = 100;
+		atirarListeners = new ArrayList<AtirarListener>();
 	}
 	
 	// Getters & Setters
@@ -55,6 +67,18 @@ public abstract class Torre extends FormaDeVida {
 			setImageKey("dano");
 	}
 	
+	public void addAtirarListener(AtirarListener listener) {
+		atirarListeners.add(listener);
+	}
+	
+	public void removeAtirarListener(AtirarListener listener) {
+		atirarListeners.remove(listener);
+	}
+	
+	public void atirar(Inimigo alvo) {
+		
+	}
+	
 	protected void carregarSequenciaImagem() {
 		ImagemColecao imagemColecao = new ImagemColecao();
 		imagemColecao.add("default", imagemLevel1);
@@ -62,5 +86,10 @@ public abstract class Torre extends FormaDeVida {
 		imagemColecao.definirImagemPadrao("default");
 		
 		definirImagemColecao(imagemColecao);
+	}
+	
+	private void fireRemoverAtirarEvent(Tiro tiro) {
+		for (AtirarListener listener : atirarListeners)
+			listener.handleAtirarEvent(tiro);
 	}
 }
