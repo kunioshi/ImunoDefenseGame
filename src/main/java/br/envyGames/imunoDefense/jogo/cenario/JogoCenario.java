@@ -22,8 +22,6 @@ import br.envyGames.imunoDefense.jogo.entidade.Tiro;
 import br.envyGames.imunoDefense.jogo.entidade.inimigo.Inimigo;
 import br.envyGames.imunoDefense.jogo.entidade.inimigo.TipoInimigo;
 import br.envyGames.imunoDefense.jogo.entidade.torre.AtirarListener;
-import br.envyGames.imunoDefense.jogo.entidade.torre.MedulaTorre;
-import br.envyGames.imunoDefense.jogo.entidade.torre.MiocardioTorre;
 import br.envyGames.imunoDefense.jogo.entidade.torre.TipoTorre;
 import br.envyGames.imunoDefense.jogo.entidade.torre.Torre;
 import br.envyGames.imunoDefense.motor.Cenario;
