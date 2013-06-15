@@ -1,7 +1,12 @@
 package br.envyGames.imunoDefense.jogo.cenario;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
+
+import s3t.gameControl.system.GameSystem;
+import s3t.gameEntities.Message;
 
 import br.envyGames.imunoDefense.jogo.ChegarHordaListener;
 import br.envyGames.imunoDefense.jogo.HordaGerenciador;
@@ -122,6 +127,9 @@ public class JogoCenario extends Cenario implements ChegarHordaListener, MorteLi
 	private void carregarBackground() {		
 		CenarioLayer background = CenarioLayer.criarPassLayer("BackGround");
 		
+		int score = jogador.getPontos();
+		String nome = "Score:";
+		
 		//criando um HUD para teste
 		Imagem backgroundImagem = ResourceManager.getImagem("/imagens/BackgroundJogo.jpg");
 		
@@ -143,6 +151,19 @@ public class JogoCenario extends Cenario implements ChegarHordaListener, MorteLi
 		background.adicionarItem(new CenarioItem("botaoLeucogenTorre", botaoLeucogenTorre, xLeucogenBotao, yInicioBotao));
 		background.adicionarItem(new CenarioItem("botaoRochaganTorre", botaoRochaganTorre, xRochaganBotao, yInicioBotao));
 		background.adicionarItem(new CenarioItem("botaoLinfoideTorre", botaoLinfoideTorre, 486, yInicioBotao));		
+		
+		GameSystem.getMessageCollection().addMessage(new Message("Score", "" + score, null, 0 , 0));
+		GameSystem.getMessageCollection().addMessage(new Message("Nome", nome, new Font("verdana", Font.BOLD, 16), 708 , 490));
+		Message msgScore = GameSystem.getMessageCollection().getMessageByName("score");
+		Message nomeScore = GameSystem.getMessageCollection().getMessageByName("Nome");
+        if (msgScore == null){
+            GameSystem.getMessageCollection().addMessage(msgScore = new Message("score", "", new Font("verdana", Font.BOLD, 16), 767, 490));
+        }
+        msgScore.setForegroundColor(Color.WHITE);
+        nomeScore.setForegroundColor(Color.WHITE);
+        msgScore.setMessage(String.valueOf(score));
+        nomeScore.setMessage(String.valueOf(nome));
+		
 		
 		background.adicionarItem(new CenarioItem("botaoUpgrade", botaoUpgrade, 600, 470));
 		
