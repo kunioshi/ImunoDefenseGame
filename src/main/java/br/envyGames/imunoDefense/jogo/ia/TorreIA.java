@@ -14,25 +14,35 @@ import br.envyGames.imunoDefense.motor.IAAcao;
 import br.envyGames.imunoDefense.motor.IAMensagem;
 
 public class TorreIA extends IAAcao {
+	
+	private int velocidade;
 
 	@Override
 	public void doAction(Entidade entidade) {
 		if (entidade instanceof Torre) {
-			Torre torre = (Torre)entidade;
-			
-			try {
-				Thread.sleep(3500 / torre.getVelocidade());
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			
+			Torre torre = (Torre)entidade;	
 			
 			if (torre.getTipoAtaque() != TipoAtaque.Nenhum) {
 				Inimigo alvo = localizarAlvo(torre);
 				if (alvo != null)
 					atacar(torre, alvo);
-			}
-			
+			}			
+		}
+	}
+	
+
+	@Override
+	public void receiveMessage(IAMensagem mensagem) { }
+
+	@Override
+	public int timeToWait() {
+		return 3500 / velocidade;
+	}
+	
+	@Override
+	protected void doPreWait(Entidade entidade) {
+		if (entidade instanceof Torre) {
+			velocidade = ((Torre)entidade).getVelocidade();
 		}
 	}
 	
@@ -82,11 +92,4 @@ public class TorreIA extends IAAcao {
 		
 		return null;		
 	}
-
-	@Override
-	public void receiveMessage(IAMensagem mensagem) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

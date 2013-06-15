@@ -42,7 +42,13 @@ public class MalariaIA extends IAAcao {
 		else
 			atacar(entity);
 	}
+	
+	@Override
+	public int timeToWait() {
+		return 700;
+	}
 
+	@Override
 	public void receiveMessage(IAMensagem msg) {}
 
 	private void atualizarCaminho(Inimigo entity) {
