@@ -55,7 +55,8 @@ public class ChagasIA extends IAAcao {
 	private void mudarCasa(Inimigo entity) {
 		if(Tabuleiro.getTabuleiroAtual().getCasa(entity.getCasaAtual()) == entity)
 			Tabuleiro.getTabuleiroAtual().setCasa(entity.getCasaAtual(), null);
-		Tabuleiro.getTabuleiroAtual().setCasa(proxCasa, entity);
+		if(Tabuleiro.getTabuleiroAtual().getCasa(proxCasa) == null)
+			Tabuleiro.getTabuleiroAtual().setCasa(proxCasa, entity);
 	}
 
 	private void comecarAndar(Inimigo inimigo) {
