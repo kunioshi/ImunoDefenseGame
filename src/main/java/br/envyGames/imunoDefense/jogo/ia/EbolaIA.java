@@ -52,7 +52,7 @@ public class EbolaIA extends AIAction {
 	public void receiveMessage(IAMessage arg0) {}
 	
 	private void atualizarCaminho(Inimigo entity) {
-		caminho = busca.buscar(entity);
+		caminho = busca.buscar(entity.getCasaAtual());
 		
 		verificarCaminho(entity);
 	}
