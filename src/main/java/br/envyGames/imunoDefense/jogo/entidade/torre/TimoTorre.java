@@ -10,31 +10,32 @@ import br.envyGames.imunoDefense.motor.Cenario;
 import br.envyGames.imunoDefense.motor.Imagem;
 import br.envyGames.imunoDefense.motor.ResourceManager;
 
-public class MedulaTorre extends Torre {
+public class TimoTorre extends Torre {
 	
 	private static Imagem imagemMiniatura = null;
 	
 	public static Imagem getImagemMiniatura() {
 		if (imagemMiniatura == null)
-			imagemMiniatura = ResourceManager.getImagem("/imagens/entidades/torres/MedulaI0.png");
+			imagemMiniatura = ResourceManager.getImagem("/imagens/entidades/torres/TimoI0.png");
 		
 		return imagemMiniatura;
 	}
 
-	public MedulaTorre(String nomeInstancia, Point xy, Cenario cenario) {
-		super(nomeInstancia, xy, cenario);
+	public TimoTorre(String nome, Point xy, Cenario cenario) {
+		super(nome, xy, cenario);
 		
-		forca = 1;
-		velocidade = 3;
-		alcance = 2;
-		this.tipoAtaque = TipoAtaque.Terrestre;
+		forca = 2;
+		velocidade = 5;
+		alcance = 3;
+		this.tipoAtaque = TipoAtaque.TerrestreEVoador;
 		
 		imagemLevel1 = getImagemMiniatura();
-		animacaoLevel1 = loadAnimation("/imagens/entidades/torres/MedulaI", ".png", 6, 20, AnimImage.STOP_AT_END);
+		animacaoLevel1 = loadAnimation("/imagens/entidades/torres/TimoI", ".png", 6, 20, AnimImage.STOP_AT_END);
 		carregarSequenciaImagem();
 		
         setDoNotStop(true);
         
         GameSystem.setAIforEntity(this, new MedulaIA());
 	}
+
 }

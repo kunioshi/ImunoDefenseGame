@@ -1,7 +1,6 @@
 package br.envyGames.imunoDefense.jogo.entidade;
 
 import java.awt.Point;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,7 +67,7 @@ public abstract class FormaDeVida extends Entidade {
 			listener.handleMorteFormaDeVida(this);
 	}
 	
-	public static ImagemAnimada loadAnimation(String firstName, String extension, int endNumber, int period, int behavior) throws IOException {
+	public static ImagemAnimada loadAnimation(String firstName, String extension, int endNumber, int period, int behavior) {
 		ImagemAnimada animImage = new ImagemAnimada();
 
         for (int i = 0; i <= endNumber; i++) {

@@ -4,9 +4,17 @@ import java.awt.Point;
 
 import br.envyGames.imunoDefense.jogo.entidade.FormaDeVida;
 import br.envyGames.imunoDefense.motor.Cenario;
+import br.envyGames.imunoDefense.motor.Imagem;
+import br.envyGames.imunoDefense.motor.ImagemAnimada;
+import br.envyGames.imunoDefense.motor.ImagemColecao;
 
 public abstract class Torre extends FormaDeVida {
-	private int forca = 0;
+	protected Imagem imagemLevel1 = null;
+	protected ImagemAnimada animacaoLevel1 = null;
+	protected int forca = 0;
+	protected int velocidade = 0;
+	protected int alcance = 0;
+	protected TipoAtaque tipoAtaque;
 	private int level = 1;
 
 	/*
@@ -16,18 +24,20 @@ public abstract class Torre extends FormaDeVida {
 	 */
 	public Torre(String nomeInstancia, Point xy, Cenario cenario) {
 		super(nomeInstancia, xy, cenario);
-		this.vida = 1000;
+		this.vida = 100;
 	}
 	
 	// Getters & Setters
 	public int getForca() { return forca; }
 	public int getLevel() { return level; }
+	public int getVelocidade() { return velocidade; }
+	public int getAlcance() { return alcance; }
 	
 	public void setForca(int dano) { forca = dano; }
 	public void upgrade() { 
 		level++; 
 		forca++;
-		vida *= 2;
+		vida *= 1.5;
 	}
 	
 	public boolean isUpgradable() {
@@ -42,5 +52,14 @@ public abstract class Torre extends FormaDeVida {
 			setImageKey("default");
 		else
 			setImageKey("dano");
+	}
+	
+	protected void carregarSequenciaImagem() {
+		ImagemColecao imagemColecao = new ImagemColecao();
+		imagemColecao.add("default", imagemLevel1);
+		imagemColecao.add("dano", animacaoLevel1);
+		imagemColecao.definirImagemPadrao("default");
+		
+		definirImagemColecao(imagemColecao);
 	}
 }

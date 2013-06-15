@@ -17,6 +17,7 @@ import br.envyGames.imunoDefense.jogo.entidade.inimigo.Inimigo;
 import br.envyGames.imunoDefense.jogo.entidade.inimigo.TipoInimigo;
 import br.envyGames.imunoDefense.jogo.entidade.torre.MedulaTorre;
 import br.envyGames.imunoDefense.jogo.entidade.torre.MiocardioTorre;
+import br.envyGames.imunoDefense.jogo.entidade.torre.TipoTorre;
 import br.envyGames.imunoDefense.jogo.entidade.torre.Torre;
 import br.envyGames.imunoDefense.motor.Cenario;
 import br.envyGames.imunoDefense.motor.CenarioItem;
@@ -30,6 +31,17 @@ public class JogoCenario extends Cenario implements ChegarHordaListener, MorteLi
 	private Coracao coracao;
 	private HordaGerenciador hordaGerenciador = new HordaGerenciador();
 	private Jogador jogador = new Jogador();
+	private Entidade seguidorMouse;
+	private TipoTorre novaConstrucaoSelecionada;
+	
+	private final int larguraBotao = 90;
+	private final int alturaBotao = 90;
+	private final int xInicioMiocardioBotao = 6;
+	private final int xInicioMedulaBotao = 102;
+	private final int xInicioTimoBotao = 198;
+	private final int xLeucogenBotao = 294;
+	private final int xRochaganBotao = 390;
+	private final int yInicioBotao = 420;
 	
 	public JogoCenario(int largura, int altura) {
 		super("JogoCenario", "Jogo", largura, altura);	
@@ -77,7 +89,16 @@ public class JogoCenario extends Cenario implements ChegarHordaListener, MorteLi
 		}
 		else if (isMedulaTorreButton(e.getX(), e.getY())) {
 			medulaTorreButtonClicked();
+		}		
+		else if (isLeucogenTorreButton(e.getX(), e.getY())) {
+			leucogenTorreButtonClicked();
 		}
+		else if (isRochaganTorreButton(e.getX(), e.getY())) {
+			rochaganTorreButtonClicked();
+		}
+		else if (isTimoTorreButton(e.getX(), e.getY())) {
+			timoTorreButtonClicked();
+		}		
 		else if (isUpgradeButton(e.getX(), e.getY())) {
 			upgradeButtonClicked();
 		}
@@ -101,24 +122,26 @@ public class JogoCenario extends Cenario implements ChegarHordaListener, MorteLi
 		
 		//criando um HUD para teste
 		Imagem backgroundImagem = ResourceManager.getImagem("/imagens/BackgroundJogo.jpg");
-		Imagem botaoMiocardioTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoMiocardioTorre.png");
-		Imagem botaoMedulaTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoMedulaTorre.png");
 		
-		Imagem botaoTimoTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoTimoTrancado.png");
+		Imagem botaoMiocardioTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoMiocardioTorre.png");
+		Imagem botaoMedulaTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoMedulaTorre.png");		
+		Imagem botaoTimoTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoTimoSemDinheiro.png");
+		Imagem botaoLeucogenTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoLeucogenSemDinheiro.png");
+		Imagem botaoRochaganTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoRochaganSemDinheiro.png");
 		Imagem botaoLinfoideTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoLinfoideTravado.png");
-		Imagem botaoLeucogenTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoLeucogenTravado.png");
-		Imagem botaoRochaganTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoRochaganTravado.png");
+		
 		Imagem botaoUpgrade = ResourceManager.getImagem("/imagens/entidades/torres/upgrade.jpg");
 		
 		
 		background.adicionarItem(new CenarioItem("fundo", backgroundImagem, 0, 0));		
-		background.adicionarItem(new CenarioItem("botaoMiocardioTorre", botaoMiocardioTorre, 6, 420));
-		background.adicionarItem(new CenarioItem("botaoMedulaTorre", botaoMedulaTorre, 102, 420));
 		
-		background.adicionarItem(new CenarioItem("botaoTimoTorre", botaoTimoTorre, 198, 420));
-		background.adicionarItem(new CenarioItem("botaoLinfoideTorre", botaoLinfoideTorre, 294, 420));
-		background.adicionarItem(new CenarioItem("botaoLeucogenTorre", botaoLeucogenTorre, 390, 420));
-		background.adicionarItem(new CenarioItem("botaoRochaganTorre", botaoRochaganTorre, 486, 420));
+		background.adicionarItem(new CenarioItem("botaoMiocardioTorre", botaoMiocardioTorre, xInicioMiocardioBotao, yInicioBotao));
+		background.adicionarItem(new CenarioItem("botaoMedulaTorre", botaoMedulaTorre, xInicioMedulaBotao, yInicioBotao));		
+		background.adicionarItem(new CenarioItem("botaoTimoTorre", botaoTimoTorre, xInicioTimoBotao, yInicioBotao));
+		background.adicionarItem(new CenarioItem("botaoLeucogenTorre", botaoLeucogenTorre, xLeucogenBotao, yInicioBotao));
+		background.adicionarItem(new CenarioItem("botaoRochaganTorre", botaoRochaganTorre, xRochaganBotao, yInicioBotao));
+		background.adicionarItem(new CenarioItem("botaoLinfoideTorre", botaoLinfoideTorre, 486, yInicioBotao));		
+		
 		background.adicionarItem(new CenarioItem("botaoUpgrade", botaoUpgrade, 600, 470));
 		
 		adicionarLayer(background);
@@ -133,36 +156,58 @@ public class JogoCenario extends Cenario implements ChegarHordaListener, MorteLi
 	}
 	
 	private boolean isGrid(int x, int y) {
-		return (x >= 32 && x <= 702 && y >= 0 && y <= 420);
+		return (x >= 32 && x <= 702 && y >= 0 && y <= 419);
 	}
 	
 	private boolean isMiocardioTorreButton(int x, int y) {
-		return x >= 6 && x <= 96 && y >= 420 && y <= 510;
+		return x >= xInicioMiocardioBotao && x <= xInicioMiocardioBotao + larguraBotao  && y >= yInicioBotao && y <= yInicioBotao + alturaBotao;
 	}
 	
 	private boolean isMedulaTorreButton(int x, int y) {
-		return x >= 102 && x <= 192 && y >= 420 && y <= 510;
+		return x >= xInicioMedulaBotao && x <= xInicioMedulaBotao + larguraBotao && y >= yInicioBotao && y <= yInicioBotao + alturaBotao;
+	}	
+	
+	private boolean isTimoTorreButton(int x, int y) {
+		return x >= xInicioTimoBotao && x <= xInicioTimoBotao + larguraBotao && y >= yInicioBotao && y <= yInicioBotao + alturaBotao;
+	}
+	
+	private boolean isLeucogenTorreButton(int x, int y) {
+		return x >= xLeucogenBotao && x <= xLeucogenBotao + larguraBotao && y >= yInicioBotao && y <= yInicioBotao + alturaBotao;
+	}
+	
+	private boolean isRochaganTorreButton(int x, int y) {
+		return x >= xRochaganBotao && x <= xRochaganBotao + larguraBotao && y >= yInicioBotao && y <= yInicioBotao + alturaBotao;
 	}
 	
 	private boolean isUpgradeButton(int x, int y) {
 		return x >= 600 && x <= 692 && y >= 470 && y <= 497;
 	}
 	
-	private Entidade seguidorMouse;
-	private String novaConstrucaoSelecionada;
-	
 	private void miocardioTorreButtonClicked() {
-		novaConstrucaoSelecionada = "Miocardio";
-		removerSeguidorMouse();
-		
-		adicionarSeguidorMouse(6, 420, MiocardioTorre.getImagemLevel1());
+		clicarTorre(TipoTorre.MIOCARDIO, xInicioMiocardioBotao, yInicioBotao);
 	}
 	
 	private void medulaTorreButtonClicked() {
-		novaConstrucaoSelecionada = "Medula";
+		clicarTorre(TipoTorre.MEDULA, xInicioMedulaBotao, yInicioBotao);
+	}
+	
+	private void timoTorreButtonClicked() {
+		clicarTorre(TipoTorre.TIMO, xInicioTimoBotao, yInicioBotao);
+	}
+	
+	private void leucogenTorreButtonClicked() {
+		clicarTorre(TipoTorre.LEUCOGEN, xLeucogenBotao, yInicioBotao);
+	}
+	
+	private void rochaganTorreButtonClicked() {
+		clicarTorre(TipoTorre.ROCHAGAN, xRochaganBotao, yInicioBotao);
+	}
+	
+	private void clicarTorre(TipoTorre tipoTorre, int x, int y) {
+		novaConstrucaoSelecionada = tipoTorre;
 		removerSeguidorMouse();
 		
-		adicionarSeguidorMouse(102, 420, MedulaTorre.getImagemLevel1());
+		adicionarSeguidorMouse(x, y, TorreFactory.getTorreMiniatura(novaConstrucaoSelecionada));
 	}
 	
 	private void upgradeButtonClicked() {
@@ -193,20 +238,15 @@ public class JogoCenario extends Cenario implements ChegarHordaListener, MorteLi
 	}
 	
 	private boolean isNovaConstrucaoSelecionada() {
-		return novaConstrucaoSelecionada != null && novaConstrucaoSelecionada != "";
+		return novaConstrucaoSelecionada != TipoTorre.NENHUMA;
 	}
 	
 	private void construirTorre(int coluna, int linha) {
-		switch(novaConstrucaoSelecionada) {
-			case "Miocardio":
-				adicionarTorre(coluna, linha, TorreFactory.criarMiocardio("MiocardioTorre_" + coluna + "_" + linha, new Point(convertGridToPixel(coluna), convertGridToPixel(linha)), this));
-				novaConstrucaoSelecionada = "";
-				break;
-			case "Medula":
-				adicionarTorre(coluna, linha, TorreFactory.criarMedula("MedulaTorre_" + coluna + "_" + linha, new Point(convertGridToPixel(coluna), convertGridToPixel(linha)), this));
-				novaConstrucaoSelecionada = "";
-				break;
-		}
+		String nome = "MiocardioTorre_" + coluna + "_" + linha;
+		Point xy = new Point(convertGridToPixel(coluna), convertGridToPixel(linha));
+		Torre torre = TorreFactory.criarTorre(novaConstrucaoSelecionada, nome, xy, this);
+		adicionarTorre(coluna, linha, torre);
+		novaConstrucaoSelecionada = TipoTorre.NENHUMA;
 		
 		removerSeguidorMouse();	
 	}
