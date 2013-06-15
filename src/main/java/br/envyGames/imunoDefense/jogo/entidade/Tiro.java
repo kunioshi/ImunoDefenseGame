@@ -16,10 +16,11 @@ public class Tiro extends Entidade {
 	private int forca;
 	private Inimigo alvo;
 
-	public Tiro(double x, double y, Imagem imagem, Inimigo alvo, Cenario cenario) {
+	public Tiro(double x, double y, Imagem imagem, Inimigo alvo, int forcaDano, Cenario cenario) {
 		super("tiro"+id, x, y, cenario);
         
 		this.alvo = alvo;
+		this.forca = forcaDano;
 		
 		ImagemColecao imagemColecao = new ImagemColecao();
 		imagemColecao.add("default", imagem);

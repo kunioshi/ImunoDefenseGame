@@ -127,19 +127,14 @@ public class JogoCenario extends Cenario implements ChegarHordaListener, MorteLi
 	private void carregarBackground() {		
 		CenarioLayer background = CenarioLayer.criarPassLayer("BackGround");
 		
-		int score = jogador.getPontos();
-		String nome = "Score:";
-		int dinheiro = jogador.getDinheiro();
-		String nomeDinheiro = "$";
-		
 		//criando um HUD para teste
 		Imagem backgroundImagem = ResourceManager.getImagem("/imagens/BackgroundJogo.jpg");
 		
 		Imagem botaoMiocardioTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoMiocardioTorre.png");
 		Imagem botaoMedulaTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoMedulaTorre.png");		
-		Imagem botaoTimoTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoTimoSemDinheiro.png");
-		Imagem botaoLeucogenTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoLeucogenSemDinheiro.png");
-		Imagem botaoRochaganTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoRochaganSemDinheiro.png");
+		Imagem botaoTimoTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoTimo.png");
+		Imagem botaoLeucogenTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoLeucogen.png");
+		Imagem botaoRochaganTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoRochagan.png");
 		Imagem botaoLinfoideTorre = ResourceManager.getImagem("/imagens/entidades/torres/botaoLinfoideTravado.png");
 		
 		Imagem botaoUpgrade = ResourceManager.getImagem("/imagens/entidades/torres/upgradeLocked.PNG");
@@ -152,41 +147,58 @@ public class JogoCenario extends Cenario implements ChegarHordaListener, MorteLi
 		background.adicionarItem(new CenarioItem("botaoTimoTorre", botaoTimoTorre, xInicioTimoBotao, yInicioBotao));
 		background.adicionarItem(new CenarioItem("botaoLeucogenTorre", botaoLeucogenTorre, xLeucogenBotao, yInicioBotao));
 		background.adicionarItem(new CenarioItem("botaoRochaganTorre", botaoRochaganTorre, xRochaganBotao, yInicioBotao));
-		background.adicionarItem(new CenarioItem("botaoLinfoideTorre", botaoLinfoideTorre, 486, yInicioBotao));		
+		background.adicionarItem(new CenarioItem("botaoLinfoideTorre", botaoLinfoideTorre, 486, yInicioBotao));
+		background.adicionarItem(new CenarioItem("botaoUpgrade", botaoUpgrade, 600, yInicioBotao + 10));
+		
+		String labelScore = "Score:";
+		String labelDinheiro = "$:";
+		Font font = new Font("verdana", Font.BOLD, 16);
+		
+		Message nomeScore = GameSystem.getMessageCollection().getMessageByName("labelScore");
+		if (nomeScore == null) {
+			nomeScore = new Message("labelScore", labelScore, font, 610 , 500);
+			GameSystem.getMessageCollection().addMessage(nomeScore);
+			nomeScore.setForegroundColor(Color.WHITE);
+		}
+		
+		Message msgDinheiro = GameSystem.getMessageCollection().getMessageByName("labelDinheiro");
+		if (msgDinheiro == null) {
+			msgDinheiro = new Message("labelDinheiro", "" + labelDinheiro, font, 650 , 480);
+			GameSystem.getMessageCollection().addMessage(msgDinheiro);
+			msgDinheiro.setForegroundColor(Color.WHITE);
+		}
+		
+		exibirScoreEDinheiro();		
 		
 		
-		//Score
-		GameSystem.getMessageCollection().addMessage(new Message("Score", "" + score, null, 0 , 0));
-		GameSystem.getMessageCollection().addMessage(new Message("Nome", nome, new Font("verdana", Font.BOLD, 16), 708 , 490));
-		Message msgScore = GameSystem.getMessageCollection().getMessageByName("score");
-		Message nomeScore = GameSystem.getMessageCollection().getMessageByName("Nome");
-        if (msgScore == null){
-            GameSystem.getMessageCollection().addMessage(msgScore = new Message("score", "", new Font("verdana", Font.BOLD, 16), 767, 490));
-        }
-        msgScore.setForegroundColor(Color.WHITE);
-        nomeScore.setForegroundColor(Color.WHITE);
-        msgScore.setMessage(String.valueOf(score));
-        nomeScore.setMessage(String.valueOf(nome));
-        
-        
-        
-        //Dinheiro        
-        GameSystem.getMessageCollection().addMessage(new Message("Dinheiro", "" + score, null, 0 , 0));
-		GameSystem.getMessageCollection().addMessage(new Message("nomeDinheiro", nome, new Font("verdana", Font.BOLD, 16), 720 , 470));
-		Message msgDinheiro = GameSystem.getMessageCollection().getMessageByName("dinheiro");
-		Message msgCash = GameSystem.getMessageCollection().getMessageByName("nomeDinheiro");
-        if (msgDinheiro == null){
-            GameSystem.getMessageCollection().addMessage(msgDinheiro = new Message("dinheiro", "", new Font("verdana", Font.BOLD, 16), 740, 470));
-        }
-        msgDinheiro.setForegroundColor(Color.WHITE);
-        msgCash.setForegroundColor(Color.WHITE);
-        msgDinheiro.setMessage(String.valueOf(dinheiro));
-        msgCash.setMessage(String.valueOf(nomeDinheiro));
-		
-		
-		background.adicionarItem(new CenarioItem("botaoUpgrade", botaoUpgrade, 600, 470));
 		
 		adicionarLayer(background);
+	}
+
+	private void exibirScoreEDinheiro() {
+		int score = jogador.getPontos();		
+		int dinheiro = jogador.getDinheiro();
+		
+		Font font = new Font("verdana", Font.BOLD, 16);
+			
+		//Score
+		Message msgScore = GameSystem.getMessageCollection().getMessageByName("score");
+		if (msgScore == null) {
+			msgScore = new Message("score", "", font, 700, 500);
+            GameSystem.getMessageCollection().addMessage(msgScore);
+            msgScore.setForegroundColor(Color.WHITE);
+		}        
+        msgScore.setMessage(String.valueOf(score));
+        
+        //Dinheiro		
+		Message msgCash = GameSystem.getMessageCollection().getMessageByName("dinheiro");
+        if (msgCash == null) {
+        	msgCash = new Message("dinheiro", "", font, 700, 480);
+            GameSystem.getMessageCollection().addMessage(msgCash);
+            msgCash.setForegroundColor(Color.WHITE);
+        }
+        
+        msgCash.setMessage(String.valueOf(dinheiro));
 	}
 	
 	private int convertGridToPixel(int n) {
@@ -284,7 +296,7 @@ public class JogoCenario extends Cenario implements ChegarHordaListener, MorteLi
 	}
 	
 	private void construirTorre(int coluna, int linha) {
-		String nome = "MiocardioTorre_" + coluna + "_" + linha;
+		String nome = "Torre_" + coluna + "_" + linha;
 		Point xy = new Point(convertGridToPixel(coluna), convertGridToPixel(linha));
 		Torre torre = TorreFactory.criarTorre(novaConstrucaoSelecionada, nome, xy, this);
 		adicionarTorre(coluna, linha, torre);
@@ -298,6 +310,7 @@ public class JogoCenario extends Cenario implements ChegarHordaListener, MorteLi
 		adicionarFormaDeVida(torre);		
 		Tabuleiro.getTabuleiroAtual().adicionarFormaDeVida(new Point(coluna, linha), torre);
 		jogador.removerDinheiro(torre.getCusto());
+		exibirScoreEDinheiro();
 	}
 	
 	private void adicionarFormaDeVida(FormaDeVida formaDeVida) {
@@ -322,6 +335,8 @@ public class JogoCenario extends Cenario implements ChegarHordaListener, MorteLi
 		Tabuleiro.getTabuleiroAtual().getCasa(inimigo.getCasaAtual()).remover(inimigo);
 		jogador.adicionarDinheiro(inimigo.getBonusDinheiroToKill());
 		jogador.adicionarPontos(inimigo.getBonusScoreToKill());
+
+		exibirScoreEDinheiro();
 	}
 	
 	private void destruirTorre(Torre torre) {

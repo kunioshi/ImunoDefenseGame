@@ -82,7 +82,7 @@ public abstract class Torre extends FormaDeVida {
 	}
 
 	private Tiro criarTiro(Inimigo alvo) {
-		return new Tiro(this.getX(), this.getY(), tiroImagem, alvo, this.getCenario());
+		return new Tiro(this.getX(), this.getY(), tiroImagem, alvo, forca, this.getCenario());
 	}
 	
 	protected void carregarSequenciaImagem() {
