@@ -1,16 +1,12 @@
 package br.envyGames.imunoDefense.jogo;
 
-import s3t.gameControl.GameCore;
-import s3t.gameControl.system.GameSystem;
-import s3t.gameEntities.Message;
-
 public class Jogador {
 
 	private int dinheiro;
 	private int pontos;
 	
 	public void inicializarValores() {
-		dinheiro = 40;
+		dinheiro = 10000;
 		pontos = 0;
 	}
 	
