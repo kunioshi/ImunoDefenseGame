@@ -1,5 +1,9 @@
 package br.envyGames.imunoDefense.jogo;
 
+import s3t.gameControl.GameCore;
+import s3t.gameControl.system.GameSystem;
+import s3t.gameEntities.Message;
+
 public class Jogador {
 
 	private int dinheiro;
@@ -23,10 +27,10 @@ public class Jogador {
 	}
 	
 	public int getPontos() {
-		return pontos;
+		return pontos;		
 	}
 	
 	public void adicionarPontos(int valor) {
-		pontos += valor;
+		pontos += valor;		
 	}
 }
