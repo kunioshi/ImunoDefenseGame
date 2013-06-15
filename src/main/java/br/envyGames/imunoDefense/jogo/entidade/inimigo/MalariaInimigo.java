@@ -14,6 +14,8 @@ public class MalariaInimigo extends Inimigo {
 	public MalariaInimigo(String name, Point xy, Cenario cenario) throws IOException {
 		super(name, xy, cenario);
 		
+		this.tipoLocomocao = TipoLocomocao.Terrestre;
+		
 		ImageCollection imgCollection = new ImageCollection();
 
 		imgCollection.add("direita", loadAnimation("/imagens/inimigos/Malaria-direita", ".png", 1, 20, AnimImage.GO_AND_BACK));

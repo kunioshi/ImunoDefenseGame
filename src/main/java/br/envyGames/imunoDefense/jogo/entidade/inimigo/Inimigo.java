@@ -19,11 +19,11 @@ enum TipoLocomocao {
  * Classe abstrata base dos inimigos
  */
 public abstract class Inimigo extends FormaDeVida {
+	protected TipoLocomocao tipoLocomocao;
 	private int forca = 1;
 	private float velocidadeNatural = 32;
 	private float lentidao = 1;
 	private Direcao direcao = Direcao.DIREITA;
-	private TipoLocomocao tipoLocomocao;
 	
 	/*
 	 * Construtor<br/>

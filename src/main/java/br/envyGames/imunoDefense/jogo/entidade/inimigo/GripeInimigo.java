@@ -14,6 +14,8 @@ public class GripeInimigo extends Inimigo {
 	public GripeInimigo(String name, Point xy, Cenario cenario) throws IOException {
 		super(name, xy, cenario);
 		
+		this.tipoLocomocao = TipoLocomocao.Terrestre;
+		
 		ImageCollection imgCollection = new ImageCollection();
 		
 		imgCollection.add("gripeDireita", loadAnimation("/imagens/inimigos/Gripe-direita", ".png", 2, 20, AnimImage.GO_AND_BACK));

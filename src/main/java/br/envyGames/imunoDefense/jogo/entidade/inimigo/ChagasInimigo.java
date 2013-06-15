@@ -14,6 +14,8 @@ public class ChagasInimigo extends Inimigo {
 	public ChagasInimigo(String name, Point xy, Cenario cenario) throws IOException {
 		super(name, xy, cenario);
 		
+		this.tipoLocomocao = TipoLocomocao.Aerio;
+		
 		ImageCollection imgCollection = new ImageCollection();
 
 		imgCollection.add("direita", loadAnimation("/imagens/inimigos/Chagas - Direita ", ".png", 2, 20, AnimImage.GO_AND_BACK));

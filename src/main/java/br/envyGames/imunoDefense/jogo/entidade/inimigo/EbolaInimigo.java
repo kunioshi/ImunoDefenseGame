@@ -14,6 +14,8 @@ public class EbolaInimigo extends Inimigo {
 	public EbolaInimigo(String name, Point xy, Cenario cenario) throws IOException {
 		super(name, xy, cenario);
 		
+		this.tipoLocomocao = TipoLocomocao.Terrestre;
+		
 		ImageCollection imgCollection = new ImageCollection();
 		
 		imgCollection.add("direita", loadAnimation("/imagens/inimigos/Ebola-direita", ".png", 2, 20, AnimImage.GO_AND_BACK));
