@@ -27,6 +27,7 @@ public class MalariaInimigo extends Inimigo {
 		setImageKey("direita");
         setDoNotStop(true);
 		
+        setVelocidadeNormal(2);
 		GameSystem.setAIforEntity(this, new MalariaIA());
 	}
 }

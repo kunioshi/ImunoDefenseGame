@@ -33,8 +33,7 @@ public class TorreIA extends IAAcao {
 	private void atacar(Torre torre, Inimigo alvo) {
 		torre.atirar(alvo);
 	}
-
-	//TODO: refatorar isso qdo tiver com tanto sono
+	
 	private Inimigo localizarAlvo(Torre torre) {
 		Point xy = torre.getCasaAtual();
 		
@@ -78,9 +77,5 @@ public class TorreIA extends IAAcao {
 	}
 
 	@Override
-	public void receiveMessage(IAMensagem mensagem) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	public void receiveMessage(IAMensagem mensagem) {}
 }

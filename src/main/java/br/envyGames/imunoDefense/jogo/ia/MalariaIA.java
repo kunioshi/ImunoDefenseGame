@@ -21,15 +21,21 @@ public class MalariaIA extends IAAcao {
 	private FormaDeVida alvo = null;
 	private BuscaAStar busca = new BuscaAStar();
 	private BuscaTorre buscaTorre = new BuscaTorre();
+	private int cooldown = 700;
 
 	public void doAction(Entidade entidade) {
 		Inimigo entity = (Inimigo)entidade;
-
+		
+		if(estado == EstadoInimigo.ANDANDO || estado == EstadoInimigo.ATACANDOTORRE)
+			cooldown = 43;
+		else
+			cooldown = 700;
+		
 		if(caminho == null)
 			atualizarCaminho(entity);
 
 		try {
-			Thread.sleep(700);
+			Thread.sleep(cooldown);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
